@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store — NotDonutSMP</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav>
+    <div class="nav-logo">
+        <span class="not">Not</span><span class="donut">Donut</span><span class="smp">SMP</span>
+    </div>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="rules.html">Rules</a></li>
+        <li><a href="staff.html">Staff</a></li>
+        <li><a href="store.html" class="active">Store</a></li>
+        <li><a href="https://discord.gg/zdaUByyf4b" target="_blank" class="nav-cta">Discord</a></li>
+    </ul>
+</nav>
+
+<div class="page-hero">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 80%,rgba(74,222,128,0.08) 0%,transparent 60%);pointer-events:none;"></div>
+    <div class="section-tag">Support The Server</div>
+    <h1>Store</h1>
+    <p>Purchase a rank to unlock exclusive perks and support NotDonutSMP's development.</p>
+</div>
+
+<!-- Rank Store -->
+<div class="store-grid">
+
+    <div class="store-card">
+        <div class="store-card-header">
+            <div class="store-rank-icon">🌿</div>
+            <div class="store-rank-name">VIP</div>
+            <div class="store-price">£3.99 <span>/ one-time</span></div>
+        </div>
+        <div class="store-card-body">
+            <ul class="store-perks">
+                <li><span class="perk-check">✓</span> Green [VIP] prefix in chat</li>
+                <li><span class="perk-check">✓</span> 3 home locations</li>
+                <li><span class="perk-check">✓</span> /nick command</li>
+                <li><span class="perk-check">✓</span> Coloured chat messages</li>
+                <li><span class="perk-check">✓</span> Access to VIP Discord channel</li>
+            </ul>
+            <button class="store-btn store-btn-secondary" onclick="openModal('VIP', '£3.99')">Purchase</button>
+        </div>
+    </div>
+
+    <div class="store-card featured">
+        <div class="store-card-badge">POPULAR</div>
+        <div class="store-card-header">
+            <div class="store-rank-icon">⭐</div>
+            <div class="store-rank-name" style="color: #fbbf24;">VIP+</div>
+            <div class="store-price" style="color: #fbbf24;">£6.99 <span>/ one-time</span></div>
+        </div>
+        <div class="store-card-body">
+            <ul class="store-perks">
+                <li><span class="perk-check">✓</span> Gold [VIP+] prefix in chat</li>
+                <li><span class="perk-check">✓</span> 5 home locations</li>
+                <li><span class="perk-check">✓</span> /nick + /hat commands</li>
+                <li><span class="perk-check">✓</span> Coloured chat &amp; signs</li>
+                <li><span class="perk-check">✓</span> Custom join/leave messages</li>
+                <li><span class="perk-check">✓</span> All VIP perks included</li>
+            </ul>
+            <button class="store-btn store-btn-primary" onclick="openModal('VIP+', '£6.99')">Purchase</button>
+        </div>
+    </div>
+
+    <div class="store-card">
+        <div class="store-card-header">
+            <div class="store-rank-icon">💎</div>
+            <div class="store-rank-name" style="color: #60a5fa;">MVP</div>
+            <div class="store-price" style="color: #60a5fa;">£11.99 <span>/ one-time</span></div>
+        </div>
+        <div class="store-card-body">
+            <ul class="store-perks">
+                <li><span class="perk-check">✓</span> Aqua [MVP] prefix in chat</li>
+                <li><span class="perk-check">✓</span> 10 home locations</li>
+                <li><span class="perk-check">✓</span> /fly in non-combat zones</li>
+                <li><span class="perk-check">✓</span> /enderchest anywhere</li>
+                <li><span class="perk-check">✓</span> Priority server queue</li>
+                <li><span class="perk-check">✓</span> All VIP+ perks included</li>
+            </ul>
+            <button class="store-btn store-btn-secondary" onclick="openModal('MVP', '£11.99')">Purchase</button>
+        </div>
+    </div>
+
+    <div class="store-card">
+        <div class="store-card-header">
+            <div class="store-rank-icon">👑</div>
+            <div class="store-rank-name" style="background: linear-gradient(135deg,#f87171,#fbbf24); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">MVP+</div>
+            <div class="store-price" style="color: #f87171;">£17.99 <span>/ one-time</span></div>
+        </div>
+        <div class="store-card-body">
+            <ul class="store-perks">
+                <li><span class="perk-check">✓</span> Gradient [MVP+] prefix in chat</li>
+                <li><span class="perk-check">✓</span> Unlimited home locations</li>
+                <li><span class="perk-check">✓</span> /fly everywhere</li>
+                <li><span class="perk-check">✓</span> /workbench &amp; /anvil anywhere</li>
+                <li><span class="perk-check">✓</span> Exclusive MVP+ Discord role</li>
+                <li><span class="perk-check">✓</span> All MVP perks included</li>
+            </ul>
+            <button class="store-btn store-btn-secondary" onclick="openModal('MVP+', '£17.99')">Purchase</button>
+        </div>
+    </div>
+
+</div>
+
+<div class="store-note">
+    <strong style="color:var(--green);">How it works:</strong> After purchasing, open a ticket in our
+    <a href="https://discord.gg/zdaUByyf4b" target="_blank" style="color:var(--green);">Discord server</a>
+    with your Minecraft username and proof of purchase. Your rank will be applied within 24 hours.
+    <br><br>
+    All purchases are non-refundable. Ranks are permanent and do not expire. By purchasing you agree to our
+    <a href="rules.html" style="color:var(--green);">server rules</a>.
+</div>
+
+<!-- Purchase Modal -->
+<div class="modal-overlay" id="modal">
+    <div class="modal">
+        <div class="modal-rank-name" id="modal-rank"></div>
+        <div class="modal-price" id="modal-price"></div>
+        <h3>Complete Your Purchase</h3>
+        <p>Enter your Minecraft username and click the button below. You'll receive payment instructions via Discord.</p>
+        <input type="text" class="modal-input" id="modal-username" placeholder="Your Minecraft username" maxlength="16">
+        <div class="modal-actions" style="margin-top: 8px;">
+            <button class="btn modal-close-btn" onclick="closeModal()">Cancel</button>
+            <button class="btn btn-primary" onclick="submitPurchase()">Continue in Discord</button>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-logo">Not<span class="donut">Donut</span>SMP</div>
+    <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="rules.html">Rules</a></li>
+        <li><a href="staff.html">Staff</a></li>
+        <li><a href="store.html">Store</a></li>
+        <li><a href="https://discord.gg/zdaUByyf4b" target="_blank">Discord</a></li>
+    </ul>
+    <p>© 2026 NotDonutSMP. All rights reserved. | play.notdonutsmp.com</p>
+</footer>
+
+<script>
+let selectedRank = '';
+
+function openModal(rank, price) {
+    selectedRank = rank;
+    document.getElementById('modal-rank').textContent = rank;
+    document.getElementById('modal-price').textContent = price;
+    document.getElementById('modal').classList.add('open');
+    document.getElementById('modal-username').value = '';
+    document.getElementById('modal-username').focus();
+}
+
+function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+}
+
+function submitPurchase() {
+    const username = document.getElementById('modal-username').value.trim();
+    if (!username) {
+        document.getElementById('modal-username').style.borderColor = 'rgba(248,113,113,0.5)';
+        return;
+    }
+    const rank = selectedRank;
+    window.open(
+        'https://discord.gg/zdaUByyf4b',
+        '_blank'
+    );
+    closeModal();
+    alert(`Thanks, ${username}! Join our Discord and open a ticket with your username and rank (${rank}) to complete your purchase.`);
+}
+
+document.getElementById('modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+});
+
+document.getElementById('modal-username').addEventListener('input', function() {
+    this.style.borderColor = '';
+});
+</script>
+
+</body>
+</html>

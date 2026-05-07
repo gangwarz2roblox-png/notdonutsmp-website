@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotDonutSMP — Minecraft Server</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav>
+    <div class="nav-logo">
+        <span class="not">Not</span><span class="donut">Donut</span><span class="smp">SMP</span>
+    </div>
+    <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="rules.html">Rules</a></li>
+        <li><a href="staff.html">Staff</a></li>
+        <li><a href="store.html">Store</a></li>
+        <li><a href="https://discord.gg/zdaUByyf4b" target="_blank" class="nav-cta">Discord</a></li>
+    </ul>
+</nav>
+
+<section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+
+    <div class="hero-badge">Now Online</div>
+
+    <h1>
+        <span class="not">Not</span><span class="donut">Donut</span><span class="smp">SMP</span>
+    </h1>
+
+    <p class="hero-sub">
+        A community-driven Minecraft survival server. Build, explore, and thrive together.
+    </p>
+
+    <div class="hero-ip">
+        <span id="ip-text">play.notdonutsmp.com</span>
+        <button class="copy-btn" onclick="copyIP()">COPY IP</button>
+    </div>
+
+    <div class="hero-actions">
+        <a href="store.html" class="btn btn-primary">
+            🛒 View Store
+        </a>
+        <a href="https://discord.gg/zdaUByyf4b" target="_blank" class="btn btn-secondary">
+            💬 Join Discord
+        </a>
+    </div>
+</section>
+
+<div class="stats-bar">
+    <div class="stat-item">
+        <div class="val">1.20.4</div>
+        <div class="label">Version</div>
+    </div>
+    <div class="stat-item">
+        <div class="val">Survival</div>
+        <div class="label">Gamemode</div>
+    </div>
+    <div class="stat-item">
+        <div class="val">QBCore</div>
+        <div class="label">Economy</div>
+    </div>
+    <div class="stat-item">
+        <div class="val">24/7</div>
+        <div class="label">Uptime</div>
+    </div>
+</div>
+
+<section class="section">
+    <div class="section-header">
+        <div class="section-tag">Features</div>
+        <h2>What We Offer</h2>
+        <p>Everything you need for an incredible Minecraft experience.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
+        <div class="card">
+            <div style="font-size: 32px; margin-bottom: 16px;">⚔️</div>
+            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">Survival Gameplay</h3>
+            <p style="color: var(--muted); font-size: 14px; line-height: 1.7;">Classic survival with a twist. Earn money, build your empire, and compete on the leaderboards.</p>
+        </div>
+        <div class="card">
+            <div style="font-size: 32px; margin-bottom: 16px;">🏠</div>
+            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">Player Homes</h3>
+            <p style="color: var(--muted); font-size: 14px; line-height: 1.7;">Set multiple home points and teleport back with a stylish GUI and sound effects.</p>
+        </div>
+        <div class="card">
+            <div style="font-size: 32px; margin-bottom: 16px;">👥</div>
+            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">Teams / Clans</h3>
+            <p style="color: var(--muted); font-size: 14px; line-height: 1.7;">Form your own team, invite friends, use team chat, and show off your clan tag.</p>
+        </div>
+        <div class="card">
+            <div style="font-size: 32px; margin-bottom: 16px;">💰</div>
+            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">Economy</h3>
+            <p style="color: var(--muted); font-size: 14px; line-height: 1.7;">Full player-driven economy powered by EssentialsX. Your balance shows on your nametag.</p>
+        </div>
+        <div class="card">
+            <div style="font-size: 32px; margin-bottom: 16px;">🌀</div>
+            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">Custom Spawn</h3>
+            <p style="color: var(--muted); font-size: 14px; line-height: 1.7;">Beautiful spawn area with a teleport countdown and immersive sound effects.</p>
+        </div>
+        <div class="card">
+            <div style="font-size: 32px; margin-bottom: 16px;">🎖️</div>
+            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">Rank Perks</h3>
+            <p style="color: var(--muted); font-size: 14px; line-height: 1.7;">Support the server and unlock exclusive cosmetics, commands, and privileges.</p>
+        </div>
+    </div>
+</section>
+
+<div class="discord-banner">
+    <h2>Join Our Community</h2>
+    <p>Stay updated, report bugs, suggest features, and chat with the community.</p>
+    <a href="https://discord.gg/zdaUByyf4b" target="_blank" class="btn-discord">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.04.033.05a19.834 19.834 0 0 0 5.993 3.03.077.077 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+        Join Discord
+    </a>
+</div>
+
+<footer>
+    <div class="footer-logo">Not<span class="donut">Donut</span>SMP</div>
+    <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="rules.html">Rules</a></li>
+        <li><a href="staff.html">Staff</a></li>
+        <li><a href="store.html">Store</a></li>
+        <li><a href="https://discord.gg/zdaUByyf4b" target="_blank">Discord</a></li>
+    </ul>
+    <p>© 2026 NotDonutSMP. All rights reserved. | play.notdonutsmp.com</p>
+</footer>
+
+<script>
+function copyIP() {
+    navigator.clipboard.writeText('play.notdonutsmp.com').then(() => {
+        const btn = document.querySelector('.copy-btn');
+        btn.textContent = 'COPIED!';
+        btn.style.background = '#86efac';
+        setTimeout(() => { btn.textContent = 'COPY IP'; btn.style.background = ''; }, 2000);
+    });
+}
+</script>
+
+</body>
+</html>
