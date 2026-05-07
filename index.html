@@ -2,415 +2,264 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NotDonutSMP — Minecraft Server</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NotDonutSMP | Welcome</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background: #0d0d0d;
+            background: #111111;
             font-family: 'Inter', sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            color: silver;
         }
 
         a { color: white; text-decoration: none; }
+        img { max-width: 100%; }
 
-        /* ── NAV ── */
-        nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 18px 36px;
-        }
-
-        .nav-logo {
-            font-size: 22px;
-            font-weight: 900;
-        }
-        .nav-logo .g { color: #4ade80; }
-        .nav-logo .d { color: rgba(255,255,255,0.35); font-size: 16px; font-weight: 500; }
-
-        .nav-links {
-            display: flex;
-            gap: 6px;
-            list-style: none;
-        }
-        .nav-links a {
-            color: rgba(255,255,255,0.55);
-            font-size: 14px;
-            font-weight: 600;
-            padding: 8px 16px;
-            border-radius: 8px;
-            transition: all .15s;
-        }
-        .nav-links a:hover { color: #fff; background: rgba(255,255,255,0.07); }
-        .nav-links .disc {
-            background: #5865F2;
-            color: white !important;
-            font-weight: 700;
-        }
-        .nav-links .disc:hover { background: #4752c4; }
-
-        /* ── GRID ── */
-        .grid {
-            flex: 1;
-            display: grid;
-            grid-template-columns: 300px 1fr 260px;
-            grid-template-rows: 320px 320px;
-            gap: 14px;
-            padding: 0 36px 36px;
-        }
-
-        .card {
-            border-radius: 24px;
-            overflow: hidden;
-            position: relative;
-            transition: transform .2s;
-        }
-        .card:hover { transform: scale(1.015); }
-
-        /* ── CARD 1: LOGO ── */
-        .card-logo {
-            background: #1098f7;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 24px;
-            cursor: default;
-        }
-
-        .logo-img {
-            width: 130px;
-            height: 130px;
-            background: rgba(0,0,0,0.15);
-            border-radius: 28px;
+        /* ── TOP NAV ── */
+        .top-nav {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 70px;
-            margin-bottom: 18px;
-        }
-
-        .logo-server-name {
-            font-size: 20px;
-            font-weight: 900;
-            color: white;
-            margin-bottom: 4px;
-        }
-
-        .ip-btn {
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            background: rgba(0,0,0,0.35);
-            backdrop-filter: blur(8px);
-            border: none;
-            padding: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding: 28px 20px 0;
             gap: 12px;
-            color: white;
-            font-size: 14px;
-            font-weight: 700;
-            font-family: monospace;
-            cursor: pointer;
-            transition: background .15s;
-        }
-        .ip-btn:hover { background: rgba(0,0,0,0.5); }
-
-        .ip-icon {
-            width: 28px;
-            height: 28px;
-            background: rgba(255,255,255,0.15);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-        }
-
-        /* ── CARD 2: STORE ── */
-        .card-store {
-            background: #111;
-            display: block;
-            cursor: pointer;
-        }
-
-        .card-store-bg {
-            position: absolute;
-            inset: 0;
-            background:
-                linear-gradient(160deg, rgba(74,222,128,0.15) 0%, transparent 40%),
-                radial-gradient(ellipse at 70% 30%, rgba(96,165,250,0.12) 0%, transparent 60%),
-                #0a1a0a;
-            background-size: cover;
-            background-position: center;
-        }
-
-        /* Minecraft-style decorative elements */
-        .card-store-bg::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(74,222,128,0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(74,222,128,0.03) 1px, transparent 1px);
-            background-size: 32px 32px;
-        }
-
-        .card-store-art {
-            position: absolute;
-            right: -20px;
-            bottom: -10px;
-            font-size: 160px;
-            opacity: 0.12;
-            pointer-events: none;
-        }
-
-        .card-label {
-            position: absolute;
-            top: 20px;
-            left: 24px;
-            font-size: 20px;
-            font-weight: 800;
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            z-index: 1;
-        }
-
-        .card-label-icon {
-            width: 34px;
-            height: 34px;
-            background: rgba(255,255,255,0.12);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-        }
-
-        .store-bottom {
-            position: absolute;
-            bottom: 24px;
-            left: 24px;
-            right: 24px;
-            z-index: 1;
-        }
-
-        .store-ranks-row {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 16px;
             flex-wrap: wrap;
         }
 
-        .rank-tag {
-            padding: 5px 14px;
-            border-radius: 999px;
-            font-size: 12px;
-            font-weight: 700;
-        }
-        .rt-vip   { background: rgba(74,222,128,0.2); color:#4ade80; border:1px solid rgba(74,222,128,0.35); }
-        .rt-vipp  { background: rgba(251,191,36,0.2); color:#fbbf24; border:1px solid rgba(251,191,36,0.35); }
-        .rt-mvp   { background: rgba(96,165,250,0.2); color:#60a5fa; border:1px solid rgba(96,165,250,0.35); }
-        .rt-mvpp  { background: rgba(248,113,113,0.2); color:#f87171; border:1px solid rgba(248,113,113,0.35); }
-
-        .store-cta-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #4ade80;
-            color: #000;
-            font-weight: 800;
-            font-size: 15px;
-            padding: 12px 24px;
+        .top-nav > a {
+            background: #3a3e41;
             border-radius: 12px;
-            transition: background .15s;
-        }
-        .card-store:hover .store-cta-btn { background: #86efac; }
-
-        /* ── CARD 3: DISCORD ── */
-        .card-discord {
-            background: #1a1a1f;
-            border: 1px solid rgba(255,255,255,0.07);
+            color: #bababa;
+            min-width: 120px;
+            font-weight: 700;
+            font-size: 15px;
+            text-transform: uppercase;
+            padding: 11px 17px;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            text-align: center;
-            padding: 28px;
-            cursor: pointer;
+            gap: 8px;
+            transition: color .15s;
+        }
+        .top-nav > a:hover { color: white; }
+        .top-nav > a.store-link { background: #036fff; color: white; }
+        .top-nav > a.disc-link { background: #5865F2; color: white; }
+
+        /* ── HOME CONTENTS ── */
+        .home-contents {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            margin-top: 5%;
+            padding: 0 20px 60px;
         }
 
-        .discord-icon {
-            width: 72px;
-            height: 72px;
+        .relative { position: relative; }
+        .group { cursor: pointer; }
+        .group:hover img { opacity: 0.92; }
+
+        /* ── LOGO CARD ── */
+        .logo-img-home {
+            background-color: #00b4ff;
+            height: 230px;
+            padding: 30px 60px;
+            border-radius: 24px;
+            display: block;
         }
 
-        .discord-count {
-            font-size: 36px;
-            font-weight: 900;
+        .below-logo { margin-top: 12px; }
+
+        .ip-home {
+            background: #1e1e1e;
+            padding: 10px 18px;
+            font-size: 18px;
+            font-weight: 700;
             color: white;
-            line-height: 1;
+            border-radius: 32px;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: inline-flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            transition: background .15s;
+        }
+        .ip-home:hover { background: #252830; color: #036fff; }
+
+        /* ── STORE / STATS / JOIN IMAGES ── */
+        .store-img-home, .join-img-home, .stats-img-home {
+            height: 300px;
+            border-radius: 24px;
+            display: block;
+            transition: transform .2s;
+        }
+        .stats-img-home { transform: scaleX(-1); }
+        .group:hover .store-img-home,
+        .group:hover .join-img-home { transform: scale(1.02); }
+        .group:hover .stats-img-home { transform: scaleX(-1) scale(1.02); }
+
+        /* ── LABEL OVERLAY ── */
+        .img-text-home {
+            position: absolute;
+            top: 0; left: 0;
+            padding: 18px 22px;
+            z-index: 1;
+            color: white;
         }
 
-        .discord-live {
+        .img-text-home > h2 {
+            font-weight: 800;
+            font-size: 22px;
+            text-shadow: 1px 1px 24px black;
+        }
+
+        /* ── DISCORD CARD ── */
+        .discord-card-home {
             display: flex;
             align-items: center;
+            background: #1e1e1e;
+            height: 300px;
+            justify-content: center;
+            flex-direction: column;
+            width: 220px;
+            border-radius: 24px;
             gap: 6px;
-            font-size: 13px;
-            color: rgba(255,255,255,0.5);
+            transition: background .15s;
+        }
+        .group:hover .discord-card-home { background: #252830; }
+
+        .discord-img-home { width: 60px; }
+
+        .discord-count {
+            color: white;
+            font-size: 32px;
+            margin-top: 8px;
+            font-weight: 800;
+        }
+
+        .discord-message {
+            color: rgba(255,255,255,0.7);
+            font-size: 14px;
             font-weight: 600;
         }
 
-        .discord-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #4ade80;
-            box-shadow: 0 0 6px #4ade80;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
-
-        /* ── CARD 4: STATS ── */
-        .card-stats {
-            grid-column: 1 / 3;
-            background: #111;
-            cursor: default;
-        }
-
-        .card-stats-bg {
-            position: absolute;
-            inset: 0;
-            background:
-                linear-gradient(200deg, rgba(96,165,250,0.12) 0%, transparent 45%),
-                radial-gradient(ellipse at 15% 80%, rgba(96,165,250,0.1) 0%, transparent 55%),
-                #080f1a;
-        }
-
-        .card-stats-bg::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(96,165,250,0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(96,165,250,0.03) 1px, transparent 1px);
-            background-size: 32px 32px;
-        }
-
-        .stats-inner {
-            position: absolute;
-            inset: 0;
-            padding: 24px;
+        /* ── OWNERS CARD (replaces video) ── */
+        .owners-card-home {
+            background: #1e1e1e;
+            height: 300px;
+            border-radius: 24px;
+            width: 260px;
             display: flex;
             flex-direction: column;
+            padding: 22px;
             justify-content: space-between;
-            z-index: 1;
+            transition: background .15s;
         }
+        .group:hover .owners-card-home { background: #252830; }
 
-        .stats-boxes {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-        }
-
-        .stat-box {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 14px;
-            padding: 16px;
-        }
-
-        .stat-val {
-            font-size: 22px;
-            font-weight: 900;
-            color: #60a5fa;
-            margin-bottom: 4px;
-        }
-
-        .stat-lbl {
-            font-size: 10px;
+        .owners-title {
+            font-size: 11px;
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
             color: rgba(255,255,255,0.3);
-        }
-
-        /* ── CARD 5: HOW TO JOIN ── */
-        .card-join {
-            background: #0d0d10;
-            border: 1px solid rgba(255,255,255,0.07);
-            display: flex;
-            flex-direction: column;
-            padding: 24px;
-            justify-content: space-between;
-            cursor: default;
-        }
-
-        .mc-field-wrap {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
             margin-bottom: 16px;
         }
 
-        .mc-field {
-            background: #3d3d3d;
-            border: 2px solid #555;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .mc-label {
-            font-size: 11px;
-            color: #aaa;
-            padding: 7px 12px 3px;
-            font-family: 'Courier New', monospace;
-        }
-
-        .mc-value {
-            padding: 5px 12px 9px;
-            color: #fff;
-            font-size: 14px;
-            font-family: 'Courier New', monospace;
+        .owner-row {
             display: flex;
             align-items: center;
-            gap: 2px;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
         }
+        .owner-row:last-of-type { border-bottom: none; }
 
-        .cursor {
+        .owner-skin-sm {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: #2a2a2a;
+        }
+        .owner-skin-sm img { width: 100%; height: 100%; object-fit: cover; }
+
+        .owner-info-sm .name { font-size: 15px; font-weight: 700; color: white; margin-bottom: 4px; }
+
+        .badge-sm {
             display: inline-block;
-            width: 2px;
-            height: 14px;
-            background: #fff;
-            animation: blink 1s infinite;
-            vertical-align: middle;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 2px 8px;
+            border-radius: 999px;
         }
-        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+        .b-owner   { background: rgba(248,113,113,0.15); color: #f87171; border: 1px solid rgba(248,113,113,0.3); }
+        .b-coowner { background: rgba(251,146,60,0.15);  color: #fb923c; border: 1px solid rgba(251,146,60,0.3); }
 
-        .join-copy-btn {
-            width: 100%;
-            background: #4ade80;
-            color: #000;
-            border: none;
-            border-radius: 12px;
-            padding: 14px;
-            font-size: 14px;
-            font-weight: 800;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-            transition: background .15s;
+        .view-staff-link {
+            font-size: 12px;
+            color: rgba(255,255,255,0.25);
+            text-align: center;
+            display: block;
+            margin-top: auto;
+            padding-top: 12px;
+            transition: color .15s;
         }
-        .join-copy-btn:hover { background: #86efac; }
+        .view-staff-link:hover { color: rgba(255,255,255,0.6); }
+
+        /* ── FOOTER ── */
+        #foot {
+            color: grey;
+            background: #1e1e1e;
+            padding: 40px 0;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        #foot .copyright {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        #foot .copyright-text {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: white;
+        }
+
+        #foot .copyright-text img { width: 32px; border-radius: 8px; }
+        #foot small { font-size: 12px; color: #7a7a7a; display: block; }
+
+        #foot .copyright-links {
+            margin-top: 10px;
+            display: flex;
+            gap: 20px;
+            font-size: 10px;
+            text-transform: uppercase;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        #foot .copyright-links a { color: #a7b2c1; transition: color .15s; }
+        #foot .copyright-links a:hover { color: white; }
 
         /* ── TOAST ── */
         .toast {
@@ -418,152 +267,126 @@
             bottom: 28px;
             left: 50%;
             transform: translateX(-50%) translateY(80px);
-            background: #1e2025;
-            border: 1px solid rgba(74,222,128,0.3);
-            color: #fff;
+            background: #036fff;
+            color: white;
             padding: 12px 28px;
             border-radius: 12px;
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 700;
             transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
             z-index: 999;
-            white-space: nowrap;
         }
         .toast.show { transform: translateX(-50%) translateY(0); }
-
-        /* ── FOOTER ── */
-        footer {
-            text-align: center;
-            padding: 16px 36px 24px;
-            color: rgba(255,255,255,0.2);
-            font-size: 12px;
-        }
-        footer a { color: rgba(255,255,255,0.3); margin: 0 10px; transition: color .15s; }
-        footer a:hover { color: rgba(255,255,255,0.7); }
     </style>
 </head>
 <body>
 
-<nav>
-    <div class="nav-logo">Not<span class="g">Donut</span><span class="d">SMP</span></div>
-    <ul class="nav-links">
-        <li><a href="rules.html">Rules</a></li>
-        <li><a href="staff.html">Staff</a></li>
-        <li><a href="store.html">Store</a></li>
-        <li><a href="https://discord.gg/zdaUByyf4b" target="_blank" class="disc">Discord</a></li>
-    </ul>
-</nav>
+<!-- TOP NAV -->
+<div class="top-nav">
+    <a href="index.html">🏠 Home</a>
+    <a href="store.html" class="store-link">🛒 Store</a>
+    <a href="rules.html">📋 Rules</a>
+    <a href="staff.html">👥 Staff</a>
+    <a href="https://discord.gg/zdaUByyf4b" target="_blank" class="disc-link">💬 Discord</a>
+</div>
 
-<div class="grid">
+<!-- MAIN CONTENT -->
+<div class="home-contents">
 
-    <!-- CARD 1: LOGO -->
-    <div class="card card-logo">
-        <div class="logo-img">🍩</div>
-        <div class="logo-server-name">NotDonutSMP</div>
-        <button class="ip-btn" onclick="copyIP()">
-            <div class="ip-icon">⧉</div>
-            PLAY.NOTDONUTSMP.COM
-        </button>
-    </div>
-
-    <!-- CARD 2: STORE -->
-    <a class="card card-store" href="store.html">
-        <div class="card-store-bg"></div>
-        <div class="card-store-art">⚔️</div>
-        <div class="card-label">
-            <div class="card-label-icon">🛒</div>
-            Store
-        </div>
-        <div class="store-bottom">
-            <div class="store-ranks-row">
-                <span class="rank-tag rt-vip">VIP</span>
-                <span class="rank-tag rt-vipp">VIP+</span>
-                <span class="rank-tag rt-mvp">MVP</span>
-                <span class="rank-tag rt-mvpp">MVP+</span>
-            </div>
-            <div class="store-cta-btn">View All Ranks →</div>
-        </div>
-    </a>
-
-    <!-- CARD 3: DISCORD -->
-    <a class="card card-discord" href="https://discord.gg/zdaUByyf4b" target="_blank">
-        <svg class="discord-icon" viewBox="0 0 127.14 96.36" fill="#5865F2" xmlns="http://www.w3.org/2000/svg">
-            <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
-        </svg>
-        <div class="discord-count">Join Us</div>
-        <div class="discord-live">
-            <div class="discord-dot"></div>
-            Discord Community
-        </div>
-    </a>
-
-    <!-- CARD 4: STATS -->
-    <div class="card card-stats">
-        <div class="card-stats-bg"></div>
-        <div class="stats-inner">
-            <div class="card-label" style="position:relative;top:auto;left:auto;">
-                <div class="card-label-icon">📊</div>
-                Stats
-            </div>
-            <div class="stats-boxes">
-                <div class="stat-box">
-                    <div class="stat-val">1.20.4</div>
-                    <div class="stat-lbl">Version</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-val">Survival</div>
-                    <div class="stat-lbl">Gamemode</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-val">24/7</div>
-                    <div class="stat-lbl">Uptime</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-val">Free</div>
-                    <div class="stat-lbl">To Play</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-val">UK</div>
-                    <div class="stat-lbl">Based</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-val">SMP</div>
-                    <div class="stat-lbl">Type</div>
-                </div>
-            </div>
+    <!-- LOGO + IP -->
+    <div class="relative">
+        <a href="store.html">
+            <img class="logo-img-home" src="img/logo.png" alt="NotDonutSMP">
+        </a>
+        <div class="below-logo">
+            <button class="ip-home" onclick="copyIP()">
+                <i>⧉</i> play.notdonutsmp.com
+            </button>
         </div>
     </div>
 
-    <!-- CARD 5: HOW TO JOIN -->
-    <div class="card card-join">
-        <div class="card-label" style="position:relative;top:auto;left:auto;margin-bottom:20px;">
-            <div class="card-label-icon">🎮</div>
-            How To Join
-        </div>
-        <div class="mc-field-wrap">
-            <div class="mc-field">
-                <div class="mc-label">Server Name</div>
-                <div class="mc-value">NotDonutSMP<span class="cursor"></span></div>
+    <!-- STORE IMAGE -->
+    <div class="relative group">
+        <a href="store.html">
+            <div class="img-text-home">
+                <h2>Store</h2>
             </div>
-            <div class="mc-field">
-                <div class="mc-label">Server Address</div>
-                <div class="mc-value">play.notdonutsmp.com</div>
+            <img class="store-img-home" src="img/store.png" alt="Store">
+        </a>
+    </div>
+
+    <!-- DISCORD CARD -->
+    <div class="relative group">
+        <a href="https://discord.gg/zdaUByyf4b" target="_blank">
+            <div class="discord-card-home">
+                <img class="discord-img-home" src="img/discord.png" alt="Discord">
+                <span class="discord-count">Join Us</span>
+                <span class="discord-message"><span style="color:#4ade80;padding-right:4px">●</span>Discord Community</span>
             </div>
-        </div>
-        <button class="join-copy-btn" onclick="copyIP()">Copy IP Address</button>
+        </a>
+    </div>
+
+    <!-- STATS IMAGE -->
+    <div class="relative group">
+        <a href="staff.html">
+            <div class="img-text-home">
+                <h2>Staff</h2>
+            </div>
+            <img class="stats-img-home" src="img/stats.png" alt="Staff">
+        </a>
+    </div>
+
+    <!-- OWNERS CARD -->
+    <div class="relative group">
+        <a href="staff.html">
+            <div class="owners-card-home">
+                <div>
+                    <div class="owners-title">Server Owners</div>
+                    <div class="owner-row">
+                        <div class="owner-skin-sm">
+                            <img src="https://minotar.net/helm/DRDeathMC/80" alt="DRDeathMC">
+                        </div>
+                        <div class="owner-info-sm">
+                            <div class="name">DRDeathMC</div>
+                            <span class="badge-sm b-owner">Owner</span>
+                        </div>
+                    </div>
+                    <div class="owner-row">
+                        <div class="owner-skin-sm">
+                            <img src="https://minotar.net/helm/ItzBebeOnMC/80" alt="ItzBebeOnMC">
+                        </div>
+                        <div class="owner-info-sm">
+                            <div class="name">ItzBebeOnMC</div>
+                            <span class="badge-sm b-coowner">Co-Owner</span>
+                        </div>
+                    </div>
+                </div>
+                <a href="staff.html" class="view-staff-link">View Full Staff →</a>
+            </div>
+        </a>
     </div>
 
 </div>
 
-<footer>
-    <a href="rules.html">Rules</a>
-    <a href="staff.html">Staff</a>
-    <a href="store.html">Store</a>
-    <a href="https://discord.gg/zdaUByyf4b" target="_blank">Discord</a>
-    <br><br>© 2026 NotDonutSMP · play.notdonutsmp.com
-</footer>
+<!-- FOOTER -->
+<div id="foot">
+    <div class="copyright">
+        <div class="copyright-text">
+            <img src="img/bcGCsev.png" alt="">
+            <strong>NotDonutSMP</strong>
+        </div>
+        <small>Not associated with Mojang or Microsoft</small>
+        <small>© 2026 NotDonutSMP. All Rights Reserved.</small>
+        <div class="copyright-links">
+            <a href="rules.html">Rules</a>
+            <a href="staff.html">Staff</a>
+            <a href="store.html">Store</a>
+            <a href="https://discord.gg/zdaUByyf4b" target="_blank">Discord</a>
+        </div>
+    </div>
+</div>
 
-<div class="toast" id="toast">✓ Copied to clipboard!</div>
+<div class="toast" id="toast">✓ Copied!</div>
 
 <script>
 function copyIP() {
