@@ -6,139 +6,610 @@
     <title>NotDonutSMP — Minecraft Server</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { background: #111113; }
+
+        .site-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ── TOP NAV ── */
+        .top-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 32px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .top-nav-logo {
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+        }
+        .top-nav-logo .not   { color: #fff; }
+        .top-nav-logo .donut { color: #4ade80; }
+        .top-nav-logo .smp   { color: rgba(255,255,255,0.35); font-weight: 500; font-size: 16px; }
+
+        .top-nav-links {
+            display: flex;
+            gap: 6px;
+            list-style: none;
+        }
+        .top-nav-links a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 14px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        .top-nav-links a:hover { color: #fff; background: rgba(255,255,255,0.07); }
+        .top-nav-links .nav-disc {
+            background: #5865F2;
+            color: #fff !important;
+            font-weight: 700;
+            border-radius: 8px;
+        }
+        .top-nav-links .nav-disc:hover { background: #4752c4; }
+
+        /* ── BENTO GRID ── */
+        .bento {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 280px 1fr 280px;
+            grid-template-rows: 300px 300px;
+            gap: 12px;
+            padding: 0 32px 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .bento-card {
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .bento-card:hover { transform: scale(1.01); box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+
+        /* ── CARD 1: LOGO ── */
+        .card-logo {
+            background: #1a1a1f;
+            border: 1px solid rgba(255,255,255,0.07);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 28px;
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        .logo-icon {
+            width: 110px;
+            height: 110px;
+            border-radius: 26px;
+            background: linear-gradient(135deg, #1a3a1a, #0d2b0d);
+            border: 2px solid rgba(74,222,128,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            margin-bottom: 16px;
+        }
+
+        .logo-name {
+            font-size: 17px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+        .logo-name .g { color: #4ade80; }
+
+        .logo-tag {
+            font-size: 11px;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .ip-copy-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #1e2025;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 10px 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+            width: 100%;
+            justify-content: center;
+        }
+        .ip-copy-btn:hover { background: #252830; border-color: rgba(74,222,128,0.3); }
+
+        .ip-copy-icon {
+            color: rgba(255,255,255,0.5);
+            font-size: 14px;
+        }
+
+        .ip-copy-text {
+            font-size: 13px;
+            font-weight: 700;
+            color: #fff;
+            font-family: monospace;
+            letter-spacing: 0.3px;
+        }
+
+        /* ── CARD 2: STORE ── */
+        .card-store {
+            grid-column: 2;
+            grid-row: 1;
+            background: #1a1a1f;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: block;
+        }
+
+        .card-store-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(160deg, rgba(74,222,128,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(74,222,128,0.12) 0%, transparent 60%),
+                #0f1a12;
+        }
+
+        .card-store-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(74,222,128,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(74,222,128,0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .card-store-content {
+            position: absolute;
+            inset: 0;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-label {
+            font-size: 18px;
+            font-weight: 800;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-label-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .store-ranks {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .rank-chip {
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .rank-vip    { background: rgba(74,222,128,0.15); color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
+        .rank-vipp   { background: rgba(251,191,36,0.15); color: #fbbf24; border: 1px solid rgba(251,191,36,0.3); }
+        .rank-mvp    { background: rgba(96,165,250,0.15); color: #60a5fa; border: 1px solid rgba(96,165,250,0.3); }
+        .rank-mvpp   { background: rgba(248,113,113,0.15); color: #f87171; border: 1px solid rgba(248,113,113,0.3); }
+
+        .store-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #4ade80;
+            color: #000;
+            font-size: 14px;
+            font-weight: 800;
+            padding: 12px 22px;
+            border-radius: 10px;
+            align-self: flex-start;
+            transition: all 0.2s;
+        }
+        .card-store:hover .store-cta { background: #86efac; }
+
+        /* ── CARD 3: OWNERS ── */
+        .card-owners {
+            grid-column: 3;
+            grid-row: 1;
+            background: #1a1a1f;
+            border: 1px solid rgba(255,255,255,0.07);
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+            gap: 0;
+        }
+
+        .owners-title {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+            margin-bottom: 20px;
+        }
+
+        .owner-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .owner-item:last-of-type { border-bottom: none; }
+
+        .owner-skin {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: #252830;
+            border: 2px solid rgba(255,255,255,0.07);
+        }
+        .owner-skin img { width: 100%; height: 100%; object-fit: cover; }
+
+        .owner-info { flex: 1; min-width: 0; }
+        .owner-name { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        .owner-badge {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 3px 9px;
+            border-radius: 999px;
+        }
+        .badge-owner   { background: rgba(248,113,113,0.15); color: #f87171; border: 1px solid rgba(248,113,113,0.3); }
+        .badge-coowner { background: rgba(251,146,60,0.15);  color: #fb923c; border: 1px solid rgba(251,146,60,0.3); }
+
+        /* ── CARD 4: STATS ── */
+        .card-stats {
+            grid-column: 1 / 3;
+            grid-row: 2;
+            background: #1a1a1f;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-stats-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(200deg, rgba(96,165,250,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 20% 80%, rgba(96,165,250,0.1) 0%, transparent 60%),
+                #0d1520;
+        }
+
+        .card-stats-content {
+            position: absolute;
+            inset: 0;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .stat-box {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 14px;
+            padding: 18px 16px;
+        }
+
+        .stat-box-val {
+            font-size: 26px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+        .stat-box-val span { color: #4ade80; }
+
+        .stat-box-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.3);
+        }
+
+        /* ── CARD 5: HOW TO JOIN ── */
+        .card-join {
+            grid-column: 3;
+            grid-row: 2;
+            background: #0d0d10;
+            border: 1px solid rgba(255,255,255,0.07);
+            display: flex;
+            flex-direction: column;
+            padding: 28px;
+            justify-content: space-between;
+        }
+
+        .join-mc-ui {
+            background: #3d3d3d;
+            border: 2px solid #555;
+            border-radius: 4px;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Courier New', monospace;
+        }
+
+        .join-mc-label {
+            font-size: 11px;
+            color: #aaa;
+            padding: 8px 12px 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .join-mc-field {
+            background: #000;
+            border: none;
+            padding: 6px 12px 10px;
+            color: #fff;
+            font-size: 13px;
+            font-family: 'Courier New', monospace;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .join-mc-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 14px;
+            background: #fff;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+        .join-btn {
+            width: 100%;
+            background: #4ade80;
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            padding: 13px;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
+            letter-spacing: 0.3px;
+        }
+        .join-btn:hover { background: #86efac; }
+
+        /* ── TOAST ── */
+        .toast {
+            position: fixed;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: #1e2025;
+            border: 1px solid rgba(74,222,128,0.3);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+            z-index: 999;
+            white-space: nowrap;
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        /* ── FOOTER ── */
+        .bento-footer {
+            text-align: center;
+            padding: 20px 32px 28px;
+            color: rgba(255,255,255,0.2);
+            font-size: 12px;
+        }
+        .bento-footer a { color: rgba(255,255,255,0.3); text-decoration: none; margin: 0 10px; }
+        .bento-footer a:hover { color: rgba(255,255,255,0.6); }
+    </style>
 </head>
 <body>
 
-<nav>
-    <div class="nav-logo">
-        <span class="not">Not</span><span class="donut">Donut</span><span class="smp">SMP</span>
-    </div>
-    <ul class="nav-links">
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="rules.html">Rules</a></li>
-        <li><a href="staff.html">Staff</a></li>
-        <li><a href="store.html">Store</a></li>
-        <li><a href="https://discord.gg/zdaUByyf4b" target="_blank" class="nav-cta">Discord</a></li>
-    </ul>
-</nav>
+<div class="site-wrapper">
 
-<section class="hero">
-    <div class="hero-grid"></div>
-    <div class="hero-glow"></div>
+    <!-- NAV -->
+    <nav class="top-nav">
+        <div class="top-nav-logo">
+            <span class="not">Not</span><span class="donut">Donut</span><span class="smp">SMP</span>
+        </div>
+        <ul class="top-nav-links">
+            <li><a href="rules.html">Rules</a></li>
+            <li><a href="staff.html">Staff</a></li>
+            <li><a href="store.html">Store</a></li>
+            <li><a href="https://discord.gg/zdaUByyf4b" target="_blank" class="nav-disc">Discord</a></li>
+        </ul>
+    </nav>
 
-    <div class="hero-badge">Now Online</div>
+    <!-- BENTO GRID -->
+    <div class="bento">
 
-    <h1>
-        <span class="not">Not</span><span class="donut">Donut</span><span class="smp">SMP</span>
-    </h1>
+        <!-- CARD 1: LOGO + IP -->
+        <div class="bento-card card-logo">
+            <div class="logo-icon">🍩</div>
+            <div class="logo-name">Not<span class="g">Donut</span>SMP</div>
+            <div class="logo-tag">Minecraft Server</div>
+            <button class="ip-copy-btn" onclick="copyIP()">
+                <span class="ip-copy-icon">⧉</span>
+                <span class="ip-copy-text" id="ip-text">play.notdonutsmp.com</span>
+            </button>
+        </div>
 
-    <p class="hero-sub">
-        A community-driven Minecraft survival server. Build, explore, and thrive together.
-    </p>
-
-    <div class="hero-ip">
-        <span id="ip-text">play.notdonutsmp.com</span>
-        <button class="copy-btn" onclick="copyIP()">COPY IP</button>
-    </div>
-
-    <div class="hero-actions">
-        <a href="store.html" class="btn btn-primary">
-            🛒 View Store
+        <!-- CARD 2: STORE -->
+        <a class="bento-card card-store" href="store.html">
+            <div class="card-store-bg"></div>
+            <div class="card-store-grid"></div>
+            <div class="card-store-content">
+                <div class="card-label">
+                    <div class="card-label-icon">🛒</div>
+                    Store
+                </div>
+                <div>
+                    <div class="store-ranks" style="margin-bottom:20px;">
+                        <span class="rank-chip rank-vip">VIP</span>
+                        <span class="rank-chip rank-vipp">VIP+</span>
+                        <span class="rank-chip rank-mvp">MVP</span>
+                        <span class="rank-chip rank-mvpp">MVP+</span>
+                    </div>
+                    <div class="store-cta">View All Ranks →</div>
+                </div>
+            </div>
         </a>
-        <a href="https://discord.gg/zdaUByyf4b" target="_blank" class="btn btn-secondary">
-            💬 Join Discord
-        </a>
-    </div>
-</section>
 
-<div class="stats-bar">
-    <div class="stat-item">
-        <div class="val">1.20.4</div>
-        <div class="label">Version</div>
+        <!-- CARD 3: OWNERS -->
+        <div class="bento-card card-owners">
+            <div class="owners-title">Server Owners</div>
+
+            <div class="owner-item">
+                <div class="owner-skin">
+                    <img src="https://minotar.net/helm/DRDeathMC/80" alt="DRDeathMC" onerror="this.src='https://minotar.net/helm/Steve/80'">
+                </div>
+                <div class="owner-info">
+                    <div class="owner-name">DRDeathMC</div>
+                    <span class="owner-badge badge-owner">Owner</span>
+                </div>
+            </div>
+
+            <div class="owner-item">
+                <div class="owner-skin">
+                    <img src="https://minotar.net/helm/ItzBebeOnMC/80" alt="ItzBebeOnMC" onerror="this.src='https://minotar.net/helm/Steve/80'">
+                </div>
+                <div class="owner-info">
+                    <div class="owner-name">ItzBebeOnMC</div>
+                    <span class="owner-badge badge-coowner">Co-Owner</span>
+                </div>
+            </div>
+
+            <a href="staff.html" style="display:block; text-align:center; margin-top:auto; padding-top:16px; font-size:13px; color:rgba(255,255,255,0.3); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.7)'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">View Full Staff →</a>
+        </div>
+
+        <!-- CARD 4: STATS -->
+        <div class="bento-card card-stats">
+            <div class="card-stats-bg"></div>
+            <div class="card-stats-content">
+                <div class="card-label">
+                    <div class="card-label-icon">📊</div>
+                    Server Stats
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-box-val"><span>1.20.4</span></div>
+                        <div class="stat-box-label">Version</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-box-val"><span>Survival</span></div>
+                        <div class="stat-box-label">Gamemode</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-box-val"><span>24/7</span></div>
+                        <div class="stat-box-label">Uptime</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-box-val"><span>QBCore</span></div>
+                        <div class="stat-box-label">Economy</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-box-val"><span>UK</span></div>
+                        <div class="stat-box-label">Based</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-box-val"><span>Free</span></div>
+                        <div class="stat-box-label">To Play</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARD 5: HOW TO JOIN -->
+        <div class="bento-card card-join">
+            <div class="card-label" style="margin-bottom:20px;">
+                <div class="card-label-icon">🎮</div>
+                How To Join
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:20px;">
+                <div class="join-mc-ui">
+                    <div class="join-mc-label">Server Name</div>
+                    <div class="join-mc-field">NotDonutSMP<span class="join-mc-cursor"></span></div>
+                </div>
+                <div class="join-mc-ui">
+                    <div class="join-mc-label">Server Address</div>
+                    <div class="join-mc-field">play.notdonutsmp.com</div>
+                </div>
+            </div>
+
+            <button class="join-btn" onclick="copyIP()">Copy IP Address</button>
+        </div>
+
     </div>
-    <div class="stat-item">
-        <div class="val">Survival</div>
-        <div class="label">Gamemode</div>
+
+    <div class="bento-footer">
+        <a href="rules.html">Rules</a>
+        <a href="staff.html">Staff</a>
+        <a href="store.html">Store</a>
+        <a href="https://discord.gg/zdaUByyf4b" target="_blank">Discord</a>
+        <br><br>
+        © 2026 NotDonutSMP · play.notdonutsmp.com
     </div>
-    <div class="stat-item">
-        <div class="val">QBCore</div>
-        <div class="label">Economy</div>
-    </div>
-    <div class="stat-item">
-        <div class="val">24/7</div>
-        <div class="label">Uptime</div>
-    </div>
+
 </div>
 
-<section class="section">
-    <div class="section-header">
-        <div class="section-tag">Features</div>
-        <h2>What We Offer</h2>
-        <p>Everything you need for an incredible Minecraft experience.</p>
-    </div>
-
-    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
-        <div class="card">
-            <div style="font-size: 32px; margin-bottom: 16px;">⚔️</div>
-            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">Survival Gameplay</h3>
-            <p style="color: var(--muted); font-size: 14px; line-height: 1.7;">Classic survival with a twist. Earn money, build your empire, and compete on the leaderboards.</p>
-        </div>
-        <div class="card">
-            <div style="font-size: 32px; margin-bottom: 16px;">🏠</div>
-            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">Player Homes</h3>
-            <p style="color: var(--muted); font-size: 14px; line-height: 1.7;">Set multiple home points and teleport back with a stylish GUI and sound effects.</p>
-        </div>
-        <div class="card">
-            <div style="font-size: 32px; margin-bottom: 16px;">👥</div>
-            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">Teams / Clans</h3>
-            <p style="color: var(--muted); font-size: 14px; line-height: 1.7;">Form your own team, invite friends, use team chat, and show off your clan tag.</p>
-        </div>
-        <div class="card">
-            <div style="font-size: 32px; margin-bottom: 16px;">💰</div>
-            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">Economy</h3>
-            <p style="color: var(--muted); font-size: 14px; line-height: 1.7;">Full player-driven economy powered by EssentialsX. Your balance shows on your nametag.</p>
-        </div>
-        <div class="card">
-            <div style="font-size: 32px; margin-bottom: 16px;">🌀</div>
-            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">Custom Spawn</h3>
-            <p style="color: var(--muted); font-size: 14px; line-height: 1.7;">Beautiful spawn area with a teleport countdown and immersive sound effects.</p>
-        </div>
-        <div class="card">
-            <div style="font-size: 32px; margin-bottom: 16px;">🎖️</div>
-            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">Rank Perks</h3>
-            <p style="color: var(--muted); font-size: 14px; line-height: 1.7;">Support the server and unlock exclusive cosmetics, commands, and privileges.</p>
-        </div>
-    </div>
-</section>
-
-<div class="discord-banner">
-    <h2>Join Our Community</h2>
-    <p>Stay updated, report bugs, suggest features, and chat with the community.</p>
-    <a href="https://discord.gg/zdaUByyf4b" target="_blank" class="btn-discord">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.04.033.05a19.834 19.834 0 0 0 5.993 3.03.077.077 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
-        Join Discord
-    </a>
-</div>
-
-<footer>
-    <div class="footer-logo">Not<span class="donut">Donut</span>SMP</div>
-    <ul class="footer-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="rules.html">Rules</a></li>
-        <li><a href="staff.html">Staff</a></li>
-        <li><a href="store.html">Store</a></li>
-        <li><a href="https://discord.gg/zdaUByyf4b" target="_blank">Discord</a></li>
-    </ul>
-    <p>© 2026 NotDonutSMP. All rights reserved. | play.notdonutsmp.com</p>
-</footer>
+<div class="toast" id="toast">✓ Copied to clipboard!</div>
 
 <script>
 function copyIP() {
     navigator.clipboard.writeText('play.notdonutsmp.com').then(() => {
-        const btn = document.querySelector('.copy-btn');
-        btn.textContent = 'COPIED!';
-        btn.style.background = '#86efac';
-        setTimeout(() => { btn.textContent = 'COPY IP'; btn.style.background = ''; }, 2000);
+        const t = document.getElementById('toast');
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 2500);
     });
 }
 </script>

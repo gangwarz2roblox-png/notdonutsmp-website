@@ -6,6 +6,314 @@
     <title>Store — NotDonutSMP</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { background: #0d0d0f; }
+
+        .store-page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 100px 28px 80px;
+        }
+
+        /* ── FEATURED RANK BANNER ── */
+        .featured-rank {
+            border-radius: 20px;
+            background: linear-gradient(120deg, #1565e8 0%, #1a7aff 60%, #2196ff 100%);
+            padding: 36px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-rank::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 80% 50%, rgba(255,255,255,0.12) 0%, transparent 60%);
+        }
+
+        .featured-rank-left { position: relative; z-index: 1; }
+
+        .featured-rank-title {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 6px;
+        }
+
+        .featured-rank-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .featured-rank-name {
+            font-size: 30px;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .featured-rank-sub {
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 22px;
+        }
+
+        .featured-perks {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .featured-perk {
+            font-size: 14px;
+            color: rgba(255,255,255,0.9);
+        }
+        .featured-perk::before { content: '+'; margin-right: 6px; font-weight: 700; }
+
+        .featured-rank-right {
+            position: relative;
+            z-index: 1;
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 14px;
+        }
+
+        .featured-rank-price {
+            font-size: 36px;
+            font-weight: 900;
+            color: #fff;
+        }
+        .featured-rank-price span {
+            font-size: 14px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.6);
+            display: block;
+            margin-top: -4px;
+        }
+
+        .featured-buy-btn {
+            background: #fff;
+            color: #1565e8;
+            border: none;
+            padding: 13px 28px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
+        }
+        .featured-buy-btn:hover { background: #e0eeff; transform: translateY(-1px); }
+
+        /* ── SECTION TITLE ── */
+        .store-section-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 24px;
+        }
+
+        /* ── KEYS GRID ── */
+        .keys-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .key-card {
+            background: #1a1a20;
+            border-radius: 16px;
+            padding: 28px 20px 20px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.06);
+            position: relative;
+            transition: all 0.2s;
+        }
+        .key-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-2px); }
+
+        .key-popular-badge {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff6b35;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            padding: 4px 12px;
+            border-radius: 999px;
+            white-space: nowrap;
+        }
+
+        .key-icon {
+            font-size: 52px;
+            margin-bottom: 12px;
+            display: block;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+        }
+
+        .key-name {
+            font-size: 20px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .key-price {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .key-qty-row {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            margin-bottom: 14px;
+        }
+
+        .qty-btn {
+            background: #252530;
+            color: rgba(255,255,255,0.7);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px;
+            padding: 7px 12px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.15s;
+            flex: 1;
+        }
+        .qty-btn:hover { background: #2e2e3e; color: #fff; }
+        .qty-btn.active {
+            background: #1565e8;
+            color: #fff;
+            border-color: #1565e8;
+        }
+
+        .add-cart-btn {
+            width: 100%;
+            background: #1565e8;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .add-cart-btn:hover { background: #1976f5; }
+
+        /* ── RANKS GRID ── */
+        .ranks-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .rank-card {
+            background: #1a1a20;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.2s;
+        }
+        .rank-card:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.12); }
+
+        .rank-card-header {
+            padding: 24px 24px 18px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .rank-card-name {
+            font-size: 20px;
+            font-weight: 900;
+            margin-bottom: 4px;
+        }
+
+        .rank-card-price {
+            font-size: 26px;
+            font-weight: 900;
+            color: #fff;
+        }
+        .rank-card-price small { font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.4); }
+
+        .rank-card-body { padding: 18px 24px 20px; }
+
+        .rank-perks-list {
+            list-style: none;
+            margin-bottom: 18px;
+        }
+        .rank-perks-list li {
+            font-size: 13px;
+            color: rgba(255,255,255,0.7);
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .rank-perks-list li:last-child { border-bottom: none; }
+        .perk-plus { color: #4ade80; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+
+        .rank-buy-btn {
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
+        }
+
+        .store-note {
+            text-align: center;
+            margin-top: 48px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.25);
+            line-height: 1.8;
+        }
+        .store-note a { color: rgba(255,255,255,0.4); }
+
+        /* ── TOAST ── */
+        .toast {
+            position: fixed;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: #1565e8;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+            z-index: 999;
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+    </style>
 </head>
 <body>
 
@@ -22,116 +330,185 @@
     </ul>
 </nav>
 
-<div class="page-hero">
-    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 80%,rgba(74,222,128,0.08) 0%,transparent 60%);pointer-events:none;"></div>
-    <div class="section-tag">Support The Server</div>
-    <h1>Store</h1>
-    <p>Purchase a rank to unlock exclusive perks and support NotDonutSMP's development.</p>
-</div>
+<div class="store-page">
 
-<!-- Rank Store -->
-<div class="store-grid">
-
-    <div class="store-card">
-        <div class="store-card-header">
-            <div class="store-rank-icon">🌿</div>
-            <div class="store-rank-name">VIP</div>
-            <div class="store-price">£3.99 <span>/ one-time</span></div>
+    <!-- FEATURED RANK -->
+    <div class="featured-rank">
+        <div class="featured-rank-left">
+            <div class="featured-rank-title">
+                <div class="featured-rank-icon">👑</div>
+                <div class="featured-rank-name">MVP+ Rank</div>
+            </div>
+            <div class="featured-rank-sub">Permanent — never expires</div>
+            <div class="featured-perks">
+                <div class="featured-perk">Unlimited home locations</div>
+                <div class="featured-perk">/fly everywhere</div>
+                <div class="featured-perk">/workbench &amp; /anvil anywhere</div>
+                <div class="featured-perk">Gradient [MVP+] prefix in chat</div>
+                <div class="featured-perk">Priority server queue</div>
+                <div class="featured-perk">Exclusive MVP+ Discord role</div>
+            </div>
         </div>
-        <div class="store-card-body">
-            <ul class="store-perks">
-                <li><span class="perk-check">✓</span> Green [VIP] prefix in chat</li>
-                <li><span class="perk-check">✓</span> 3 home locations</li>
-                <li><span class="perk-check">✓</span> /nick command</li>
-                <li><span class="perk-check">✓</span> Coloured chat messages</li>
-                <li><span class="perk-check">✓</span> Access to VIP Discord channel</li>
-            </ul>
-            <button class="store-btn store-btn-secondary" onclick="openModal('VIP', '£3.99')">Purchase</button>
+        <div class="featured-rank-right">
+            <div class="featured-rank-price">
+                £17.99
+                <span>one-time payment</span>
+            </div>
+            <button class="featured-buy-btn" onclick="buyRank('MVP+', '£17.99')">Purchase Now</button>
         </div>
     </div>
 
-    <div class="store-card featured">
-        <div class="store-card-badge">POPULAR</div>
-        <div class="store-card-header">
-            <div class="store-rank-icon">⭐</div>
-            <div class="store-rank-name" style="color: #fbbf24;">VIP+</div>
-            <div class="store-price" style="color: #fbbf24;">£6.99 <span>/ one-time</span></div>
+    <!-- CRATE KEYS -->
+    <div class="store-section-title">Crate Keys</div>
+    <div class="keys-grid">
+
+        <div class="key-card" id="card-common">
+            <div class="key-icon">🗝️</div>
+            <div class="key-name" style="color:#4ade80;">Common</div>
+            <div class="key-price" style="color:#4ade80;" id="price-common">£1.20</div>
+            <div class="key-qty-row">
+                <button class="qty-btn active" onclick="setQty('common',1,1.20)">1x</button>
+                <button class="qty-btn" onclick="setQty('common',5,1.20)">5x</button>
+                <button class="qty-btn" onclick="setQty('common',10,1.20)">10x</button>
+                <button class="qty-btn" onclick="setQty('common',20,1.20)">20x</button>
+            </div>
+            <button class="add-cart-btn" style="background:#16a34a;" onclick="buyKey('Common')">🛒 Add to Cart</button>
         </div>
-        <div class="store-card-body">
-            <ul class="store-perks">
-                <li><span class="perk-check">✓</span> Gold [VIP+] prefix in chat</li>
-                <li><span class="perk-check">✓</span> 5 home locations</li>
-                <li><span class="perk-check">✓</span> /nick + /hat commands</li>
-                <li><span class="perk-check">✓</span> Coloured chat &amp; signs</li>
-                <li><span class="perk-check">✓</span> Custom join/leave messages</li>
-                <li><span class="perk-check">✓</span> All VIP perks included</li>
-            </ul>
-            <button class="store-btn store-btn-primary" onclick="openModal('VIP+', '£6.99')">Purchase</button>
+
+        <div class="key-card" id="card-prime">
+            <div class="key-icon">🔑</div>
+            <div class="key-name" style="color:#60a5fa;">Prime</div>
+            <div class="key-price" style="color:#60a5fa;" id="price-prime">£2.40</div>
+            <div class="key-qty-row">
+                <button class="qty-btn active" onclick="setQty('prime',1,2.40)">1x</button>
+                <button class="qty-btn" onclick="setQty('prime',5,2.40)">5x</button>
+                <button class="qty-btn" onclick="setQty('prime',10,2.40)">10x</button>
+                <button class="qty-btn" onclick="setQty('prime',20,2.40)">20x</button>
+            </div>
+            <button class="add-cart-btn" onclick="buyKey('Prime')">🛒 Add to Cart</button>
         </div>
+
+        <div class="key-card" id="card-gold">
+            <div class="key-icon">✨</div>
+            <div class="key-name" style="color:#fbbf24;">Gold</div>
+            <div class="key-price" style="color:#fbbf24;" id="price-gold">£3.60</div>
+            <div class="key-qty-row">
+                <button class="qty-btn active" onclick="setQty('gold',1,3.60)">1x</button>
+                <button class="qty-btn" onclick="setQty('gold',5,3.60)">5x</button>
+                <button class="qty-btn" onclick="setQty('gold',10,3.60)">10x</button>
+                <button class="qty-btn" onclick="setQty('gold',20,3.60)">20x</button>
+            </div>
+            <button class="add-cart-btn" style="background:#b45309;" onclick="buyKey('Gold')">🛒 Add to Cart</button>
+        </div>
+
+        <div class="key-card" id="card-amethyst">
+            <div class="key-popular-badge">Most Popular</div>
+            <div class="key-icon">💎</div>
+            <div class="key-name" style="color:#c084fc;">Amethyst</div>
+            <div class="key-price" style="color:#c084fc;" id="price-amethyst">£4.80</div>
+            <div class="key-qty-row">
+                <button class="qty-btn active" onclick="setQty('amethyst',1,4.80)">1x</button>
+                <button class="qty-btn" onclick="setQty('amethyst',5,4.80)">5x</button>
+                <button class="qty-btn" onclick="setQty('amethyst',10,4.80)">10x</button>
+                <button class="qty-btn" onclick="setQty('amethyst',20,4.80)">20x</button>
+            </div>
+            <button class="add-cart-btn" style="background:#7c3aed;" onclick="buyKey('Amethyst')">🛒 Add to Cart</button>
+        </div>
+
+        <div class="key-card" id="card-crimson">
+            <div class="key-icon">🔴</div>
+            <div class="key-name" style="color:#f87171;">Crimson</div>
+            <div class="key-price" style="color:#f87171;" id="price-crimson">£6.00</div>
+            <div class="key-qty-row">
+                <button class="qty-btn active" onclick="setQty('crimson',1,6.00)">1x</button>
+                <button class="qty-btn" onclick="setQty('crimson',5,6.00)">5x</button>
+                <button class="qty-btn" onclick="setQty('crimson',10,6.00)">10x</button>
+                <button class="qty-btn" onclick="setQty('crimson',20,6.00)">20x</button>
+            </div>
+            <button class="add-cart-btn" style="background:#991b1b;" onclick="buyKey('Crimson')">🛒 Add to Cart</button>
+        </div>
+
     </div>
 
-    <div class="store-card">
-        <div class="store-card-header">
-            <div class="store-rank-icon">💎</div>
-            <div class="store-rank-name" style="color: #60a5fa;">MVP</div>
-            <div class="store-price" style="color: #60a5fa;">£11.99 <span>/ one-time</span></div>
+    <!-- RANKS -->
+    <div class="store-section-title">Ranks</div>
+    <div class="ranks-grid">
+
+        <div class="rank-card">
+            <div class="rank-card-header">
+                <div class="rank-card-name" style="color:#4ade80;">VIP</div>
+                <div class="rank-card-price">£3.99 <small>one-time</small></div>
+            </div>
+            <div class="rank-card-body">
+                <ul class="rank-perks-list">
+                    <li><span class="perk-plus">+</span>Green [VIP] prefix in chat</li>
+                    <li><span class="perk-plus">+</span>3 home locations</li>
+                    <li><span class="perk-plus">+</span>/nick command</li>
+                    <li><span class="perk-plus">+</span>Coloured chat messages</li>
+                    <li><span class="perk-plus">+</span>VIP Discord role</li>
+                </ul>
+                <button class="rank-buy-btn" style="background:#166534;color:#4ade80;" onclick="buyRank('VIP','£3.99')">Purchase</button>
+            </div>
         </div>
-        <div class="store-card-body">
-            <ul class="store-perks">
-                <li><span class="perk-check">✓</span> Aqua [MVP] prefix in chat</li>
-                <li><span class="perk-check">✓</span> 10 home locations</li>
-                <li><span class="perk-check">✓</span> /fly in non-combat zones</li>
-                <li><span class="perk-check">✓</span> /enderchest anywhere</li>
-                <li><span class="perk-check">✓</span> Priority server queue</li>
-                <li><span class="perk-check">✓</span> All VIP+ perks included</li>
-            </ul>
-            <button class="store-btn store-btn-secondary" onclick="openModal('MVP', '£11.99')">Purchase</button>
+
+        <div class="rank-card">
+            <div class="rank-card-header">
+                <div class="rank-card-name" style="color:#fbbf24;">VIP+</div>
+                <div class="rank-card-price">£6.99 <small>one-time</small></div>
+            </div>
+            <div class="rank-card-body">
+                <ul class="rank-perks-list">
+                    <li><span class="perk-plus">+</span>Gold [VIP+] prefix in chat</li>
+                    <li><span class="perk-plus">+</span>5 home locations</li>
+                    <li><span class="perk-plus">+</span>/nick + /hat commands</li>
+                    <li><span class="perk-plus">+</span>Custom join/leave messages</li>
+                    <li><span class="perk-plus">+</span>All VIP perks included</li>
+                </ul>
+                <button class="rank-buy-btn" style="background:#78350f;color:#fbbf24;" onclick="buyRank('VIP+','£6.99')">Purchase</button>
+            </div>
         </div>
+
+        <div class="rank-card">
+            <div class="rank-card-header">
+                <div class="rank-card-name" style="color:#60a5fa;">MVP</div>
+                <div class="rank-card-price">£11.99 <small>one-time</small></div>
+            </div>
+            <div class="rank-card-body">
+                <ul class="rank-perks-list">
+                    <li><span class="perk-plus">+</span>Aqua [MVP] prefix in chat</li>
+                    <li><span class="perk-plus">+</span>10 home locations</li>
+                    <li><span class="perk-plus">+</span>/fly in non-combat zones</li>
+                    <li><span class="perk-plus">+</span>/enderchest anywhere</li>
+                    <li><span class="perk-plus">+</span>Priority server queue</li>
+                </ul>
+                <button class="rank-buy-btn" style="background:#1e3a5f;color:#60a5fa;" onclick="buyRank('MVP','£11.99')">Purchase</button>
+            </div>
+        </div>
+
+        <div class="rank-card" style="border-color:rgba(248,113,113,0.2);">
+            <div class="rank-card-header">
+                <div class="rank-card-name" style="background:linear-gradient(135deg,#f87171,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">MVP+</div>
+                <div class="rank-card-price">£17.99 <small>one-time</small></div>
+            </div>
+            <div class="rank-card-body">
+                <ul class="rank-perks-list">
+                    <li><span class="perk-plus">+</span>Gradient [MVP+] prefix</li>
+                    <li><span class="perk-plus">+</span>Unlimited home locations</li>
+                    <li><span class="perk-plus">+</span>/fly everywhere</li>
+                    <li><span class="perk-plus">+</span>/workbench &amp; /anvil anywhere</li>
+                    <li><span class="perk-plus">+</span>All MVP perks included</li>
+                </ul>
+                <button class="rank-buy-btn" style="background:#7f1d1d;color:#f87171;" onclick="buyRank('MVP+','£17.99')">Purchase</button>
+            </div>
+        </div>
+
     </div>
 
-    <div class="store-card">
-        <div class="store-card-header">
-            <div class="store-rank-icon">👑</div>
-            <div class="store-rank-name" style="background: linear-gradient(135deg,#f87171,#fbbf24); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">MVP+</div>
-            <div class="store-price" style="color: #f87171;">£17.99 <span>/ one-time</span></div>
-        </div>
-        <div class="store-card-body">
-            <ul class="store-perks">
-                <li><span class="perk-check">✓</span> Gradient [MVP+] prefix in chat</li>
-                <li><span class="perk-check">✓</span> Unlimited home locations</li>
-                <li><span class="perk-check">✓</span> /fly everywhere</li>
-                <li><span class="perk-check">✓</span> /workbench &amp; /anvil anywhere</li>
-                <li><span class="perk-check">✓</span> Exclusive MVP+ Discord role</li>
-                <li><span class="perk-check">✓</span> All MVP perks included</li>
-            </ul>
-            <button class="store-btn store-btn-secondary" onclick="openModal('MVP+', '£17.99')">Purchase</button>
-        </div>
+    <div class="store-note">
+        After purchasing, open a ticket in our <a href="https://discord.gg/zdaUByyf4b" target="_blank">Discord</a> with your Minecraft username and proof of purchase.<br>
+        All purchases are final and non-refundable. By purchasing you agree to our <a href="rules.html">server rules</a>.
     </div>
 
-</div>
-
-<div class="store-note">
-    <strong style="color:var(--green);">How it works:</strong> After purchasing, open a ticket in our
-    <a href="https://discord.gg/zdaUByyf4b" target="_blank" style="color:var(--green);">Discord server</a>
-    with your Minecraft username and proof of purchase. Your rank will be applied within 24 hours.
-    <br><br>
-    All purchases are non-refundable. Ranks are permanent and do not expire. By purchasing you agree to our
-    <a href="rules.html" style="color:var(--green);">server rules</a>.
-</div>
-
-<!-- Purchase Modal -->
-<div class="modal-overlay" id="modal">
-    <div class="modal">
-        <div class="modal-rank-name" id="modal-rank"></div>
-        <div class="modal-price" id="modal-price"></div>
-        <h3>Complete Your Purchase</h3>
-        <p>Enter your Minecraft username and click the button below. You'll receive payment instructions via Discord.</p>
-        <input type="text" class="modal-input" id="modal-username" placeholder="Your Minecraft username" maxlength="16">
-        <div class="modal-actions" style="margin-top: 8px;">
-            <button class="btn modal-close-btn" onclick="closeModal()">Cancel</button>
-            <button class="btn btn-primary" onclick="submitPurchase()">Continue in Discord</button>
-        </div>
-    </div>
 </div>
 
 <footer>
@@ -146,44 +523,36 @@
     <p>© 2026 NotDonutSMP. All rights reserved. | play.notdonutsmp.com</p>
 </footer>
 
+<div class="toast" id="toast"></div>
+
 <script>
-let selectedRank = '';
+const qtys = {};
 
-function openModal(rank, price) {
-    selectedRank = rank;
-    document.getElementById('modal-rank').textContent = rank;
-    document.getElementById('modal-price').textContent = price;
-    document.getElementById('modal').classList.add('open');
-    document.getElementById('modal-username').value = '';
-    document.getElementById('modal-username').focus();
+function setQty(key, qty, basePrice) {
+    qtys[key] = qty;
+    const total = (qty * basePrice).toFixed(2);
+    document.getElementById('price-' + key).textContent = '£' + total;
+    const card = document.getElementById('card-' + key);
+    card.querySelectorAll('.qty-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
 }
 
-function closeModal() {
-    document.getElementById('modal').classList.remove('open');
+function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
 }
 
-function submitPurchase() {
-    const username = document.getElementById('modal-username').value.trim();
-    if (!username) {
-        document.getElementById('modal-username').style.borderColor = 'rgba(248,113,113,0.5)';
-        return;
-    }
-    const rank = selectedRank;
-    window.open(
-        'https://discord.gg/zdaUByyf4b',
-        '_blank'
-    );
-    closeModal();
-    alert(`Thanks, ${username}! Join our Discord and open a ticket with your username and rank (${rank}) to complete your purchase.`);
+function buyKey(name) {
+    window.open('https://discord.gg/zdaUByyf4b', '_blank');
+    showToast('Join Discord and open a ticket to purchase ' + name + ' Key!');
 }
 
-document.getElementById('modal').addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
-});
-
-document.getElementById('modal-username').addEventListener('input', function() {
-    this.style.borderColor = '';
-});
+function buyRank(name, price) {
+    window.open('https://discord.gg/zdaUByyf4b', '_blank');
+    showToast('Join Discord and open a ticket to purchase ' + name + ' (' + price + ')!');
+}
 </script>
 
 </body>
