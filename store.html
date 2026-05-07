@@ -319,15 +319,18 @@
 <body>
 
 <!-- HEAD / LOGO -->
-<div class="head">
-    <div class="logo">
-        <img src="https://minotar.net/helm/DRDeathMC/90" alt="NotDonutSMP">
-    </div>
-    <div class="below-logo">
-        <div class="ip-block" onclick="copyIP()">
-            ⧉ play.notdonutsmp.com
+<div class="head" style="background:url('img/store-bg.png') center/cover no-repeat; position:relative; padding: 60px 0 40px; margin-bottom: 0;">
+    <div style="position:absolute;inset:0;background:rgba(0,0,0,0.55);"></div>
+    <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;">
+        <div class="logo">
+            <img src="https://minotar.net/helm/DRDeathMC/90" alt="NotDonutSMP">
         </div>
-        <span class="click-to-copy" id="copy-label">Click to copy</span>
+        <div class="below-logo">
+            <div class="ip-block" onclick="copyIP()">
+                ⧉ play.notdonutsmp.com
+            </div>
+            <span class="click-to-copy" id="copy-label">Click to copy</span>
+        </div>
     </div>
 </div>
 
@@ -457,83 +460,6 @@
 
         </div>
 
-        <!-- RANKS -->
-        <div class="section-title">🎖️ Ranks</div>
-        <div class="package-loader">
-
-            <div class="package" style="background:#1a2f1a;">
-                <div class="package-image" style="height:80px;padding-top:20px;">
-                    <span style="font-size:48px;">🌿</span>
-                </div>
-                <div class="package-name" style="color:#4ade80;">VIP</div>
-                <div class="package-price">£3.99</div>
-                <div style="padding:0 16px 10px;font-size:13px;color:#aaa;text-align:left;line-height:1.8;">
-                    +Green [VIP] chat prefix<br>
-                    +3 home locations<br>
-                    +/nick command<br>
-                    +Coloured chat<br>
-                    +VIP Discord role
-                </div>
-                <div class="package-button">
-                    <a style="background:#16a34a;" onclick="buyRank('VIP','£3.99')">Purchase</a>
-                </div>
-            </div>
-
-            <div class="package" style="background:#2a2200;">
-                <div class="package-image" style="height:80px;padding-top:20px;">
-                    <span style="font-size:48px;">⭐</span>
-                </div>
-                <div class="package-name" style="color:#fbbf24;">VIP+</div>
-                <div class="package-price">£6.99</div>
-                <div style="padding:0 16px 10px;font-size:13px;color:#aaa;text-align:left;line-height:1.8;">
-                    +Gold [VIP+] chat prefix<br>
-                    +5 home locations<br>
-                    +/nick + /hat<br>
-                    +Custom join/leave messages<br>
-                    +All VIP perks
-                </div>
-                <div class="package-button">
-                    <a style="background:#b45309;" onclick="buyRank('VIP+','£6.99')">Purchase</a>
-                </div>
-            </div>
-
-            <div class="package" style="background:#0d1a2e;">
-                <div class="package-image" style="height:80px;padding-top:20px;">
-                    <span style="font-size:48px;">💎</span>
-                </div>
-                <div class="package-name" style="color:#60a5fa;">MVP</div>
-                <div class="package-price">£11.99</div>
-                <div style="padding:0 16px 10px;font-size:13px;color:#aaa;text-align:left;line-height:1.8;">
-                    +Aqua [MVP] chat prefix<br>
-                    +10 home locations<br>
-                    +/fly in safe zones<br>
-                    +/enderchest anywhere<br>
-                    +All VIP+ perks
-                </div>
-                <div class="package-button">
-                    <a style="background:#1d4ed8;" onclick="buyRank('MVP','£11.99')">Purchase</a>
-                </div>
-            </div>
-
-            <div class="package" style="background:#2a0d0d;">
-                <div class="package-image" style="height:80px;padding-top:20px;">
-                    <span style="font-size:48px;">👑</span>
-                </div>
-                <div class="package-name" style="background:linear-gradient(135deg,#f87171,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">MVP+</div>
-                <div class="package-price">£17.99</div>
-                <div style="padding:0 16px 10px;font-size:13px;color:#aaa;text-align:left;line-height:1.8;">
-                    +Gradient [MVP+] prefix<br>
-                    +Unlimited homes<br>
-                    +/fly everywhere<br>
-                    +/workbench &amp; /anvil anywhere<br>
-                    +All MVP perks
-                </div>
-                <div class="package-button">
-                    <a style="background:#991b1b;" onclick="buyRank('MVP+','£17.99')">Purchase</a>
-                </div>
-            </div>
-
-        </div>
     </div>
 </div>
 
