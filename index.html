@@ -3,11 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#050914">
+
     <title>NotDonutSMP | Welcome</title>
 
     <link rel="icon" href="img/bcGCsev.png">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    >
 
     <style>
         * {
@@ -18,12 +23,12 @@
 
         :root {
             --blue: #168cff;
-            --cyan: #21d4ff;
-            --dark: #080b12;
-            --dark2: #0d111a;
-            --card: rgba(19, 25, 38, 0.88);
+            --cyan: #25d8ff;
+            --green: #42e47a;
+            --background: #050810;
+            --card: rgba(14, 20, 32, 0.82);
             --border: rgba(255,255,255,0.08);
-            --muted: #8f9bad;
+            --muted: #8e9aad;
         }
 
         html {
@@ -35,9 +40,10 @@
             font-family: "Inter", sans-serif;
             color: white;
             background:
-                radial-gradient(circle at 50% 0%, rgba(0, 116, 255, 0.18), transparent 35%),
-                radial-gradient(circle at 20% 30%, rgba(0, 210, 255, 0.07), transparent 30%),
-                #070a10;
+                radial-gradient(circle at 50% -10%, rgba(0, 119, 255, .24), transparent 35%),
+                radial-gradient(circle at 10% 45%, rgba(0, 204, 255, .07), transparent 30%),
+                radial-gradient(circle at 90% 60%, rgba(0, 102, 255, .06), transparent 25%),
+                #050810;
             overflow-x: hidden;
         }
 
@@ -50,11 +56,29 @@
             font-family: inherit;
         }
 
+        /* BACKGROUND GRID */
+
+        .background-grid {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            pointer-events: none;
+
+            background-image:
+                linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+
+            background-size: 45px 45px;
+
+            mask-image:
+                linear-gradient(to bottom, black, transparent 85%);
+        }
+
         /* NAVBAR */
 
         .navbar {
-            width: 100%;
             height: 76px;
+            width: 100%;
 
             display: flex;
             align-items: center;
@@ -64,31 +88,38 @@
 
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
 
-            background: rgba(7, 10, 16, 0.82);
-            backdrop-filter: blur(18px);
+            background: rgba(5, 8, 16, .76);
+            backdrop-filter: blur(20px);
 
             border-bottom: 1px solid var(--border);
         }
 
-        .nav-brand {
+        .brand {
             display: flex;
             align-items: center;
             gap: 12px;
 
             font-size: 20px;
             font-weight: 900;
-            letter-spacing: -0.5px;
+
+            letter-spacing: -.5px;
         }
 
-        .nav-brand img {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
+        .brand img {
+            width: 42px;
+            height: 42px;
+
+            object-fit: cover;
+
+            border-radius: 11px;
+
+            box-shadow:
+                0 0 25px rgba(22, 140, 255, .18);
         }
 
-        .nav-brand span {
+        .brand span {
             color: var(--blue);
         }
 
@@ -102,7 +133,7 @@
         }
 
         .nav-links a {
-            color: #aeb8c6;
+            color: #9da8b8;
             transition: .2s;
         }
 
@@ -110,21 +141,24 @@
             color: white;
         }
 
-        .nav-store {
-            padding: 10px 18px;
-            border-radius: 10px;
+        .discord-nav {
+            padding: 10px 17px;
 
-            background: linear-gradient(135deg, #087cff, #00b9ff);
+            border-radius: 10px;
 
             color: white !important;
 
-            box-shadow: 0 8px 25px rgba(0, 132, 255, .22);
+            background:
+                linear-gradient(135deg, #5865f2, #7289da);
+
+            box-shadow:
+                0 10px 30px rgba(88,101,242,.18);
         }
 
         /* HERO */
 
         .hero {
-            min-height: 680px;
+            min-height: calc(100vh - 76px);
 
             display: flex;
             align-items: center;
@@ -133,37 +167,80 @@
 
             text-align: center;
 
-            padding: 90px 20px 70px;
+            padding: 70px 20px 100px;
 
             position: relative;
         }
 
-        .hero::before {
-            content: "";
+        .hero-glow {
             position: absolute;
 
-            width: 500px;
-            height: 500px;
+            width: 600px;
+            height: 400px;
 
-            background: rgba(0, 132, 255, .13);
+            top: 10%;
+
+            background:
+                rgba(0, 132, 255, .16);
+
+            filter: blur(110px);
 
             border-radius: 50%;
-            filter: blur(120px);
 
             z-index: -1;
         }
 
-        .hero-logo {
-            width: min(620px, 90vw);
+        .online-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
 
-            filter:
-                drop-shadow(0 20px 30px rgba(0,0,0,.45))
-                drop-shadow(0 0 45px rgba(0, 128, 255, .2));
+            padding: 8px 14px;
 
-            animation: float 4s ease-in-out infinite;
+            margin-bottom: 30px;
+
+            border-radius: 100px;
+
+            background:
+                rgba(255,255,255,.035);
+
+            border:
+                1px solid rgba(255,255,255,.08);
+
+            color: #aab5c5;
+
+            font-size: 11px;
+            font-weight: 800;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
         }
 
-        @keyframes float {
+        .online-dot {
+            width: 8px;
+            height: 8px;
+
+            background: var(--green);
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 12px var(--green);
+        }
+
+        .hero-logo {
+            width: min(600px, 88vw);
+
+            filter:
+                drop-shadow(0 25px 35px rgba(0,0,0,.45))
+                drop-shadow(0 0 35px rgba(0,132,255,.15));
+
+            animation:
+                logoFloat 5s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
             0%, 100% {
                 transform: translateY(0);
             }
@@ -174,47 +251,62 @@
         }
 
         .hero h1 {
+            max-width: 850px;
+
             margin-top: 35px;
 
-            font-size: clamp(32px, 5vw, 58px);
+            font-size:
+                clamp(40px, 6vw, 72px);
+
             line-height: 1;
 
             font-weight: 900;
-            letter-spacing: -2px;
+
+            letter-spacing: -3.5px;
         }
 
-        .hero h1 span {
-            background: linear-gradient(90deg, #168cff, #27d5ff);
+        .gradient-text {
+            background:
+                linear-gradient(
+                    90deg,
+                    #168cff,
+                    #29ddff
+                );
 
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .hero p {
+        .hero-description {
             max-width: 650px;
 
-            margin-top: 20px;
+            margin-top: 22px;
 
-            color: #9ca8ba;
+            color: var(--muted);
 
-            font-size: 17px;
-            line-height: 1.7;
+            font-size: 16px;
+
+            line-height: 1.75;
         }
 
-        .hero-actions {
-            margin-top: 32px;
+        /* BUTTONS */
 
+        .hero-buttons {
             display: flex;
-            gap: 14px;
+            align-items: center;
+            justify-content: center;
 
             flex-wrap: wrap;
-            justify-content: center;
+
+            gap: 13px;
+
+            margin-top: 32px;
         }
 
-        .button {
+        .btn {
             border: none;
 
-            padding: 15px 24px;
+            padding: 15px 23px;
 
             border-radius: 12px;
 
@@ -229,105 +321,153 @@
                 background .2s;
         }
 
-        .button:hover {
-            transform: translateY(-2px);
+        .btn:hover {
+            transform: translateY(-3px);
         }
 
-        .button-primary {
+        .btn-primary {
             color: white;
 
-            background: linear-gradient(135deg, #087cff, #16c8ff);
+            background:
+                linear-gradient(
+                    135deg,
+                    #087cff,
+                    #19caff
+                );
 
-            box-shadow: 0 12px 35px rgba(0, 140, 255, .25);
+            box-shadow:
+                0 12px 35px
+                rgba(0, 132, 255, .25);
         }
 
-        .button-primary:hover {
-            box-shadow: 0 16px 40px rgba(0, 140, 255, .4);
+        .btn-primary:hover {
+            box-shadow:
+                0 18px 45px
+                rgba(0, 132, 255, .4);
         }
 
-        .button-secondary {
-            color: #d5dbe5;
+        .btn-secondary {
+            color: #d9e0e9;
 
-            background: rgba(255,255,255,0.055);
+            background:
+                rgba(255,255,255,.05);
 
-            border: 1px solid var(--border);
+            border:
+                1px solid var(--border);
         }
 
-        .button-secondary:hover {
-            background: rgba(255,255,255,0.09);
+        .btn-secondary:hover {
+            background:
+                rgba(255,255,255,.09);
         }
 
-        /* SERVER IP */
+        /* IP BOX */
 
-        .server-bar {
-            margin-top: 35px;
-
-            padding: 10px 10px 10px 18px;
+        .ip-box {
+            margin-top: 40px;
 
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 15px;
 
-            border: 1px solid rgba(255,255,255,.08);
-
-            background: rgba(17, 23, 34, .85);
+            padding:
+                10px 10px 10px 18px;
 
             border-radius: 14px;
 
-            box-shadow: 0 15px 40px rgba(0,0,0,.25);
+            background:
+                rgba(14,20,32,.82);
+
+            border:
+                1px solid var(--border);
+
+            box-shadow:
+                0 18px 50px rgba(0,0,0,.3);
+
+            backdrop-filter: blur(14px);
         }
 
-        .server-status {
+        .ip-status {
             width: 10px;
             height: 10px;
 
             border-radius: 50%;
 
-            background: #43e36f;
+            background: var(--green);
 
-            box-shadow: 0 0 12px #43e36f;
+            box-shadow:
+                0 0 12px var(--green);
         }
 
-        .server-ip {
+        .ip-text {
+            text-align: left;
+        }
+
+        .ip-label {
+            display: block;
+
+            color: #677386;
+
+            font-size: 9px;
+
             font-weight: 800;
-            font-size: 15px;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
         }
 
-        .server-bar button {
-            border: none;
+        .ip-address {
+            display: block;
 
-            background: #168cff;
+            margin-top: 2px;
 
             color: white;
 
-            padding: 11px 16px;
+            font-size: 14px;
+
+            font-weight: 800;
+        }
+
+        .copy-btn {
+            padding: 11px 15px;
+
+            border: none;
 
             border-radius: 9px;
+
+            color: white;
+
+            background: #168cff;
+
+            font-size: 12px;
 
             font-weight: 800;
 
             cursor: pointer;
         }
 
-        /* CONTENT */
+        /* SECTIONS */
 
         .section {
-            width: min(1180px, 92%);
+            width: min(1150px, 92%);
+
             margin: auto;
 
-            padding: 70px 0;
+            padding: 90px 0;
         }
 
-        .section-heading {
+        .section-header {
             text-align: center;
 
-            margin-bottom: 35px;
+            margin-bottom: 40px;
         }
 
-        .section-heading span {
-            color: var(--blue);
+        .eyebrow {
+            color: #3ba4ff;
 
-            font-size: 12px;
+            font-size: 11px;
+
             font-weight: 900;
 
             letter-spacing: 3px;
@@ -335,46 +475,59 @@
             text-transform: uppercase;
         }
 
-        .section-heading h2 {
-            font-size: clamp(30px, 4vw, 42px);
+        .section-header h2 {
+            margin-top: 11px;
 
-            margin-top: 10px;
+            font-size:
+                clamp(30px, 4vw, 45px);
 
-            letter-spacing: -1.5px;
+            letter-spacing: -2px;
         }
 
-        .section-heading p {
-            margin: 12px auto 0;
+        .section-header p {
+            max-width: 580px;
+
+            margin: 13px auto 0;
 
             color: var(--muted);
 
-            max-width: 600px;
+            font-size: 14px;
 
             line-height: 1.7;
         }
 
-        /* CARDS */
+        /* FEATURE CARDS */
 
-        .cards {
+        .features {
             display: grid;
 
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns:
+                repeat(3, 1fr);
 
             gap: 20px;
         }
 
-        .card {
-            min-height: 280px;
-
+        .feature-card {
             position: relative;
 
-            border: 1px solid var(--border);
+            min-height: 260px;
 
-            border-radius: 22px;
+            padding: 28px;
 
             overflow: hidden;
 
-            background: var(--card);
+            border-radius: 21px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.045),
+                    rgba(255,255,255,.012)
+                ),
+                var(--card);
+
+            border:
+                1px solid var(--border);
 
             transition:
                 transform .25s,
@@ -382,204 +535,293 @@
                 box-shadow .25s;
         }
 
-        .card:hover {
-            transform: translateY(-6px);
+        .feature-card:hover {
+            transform: translateY(-7px);
 
-            border-color: rgba(22,140,255,.4);
+            border-color:
+                rgba(22,140,255,.38);
 
-            box-shadow: 0 20px 50px rgba(0,0,0,.35);
+            box-shadow:
+                0 25px 60px
+                rgba(0,0,0,.35);
         }
 
-        .image-card img {
-            width: 100%;
-            height: 100%;
-
-            object-fit: cover;
-
-            position: absolute;
-            inset: 0;
-
-            transition: transform .35s;
-        }
-
-        .image-card:hover img {
-            transform: scale(1.04);
-        }
-
-        .image-card::after {
+        .feature-card::after {
             content: "";
 
             position: absolute;
-            inset: 0;
 
-            background: linear-gradient(
-                to top,
-                rgba(4,7,12,.95),
-                rgba(4,7,12,.15)
-            );
-        }
+            width: 180px;
+            height: 180px;
 
-        .card-content {
-            position: absolute;
-
-            bottom: 0;
-            left: 0;
-
-            padding: 26px;
-
-            z-index: 2;
-        }
-
-        .card-content h3 {
-            font-size: 25px;
-
-            margin-bottom: 7px;
-        }
-
-        .card-content p {
-            font-size: 13px;
-
-            color: #b1bac8;
-
-            line-height: 1.5;
-        }
-
-        /* DISCORD */
-
-        .discord-card {
-            display: flex;
-
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-
-            text-align: center;
-
-            padding: 30px;
+            top: -100px;
+            right: -100px;
 
             background:
-                radial-gradient(circle at top, rgba(88,101,242,.22), transparent 55%),
-                var(--card);
+                rgba(22,140,255,.14);
+
+            border-radius: 50%;
+
+            filter: blur(35px);
         }
 
-        .discord-card img {
-            width: 72px;
+        .feature-icon {
+            width: 52px;
+            height: 52px;
 
-            margin-bottom: 20px;
+            display: grid;
+            place-items: center;
+
+            margin-bottom: 55px;
+
+            border-radius: 14px;
+
+            background:
+                rgba(22,140,255,.1);
+
+            border:
+                1px solid
+                rgba(22,140,255,.18);
+
+            font-size: 23px;
         }
 
-        .discord-card h3 {
-            font-size: 25px;
+        .feature-card h3 {
+            font-size: 20px;
+
+            margin-bottom: 9px;
         }
 
-        .discord-card p {
+        .feature-card p {
+            color: var(--muted);
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+        /* DISCORD SECTION */
+
+        .community-card {
+            display: grid;
+
+            grid-template-columns:
+                1.4fr .6fr;
+
+            min-height: 330px;
+
+            border-radius: 25px;
+
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 85% 20%,
+                    rgba(88,101,242,.25),
+                    transparent 35%
+                ),
+                #0d1320;
+
+            border:
+                1px solid var(--border);
+        }
+
+        .community-content {
+            padding: 55px;
+
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .community-content h2 {
+            margin-top: 12px;
+
+            font-size:
+                clamp(30px, 4vw, 45px);
+
+            letter-spacing: -2px;
+        }
+
+        .community-content p {
+            max-width: 500px;
+
+            margin: 15px 0 25px;
+
             color: var(--muted);
 
             font-size: 14px;
 
-            margin-top: 8px;
+            line-height: 1.7;
         }
 
-        .discord-card .join {
-            margin-top: 22px;
-
-            color: #9aa7ff;
-
-            font-weight: 800;
-
-            font-size: 13px;
-        }
-
-        /* STAFF */
-
-        .owners {
+        .community-image {
             display: grid;
+            place-items: center;
 
-            grid-template-columns: repeat(2, 1fr);
-
-            gap: 18px;
+            padding: 40px;
         }
 
-        .owner {
-            display: flex;
+        .community-image img {
+            width: 130px;
 
+            filter:
+                drop-shadow(
+                    0 20px 35px
+                    rgba(88,101,242,.3)
+                );
+        }
+
+        /* OWNER */
+
+        .owner-card {
+            max-width: 620px;
+
+            margin: auto;
+
+            display: flex;
             align-items: center;
 
-            gap: 16px;
+            gap: 25px;
 
-            padding: 20px;
+            padding: 28px;
+
+            border-radius: 22px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.045),
+                    rgba(255,255,255,.01)
+                ),
+                var(--card);
+
+            border:
+                1px solid var(--border);
+
+            transition:
+                transform .25s,
+                border-color .25s;
+        }
+
+        .owner-card:hover {
+            transform: translateY(-5px);
+
+            border-color:
+                rgba(22,140,255,.35);
+        }
+
+        .owner-head {
+            width: 90px;
+            height: 90px;
+
+            flex-shrink: 0;
 
             border-radius: 18px;
 
-            background: rgba(255,255,255,.035);
+            overflow: hidden;
 
-            border: 1px solid var(--border);
+            background: #111927;
+
+            border:
+                1px solid var(--border);
+
+            box-shadow:
+                0 15px 35px rgba(0,0,0,.3);
         }
 
-        .owner img {
-            width: 58px;
-            height: 58px;
+        .owner-head img {
+            width: 100%;
+            height: 100%;
 
-            border-radius: 12px;
+            object-fit: cover;
         }
 
-        .owner-name {
-            font-weight: 800;
+        .owner-info h3 {
+            font-size: 24px;
         }
 
-        .owner-rank {
+        .owner-role {
             display: inline-block;
 
-            margin-top: 6px;
+            margin-top: 7px;
 
-            padding: 4px 9px;
+            padding: 5px 10px;
 
             border-radius: 100px;
 
+            color: #64b7ff;
+
+            background:
+                rgba(22,140,255,.11);
+
+            border:
+                1px solid
+                rgba(22,140,255,.22);
+
             font-size: 9px;
+
             font-weight: 900;
 
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
 
             text-transform: uppercase;
-
-            color: #73baff;
-
-            background: rgba(0,132,255,.12);
-
-            border: 1px solid rgba(0,132,255,.2);
         }
 
-        /* CTA */
+        .owner-info p {
+            margin-top: 12px;
 
-        .cta {
-            width: min(1180px, 92%);
+            color: var(--muted);
 
-            margin: 30px auto 100px;
+            font-size: 13px;
 
-            padding: 55px 30px;
+            line-height: 1.6;
+        }
 
-            border-radius: 26px;
+        /* JOIN CTA */
+
+        .join-section {
+            width: min(1150px, 92%);
+
+            margin: 40px auto 100px;
+
+            padding: 70px 25px;
 
             text-align: center;
 
+            border-radius: 28px;
+
+            position: relative;
+
+            overflow: hidden;
+
             background:
-                radial-gradient(circle at 50% 0%, rgba(0, 174, 255, .25), transparent 60%),
-                #101623;
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(0,166,255,.27),
+                    transparent 55%
+                ),
+                #0d1420;
 
-            border: 1px solid rgba(0, 153, 255, .18);
+            border:
+                1px solid
+                rgba(22,140,255,.17);
         }
 
-        .cta h2 {
-            font-size: clamp(30px, 5vw, 46px);
+        .join-section h2 {
+            font-size:
+                clamp(34px, 5vw, 52px);
 
-            letter-spacing: -1.5px;
+            letter-spacing: -2.5px;
         }
 
-        .cta p {
-            margin: 13px auto 26px;
+        .join-section p {
+            margin:
+                14px auto 27px;
 
             color: var(--muted);
+
+            font-size: 14px;
         }
 
         /* FOOTER */
@@ -587,42 +829,48 @@
         footer {
             padding: 35px 7%;
 
-            border-top: 1px solid var(--border);
-
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
 
             gap: 20px;
 
-            color: #738095;
+            border-top:
+                1px solid var(--border);
 
-            font-size: 12px;
+            color: #697587;
+
+            font-size: 11px;
         }
 
         .footer-brand {
             display: flex;
-
             align-items: center;
 
             gap: 10px;
 
             color: white;
 
+            font-size: 13px;
+
             font-weight: 800;
         }
 
         .footer-brand img {
-            width: 30px;
-            height: 30px;
+            width: 32px;
+            height: 32px;
 
-            border-radius: 7px;
+            border-radius: 8px;
         }
 
         .footer-links {
             display: flex;
 
             gap: 20px;
+        }
+
+        .footer-links a {
+            transition: .2s;
         }
 
         .footer-links a:hover {
@@ -634,29 +882,38 @@
         .toast {
             position: fixed;
 
-            bottom: 30px;
             left: 50%;
+            bottom: 30px;
 
             transform:
                 translateX(-50%)
-                translateY(90px);
+                translateY(100px);
+
+            z-index: 9999;
 
             padding: 13px 22px;
-
-            background: #168cff;
 
             border-radius: 12px;
 
             color: white;
 
+            background:
+                linear-gradient(
+                    135deg,
+                    #087cff,
+                    #18c8ff
+                );
+
             font-size: 13px;
             font-weight: 800;
 
-            box-shadow: 0 15px 40px rgba(0,0,0,.35);
+            box-shadow:
+                0 18px 45px
+                rgba(0,0,0,.4);
 
-            z-index: 1000;
-
-            transition: .3s;
+            transition:
+                transform .3s
+                cubic-bezier(.34,1.56,.64,1);
         }
 
         .toast.show {
@@ -668,20 +925,53 @@
         /* MOBILE */
 
         @media (max-width: 850px) {
-            .nav-links a:not(.nav-store) {
+
+            .navbar {
+                padding: 0 5%;
+            }
+
+            .nav-links a:not(.discord-nav) {
                 display: none;
             }
 
-            .cards {
+            .features {
                 grid-template-columns: 1fr;
             }
 
-            .owners {
+            .community-card {
                 grid-template-columns: 1fr;
             }
 
-            .hero {
-                min-height: 610px;
+            .community-content {
+                padding: 40px 28px;
+                text-align: center;
+            }
+
+            .community-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .community-image {
+                padding-top: 0;
+            }
+
+            .hero h1 {
+                letter-spacing: -2px;
+            }
+
+            .ip-box {
+                max-width: 100%;
+            }
+
+            .ip-address {
+                font-size: 12px;
+            }
+
+            .owner-card {
+                flex-direction: column;
+
+                text-align: center;
             }
 
             footer {
@@ -689,33 +979,79 @@
 
                 text-align: center;
             }
+        }
 
-            .server-bar {
-                max-width: 95%;
+        @media (max-width: 480px) {
+
+            .hero {
+                padding-top: 50px;
             }
 
-            .server-ip {
-                font-size: 13px;
+            .ip-box {
+                gap: 10px;
+
+                padding-left: 12px;
+            }
+
+            .ip-status {
+                display: none;
+            }
+
+            .copy-btn {
+                padding:
+                    10px 11px;
             }
         }
     </style>
 </head>
 
+
 <body>
+
+<div class="background-grid"></div>
+
+
+<!-- NAVBAR -->
 
 <header class="navbar">
 
-    <a href="index.html" class="nav-brand">
-        <img src="img/bcGCsev.png" alt="NotDonutSMP">
+    <a
+        href="index.html"
+        class="brand"
+    >
+
+        <img
+            src="img/bcGCsev.png"
+            alt="NotDonutSMP"
+        >
+
         NotDonut<span>SMP</span>
+
     </a>
 
+
     <nav class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="rules.html">Rules</a>
-        <a href="staff.html">Staff</a>
-        <a href="https://discord.gg/zdaUByyf4b" target="_blank">Discord</a>
-        <a class="nav-store" href="store.html">Store</a>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="rules.html">
+            Rules
+        </a>
+
+        <a href="staff.html">
+            Staff
+        </a>
+
+        <a
+            class="discord-nav"
+            href="https://discord.gg/zdaUByyf4b"
+            target="_blank"
+        >
+            Join Discord
+        </a>
+
     </nav>
 
 </header>
@@ -723,245 +1059,361 @@
 
 <main>
 
-    <section class="hero">
 
-        <img
-            class="hero-logo"
-            src="img/logo.png"
-            alt="NotDonutSMP Logo"
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-glow"></div>
+
+
+    <div class="online-pill">
+
+        <span class="online-dot"></span>
+
+        NOTDONUTSMP
+
+    </div>
+
+
+    <img
+        class="hero-logo"
+        src="img/logo.png"
+        alt="NotDonutSMP Logo"
+    >
+
+
+    <h1>
+
+        Your next
+
+        <span class="gradient-text">
+            Minecraft adventure
+        </span>
+
+        starts here.
+
+    </h1>
+
+
+    <p class="hero-description">
+
+        Build your empire, fight your enemies,
+        make alliances and rise to the top on
+        NotDonutSMP.
+
+    </p>
+
+
+    <div class="hero-buttons">
+
+        <button
+            class="btn btn-primary"
+            onclick="copyIP()"
         >
-
-        <h1>
-            Welcome to
-            <span>NotDonutSMP</span>
-        </h1>
-
-        <p>
-            Jump into NotDonutSMP, build your empire,
-            fight your enemies and become one of the
-            strongest players on the server.
-        </p>
-
-        <div class="hero-actions">
-
-            <button
-                class="button button-primary"
-                onclick="copyIP()"
-            >
-                ⚔ Play Now
-            </button>
-
-            <a
-                class="button button-secondary"
-                href="https://discord.gg/zdaUByyf4b"
-                target="_blank"
-            >
-                Join Discord
-            </a>
-
-        </div>
+            ⚔ Copy Server IP
+        </button>
 
 
-        <div class="server-bar">
+        <a
+            class="btn btn-secondary"
+            href="https://discord.gg/zdaUByyf4b"
+            target="_blank"
+        >
+            Join Discord
+        </a>
 
-            <span class="server-status"></span>
+    </div>
 
-            <span class="server-ip">
+
+    <div class="ip-box">
+
+        <span class="ip-status"></span>
+
+
+        <div class="ip-text">
+
+            <span class="ip-label">
+                Java Server
+            </span>
+
+            <span class="ip-address">
                 play.notdonutsmp.com
             </span>
 
-            <button onclick="copyIP()">
-                Copy IP
-            </button>
-
         </div>
 
-    </section>
+
+        <button
+            class="copy-btn"
+            onclick="copyIP()"
+        >
+            COPY
+        </button>
+
+    </div>
+
+</section>
 
 
-    <section class="section">
 
-        <div class="section-heading">
+<!-- WHY PLAY -->
 
-            <span>Explore</span>
+<section class="section">
 
-            <h2>Everything you need</h2>
+    <div class="section-header">
+
+        <span class="eyebrow">
+            NotDonutSMP
+        </span>
+
+        <h2>
+            Start your journey.
+        </h2>
+
+        <p>
+            Join the server, build your base,
+            meet other players and fight your
+            way to the top.
+        </p>
+
+    </div>
+
+
+    <div class="features">
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                ⚔️
+            </div>
+
+            <h3>
+                Fight
+            </h3>
 
             <p>
-                Join the community, visit the store,
-                meet the team and start your journey.
+                Take on other players,
+                defend your base and prove
+                you're one of the strongest
+                players on the server.
             </p>
 
         </div>
 
 
-        <div class="cards">
+        <div class="feature-card">
 
-            <a
-                href="store.html"
-                class="card image-card"
-            >
-
-                <img
-                    src="img/store.png"
-                    alt="NotDonutSMP Store"
-                >
-
-                <div class="card-content">
-
-                    <h3>Store</h3>
-
-                    <p>
-                        Browse ranks and server upgrades.
-                    </p>
-
-                </div>
-
-            </a>
-
-
-            <a
-                href="https://discord.gg/zdaUByyf4b"
-                target="_blank"
-                class="card discord-card"
-            >
-
-                <img
-                    src="img/discord.png"
-                    alt="Discord"
-                >
-
-                <h3>Discord</h3>
-
-                <p>
-                    Chat with players, get announcements
-                    and join the community.
-                </p>
-
-                <span class="join">
-                    Join our Discord →
-                </span>
-
-            </a>
-
-
-            <a
-                href="staff.html"
-                class="card image-card"
-            >
-
-                <img
-                    src="img/stats.png"
-                    alt="Staff"
-                >
-
-                <div class="card-content">
-
-                    <h3>Staff Team</h3>
-
-                    <p>
-                        Meet the people behind NotDonutSMP.
-                    </p>
-
-                </div>
-
-            </a>
-
-        </div>
-
-    </section>
-
-
-    <section class="section">
-
-        <div class="section-heading">
-
-            <span>The Team</span>
-
-            <h2>Meet the owners</h2>
-
-        </div>
-
-
-        <div class="owners">
-
-            <div class="owner">
-
-                <img
-                    src="https://minotar.net/helm/DRDeathMC/100"
-                    alt="DRDeathMC"
-                >
-
-                <div>
-
-                    <div class="owner-name">
-                        DRDeathMC
-                    </div>
-
-                    <span class="owner-rank">
-                        Owner
-                    </span>
-
-                </div>
-
+            <div class="feature-icon">
+                🏰
             </div>
 
+            <h3>
+                Build
+            </h3>
 
-            <div class="owner">
+            <p>
+                Create your base, collect
+                resources and turn your
+                land into an empire.
+            </p>
 
-                <img
-                    src="https://minotar.net/helm/ItzBebeOnMC/100"
-                    alt="ItzBebeOnMC"
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                👑
+            </div>
+
+            <h3>
+                Become #1
+            </h3>
+
+            <p>
+                Grind, make alliances,
+                become powerful and climb
+                your way to the top.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- DISCORD -->
+
+<section class="section">
+
+    <div class="community-card">
+
+
+        <div class="community-content">
+
+            <span class="eyebrow">
+                Community
+            </span>
+
+            <h2>
+                Join our Discord.
+            </h2>
+
+            <p>
+                Get server announcements,
+                talk with other players,
+                receive support and stay
+                up to date with everything
+                happening on NotDonutSMP.
+            </p>
+
+            <div>
+
+                <a
+                    class="btn btn-primary"
+                    href="https://discord.gg/zdaUByyf4b"
+                    target="_blank"
                 >
-
-                <div>
-
-                    <div class="owner-name">
-                        ItzBebeOnMC
-                    </div>
-
-                    <span class="owner-rank">
-                        Co-Owner
-                    </span>
-
-                </div>
+                    Join the Discord →
+                </a>
 
             </div>
 
         </div>
 
-    </section>
+
+        <div class="community-image">
+
+            <img
+                src="img/discord.png"
+                alt="Discord"
+            >
+
+        </div>
 
 
-    <section class="cta">
+    </div>
+
+</section>
+
+
+
+<!-- OWNER -->
+
+<section class="section">
+
+    <div class="section-header">
+
+        <span class="eyebrow">
+            The Team
+        </span>
 
         <h2>
-            Ready to start playing?
+            Meet the owner.
         </h2>
 
         <p>
-            Join NotDonutSMP today.
+            The person behind NotDonutSMP.
         </p>
 
-        <button
-            class="button button-primary"
-            onclick="copyIP()"
-        >
-            Copy Server IP
-        </button>
+    </div>
 
-    </section>
+
+    <div class="owner-card">
+
+
+        <div class="owner-head">
+
+            <img
+                src="https://minotar.net/helm/BandzE1/100"
+                alt="BandzE1"
+            >
+
+        </div>
+
+
+        <div class="owner-info">
+
+            <h3>
+                BandzE1
+            </h3>
+
+            <span class="owner-role">
+                Owner
+            </span>
+
+            <p>
+                Owner of NotDonutSMP.
+                Check out the full staff
+                team below.
+            </p>
+
+            <div style="margin-top:18px;">
+
+                <a
+                    href="staff.html"
+                    class="btn btn-secondary"
+                >
+                    View Staff →
+                </a>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- FINAL CTA -->
+
+<section class="join-section">
+
+    <span class="eyebrow">
+        PLAY NOW
+    </span>
+
+    <h2>
+        Ready to join NotDonutSMP?
+    </h2>
+
+    <p>
+        Minecraft Java Edition
+        • play.notdonutsmp.com
+    </p>
+
+    <button
+        class="btn btn-primary"
+        onclick="copyIP()"
+    >
+        ⚔ Copy Server IP
+    </button>
+
+</section>
+
 
 </main>
 
 
+
+<!-- FOOTER -->
+
 <footer>
+
 
     <div class="footer-brand">
 
         <img
             src="img/bcGCsev.png"
-            alt="NotDonutSMP"
+            alt=""
         >
 
         NotDonutSMP
@@ -971,7 +1423,7 @@
 
     <div>
         © 2026 NotDonutSMP.
-        Not affiliated with Mojang or Microsoft.
+        Not associated with Mojang or Microsoft.
     </div>
 
 
@@ -985,21 +1437,29 @@
             Staff
         </a>
 
-        <a href="store.html">
-            Store
+        <a
+            href="https://discord.gg/zdaUByyf4b"
+            target="_blank"
+        >
+            Discord
         </a>
 
     </div>
 
+
 </footer>
 
+
+
+<!-- COPY POPUP -->
 
 <div
     class="toast"
     id="toast"
 >
-    ✓ Server IP copied!
+    ✓ play.notdonutsmp.com copied!
 </div>
+
 
 
 <script>
@@ -1007,16 +1467,26 @@
 function copyIP() {
 
     navigator.clipboard
-        .writeText("play.notdonutsmp.com")
+        .writeText(
+            "play.notdonutsmp.com"
+        )
         .then(() => {
 
             const toast =
-                document.getElementById("toast");
+                document.getElementById(
+                    "toast"
+                );
 
-            toast.classList.add("show");
+            toast.classList.add(
+                "show"
+            );
 
             setTimeout(() => {
-                toast.classList.remove("show");
+
+                toast.classList.remove(
+                    "show"
+                );
+
             }, 2200);
 
         });
@@ -1024,6 +1494,7 @@ function copyIP() {
 }
 
 </script>
+
 
 </body>
 </html>
