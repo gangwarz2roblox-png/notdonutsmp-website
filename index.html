@@ -4,361 +4,1025 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>NotDonutSMP | Welcome</title>
+
     <link rel="icon" href="img/bcGCsev.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --blue: #168cff;
+            --cyan: #21d4ff;
+            --dark: #080b12;
+            --dark2: #0d111a;
+            --card: rgba(19, 25, 38, 0.88);
+            --border: rgba(255,255,255,0.08);
+            --muted: #8f9bad;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
-            background: #111111;
-            font-family: 'Inter', sans-serif;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            color: silver;
-        }
-
-        a { color: white; text-decoration: none; }
-        img { max-width: 100%; }
-
-        /* ── HOME CONTENTS ── */
-        .home-contents {
-            display: flex;
-            gap: 24px;
-            flex-wrap: wrap;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-            margin-top: 5%;
-            padding: 0 20px 60px;
-        }
-
-        .relative { position: relative; }
-        .group { cursor: pointer; }
-        .group:hover img { opacity: 0.92; }
-
-        /* ── LOGO CARD ── */
-        .logo-img-home {
-            background-color: #00b4ff;
-            height: 230px;
-            padding: 30px 60px;
-            border-radius: 24px;
-            display: block;
-        }
-
-        .below-logo { margin-top: 12px; }
-
-        .ip-home {
-            background: #1e1e1e;
-            padding: 10px 18px;
-            font-size: 18px;
-            font-weight: 700;
+            font-family: "Inter", sans-serif;
             color: white;
-            border-radius: 32px;
-            text-transform: uppercase;
-            cursor: pointer;
-            display: inline-flex;
+            background:
+                radial-gradient(circle at 50% 0%, rgba(0, 116, 255, 0.18), transparent 35%),
+                radial-gradient(circle at 20% 30%, rgba(0, 210, 255, 0.07), transparent 30%),
+                #070a10;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
             width: 100%;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-            border: none;
-            font-family: 'Inter', sans-serif;
-            transition: background .15s;
-        }
-        .ip-home:hover { background: #252830; color: #036fff; }
+            height: 76px;
 
-        /* ── STORE / STATS / JOIN IMAGES ── */
-        .store-img-home, .join-img-home, .stats-img-home {
-            height: 300px;
-            border-radius: 24px;
-            display: block;
-            transition: transform .2s;
-        }
-        .stats-img-home { transform: scaleX(-1); }
-        .group:hover .store-img-home,
-        .group:hover .join-img-home { transform: scale(1.02); }
-        .group:hover .stats-img-home { transform: scaleX(-1) scale(1.02); }
-
-        /* ── LABEL OVERLAY ── */
-        .img-text-home {
-            position: absolute;
-            top: 0; left: 0;
-            padding: 18px 22px;
-            z-index: 1;
-            color: white;
-        }
-
-        .img-text-home > h2 {
-            font-weight: 800;
-            font-size: 22px;
-            text-shadow: 1px 1px 24px black;
-        }
-
-        /* ── DISCORD CARD ── */
-        .discord-card-home {
             display: flex;
             align-items: center;
-            background: #1e1e1e;
-            height: 300px;
-            justify-content: center;
-            flex-direction: column;
-            width: 220px;
-            border-radius: 24px;
-            gap: 6px;
-            transition: background .15s;
-        }
-        .group:hover .discord-card-home { background: #252830; }
-
-        .discord-img-home { width: 60px; }
-
-        .discord-count {
-            color: white;
-            font-size: 32px;
-            margin-top: 8px;
-            font-weight: 800;
-        }
-
-        .discord-message {
-            color: rgba(255,255,255,0.7);
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        /* ── OWNERS CARD (replaces video) ── */
-        .owners-card-home {
-            background: #1e1e1e;
-            height: 300px;
-            border-radius: 24px;
-            width: 260px;
-            display: flex;
-            flex-direction: column;
-            padding: 22px;
             justify-content: space-between;
-            transition: background .15s;
-        }
-        .group:hover .owners-card-home { background: #252830; }
 
-        .owners-title {
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.3);
-            margin-bottom: 16px;
+            padding: 0 7%;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+
+            background: rgba(7, 10, 16, 0.82);
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid var(--border);
         }
 
-        .owner-row {
+        .nav-brand {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-        }
-        .owner-row:last-of-type { border-bottom: none; }
 
-        .owner-skin-sm {
-            width: 48px;
-            height: 48px;
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-brand img {
+            width: 40px;
+            height: 40px;
             border-radius: 10px;
-            overflow: hidden;
-            flex-shrink: 0;
-            background: #2a2a2a;
-        }
-        .owner-skin-sm img { width: 100%; height: 100%; object-fit: cover; }
-
-        .owner-info-sm .name { font-size: 15px; font-weight: 700; color: white; margin-bottom: 4px; }
-
-        .badge-sm {
-            display: inline-block;
-            font-size: 9px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            padding: 2px 8px;
-            border-radius: 999px;
-        }
-        .b-owner   { background: rgba(248,113,113,0.15); color: #f87171; border: 1px solid rgba(248,113,113,0.3); }
-        .b-coowner { background: rgba(251,146,60,0.15);  color: #fb923c; border: 1px solid rgba(251,146,60,0.3); }
-
-        .view-staff-link {
-            font-size: 12px;
-            color: rgba(255,255,255,0.25);
-            text-align: center;
-            display: block;
-            margin-top: auto;
-            padding-top: 12px;
-            transition: color .15s;
-        }
-        .view-staff-link:hover { color: rgba(255,255,255,0.6); }
-
-        /* ── FOOTER ── */
-        #foot {
-            color: grey;
-            background: #1e1e1e;
-            padding: 40px 0;
-            text-align: center;
-            margin-top: auto;
         }
 
-        #foot .copyright {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
+        .nav-brand span {
+            color: var(--blue);
         }
 
-        #foot .copyright-text {
+        .nav-links {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 18px;
-            text-transform: uppercase;
+            gap: 30px;
+
+            font-size: 14px;
             font-weight: 700;
+        }
+
+        .nav-links a {
+            color: #aeb8c6;
+            transition: .2s;
+        }
+
+        .nav-links a:hover {
             color: white;
         }
 
-        #foot .copyright-text img { width: 32px; border-radius: 8px; }
-        #foot small { font-size: 12px; color: #7a7a7a; display: block; }
+        .nav-store {
+            padding: 10px 18px;
+            border-radius: 10px;
 
-        #foot .copyright-links {
-            margin-top: 10px;
+            background: linear-gradient(135deg, #087cff, #00b9ff);
+
+            color: white !important;
+
+            box-shadow: 0 8px 25px rgba(0, 132, 255, .22);
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 680px;
+
             display: flex;
-            gap: 20px;
-            font-size: 10px;
-            text-transform: uppercase;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
+            text-align: center;
+
+            padding: 90px 20px 70px;
+
+            position: relative;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+
+            width: 500px;
+            height: 500px;
+
+            background: rgba(0, 132, 255, .13);
+
+            border-radius: 50%;
+            filter: blur(120px);
+
+            z-index: -1;
+        }
+
+        .hero-logo {
+            width: min(620px, 90vw);
+
+            filter:
+                drop-shadow(0 20px 30px rgba(0,0,0,.45))
+                drop-shadow(0 0 45px rgba(0, 128, 255, .2));
+
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .hero h1 {
+            margin-top: 35px;
+
+            font-size: clamp(32px, 5vw, 58px);
+            line-height: 1;
+
+            font-weight: 900;
+            letter-spacing: -2px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, #168cff, #27d5ff);
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            max-width: 650px;
+
+            margin-top: 20px;
+
+            color: #9ca8ba;
+
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            margin-top: 32px;
+
+            display: flex;
+            gap: 14px;
+
             flex-wrap: wrap;
             justify-content: center;
         }
-        #foot .copyright-links a { color: #a7b2c1; transition: color .15s; }
-        #foot .copyright-links a:hover { color: white; }
 
-        /* ── TOAST ── */
+        .button {
+            border: none;
+
+            padding: 15px 24px;
+
+            border-radius: 12px;
+
+            font-size: 14px;
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition:
+                transform .2s,
+                box-shadow .2s,
+                background .2s;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        .button-primary {
+            color: white;
+
+            background: linear-gradient(135deg, #087cff, #16c8ff);
+
+            box-shadow: 0 12px 35px rgba(0, 140, 255, .25);
+        }
+
+        .button-primary:hover {
+            box-shadow: 0 16px 40px rgba(0, 140, 255, .4);
+        }
+
+        .button-secondary {
+            color: #d5dbe5;
+
+            background: rgba(255,255,255,0.055);
+
+            border: 1px solid var(--border);
+        }
+
+        .button-secondary:hover {
+            background: rgba(255,255,255,0.09);
+        }
+
+        /* SERVER IP */
+
+        .server-bar {
+            margin-top: 35px;
+
+            padding: 10px 10px 10px 18px;
+
+            display: flex;
+            align-items: center;
+            gap: 16px;
+
+            border: 1px solid rgba(255,255,255,.08);
+
+            background: rgba(17, 23, 34, .85);
+
+            border-radius: 14px;
+
+            box-shadow: 0 15px 40px rgba(0,0,0,.25);
+        }
+
+        .server-status {
+            width: 10px;
+            height: 10px;
+
+            border-radius: 50%;
+
+            background: #43e36f;
+
+            box-shadow: 0 0 12px #43e36f;
+        }
+
+        .server-ip {
+            font-weight: 800;
+            font-size: 15px;
+        }
+
+        .server-bar button {
+            border: none;
+
+            background: #168cff;
+
+            color: white;
+
+            padding: 11px 16px;
+
+            border-radius: 9px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+        }
+
+        /* CONTENT */
+
+        .section {
+            width: min(1180px, 92%);
+            margin: auto;
+
+            padding: 70px 0;
+        }
+
+        .section-heading {
+            text-align: center;
+
+            margin-bottom: 35px;
+        }
+
+        .section-heading span {
+            color: var(--blue);
+
+            font-size: 12px;
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(30px, 4vw, 42px);
+
+            margin-top: 10px;
+
+            letter-spacing: -1.5px;
+        }
+
+        .section-heading p {
+            margin: 12px auto 0;
+
+            color: var(--muted);
+
+            max-width: 600px;
+
+            line-height: 1.7;
+        }
+
+        /* CARDS */
+
+        .cards {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .card {
+            min-height: 280px;
+
+            position: relative;
+
+            border: 1px solid var(--border);
+
+            border-radius: 22px;
+
+            overflow: hidden;
+
+            background: var(--card);
+
+            transition:
+                transform .25s,
+                border-color .25s,
+                box-shadow .25s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+
+            border-color: rgba(22,140,255,.4);
+
+            box-shadow: 0 20px 50px rgba(0,0,0,.35);
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            position: absolute;
+            inset: 0;
+
+            transition: transform .35s;
+        }
+
+        .image-card:hover img {
+            transform: scale(1.04);
+        }
+
+        .image-card::after {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background: linear-gradient(
+                to top,
+                rgba(4,7,12,.95),
+                rgba(4,7,12,.15)
+            );
+        }
+
+        .card-content {
+            position: absolute;
+
+            bottom: 0;
+            left: 0;
+
+            padding: 26px;
+
+            z-index: 2;
+        }
+
+        .card-content h3 {
+            font-size: 25px;
+
+            margin-bottom: 7px;
+        }
+
+        .card-content p {
+            font-size: 13px;
+
+            color: #b1bac8;
+
+            line-height: 1.5;
+        }
+
+        /* DISCORD */
+
+        .discord-card {
+            display: flex;
+
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 30px;
+
+            background:
+                radial-gradient(circle at top, rgba(88,101,242,.22), transparent 55%),
+                var(--card);
+        }
+
+        .discord-card img {
+            width: 72px;
+
+            margin-bottom: 20px;
+        }
+
+        .discord-card h3 {
+            font-size: 25px;
+        }
+
+        .discord-card p {
+            color: var(--muted);
+
+            font-size: 14px;
+
+            margin-top: 8px;
+        }
+
+        .discord-card .join {
+            margin-top: 22px;
+
+            color: #9aa7ff;
+
+            font-weight: 800;
+
+            font-size: 13px;
+        }
+
+        /* STAFF */
+
+        .owners {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 18px;
+        }
+
+        .owner {
+            display: flex;
+
+            align-items: center;
+
+            gap: 16px;
+
+            padding: 20px;
+
+            border-radius: 18px;
+
+            background: rgba(255,255,255,.035);
+
+            border: 1px solid var(--border);
+        }
+
+        .owner img {
+            width: 58px;
+            height: 58px;
+
+            border-radius: 12px;
+        }
+
+        .owner-name {
+            font-weight: 800;
+        }
+
+        .owner-rank {
+            display: inline-block;
+
+            margin-top: 6px;
+
+            padding: 4px 9px;
+
+            border-radius: 100px;
+
+            font-size: 9px;
+            font-weight: 900;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+
+            color: #73baff;
+
+            background: rgba(0,132,255,.12);
+
+            border: 1px solid rgba(0,132,255,.2);
+        }
+
+        /* CTA */
+
+        .cta {
+            width: min(1180px, 92%);
+
+            margin: 30px auto 100px;
+
+            padding: 55px 30px;
+
+            border-radius: 26px;
+
+            text-align: center;
+
+            background:
+                radial-gradient(circle at 50% 0%, rgba(0, 174, 255, .25), transparent 60%),
+                #101623;
+
+            border: 1px solid rgba(0, 153, 255, .18);
+        }
+
+        .cta h2 {
+            font-size: clamp(30px, 5vw, 46px);
+
+            letter-spacing: -1.5px;
+        }
+
+        .cta p {
+            margin: 13px auto 26px;
+
+            color: var(--muted);
+        }
+
+        /* FOOTER */
+
+        footer {
+            padding: 35px 7%;
+
+            border-top: 1px solid var(--border);
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 20px;
+
+            color: #738095;
+
+            font-size: 12px;
+        }
+
+        .footer-brand {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            color: white;
+
+            font-weight: 800;
+        }
+
+        .footer-brand img {
+            width: 30px;
+            height: 30px;
+
+            border-radius: 7px;
+        }
+
+        .footer-links {
+            display: flex;
+
+            gap: 20px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* TOAST */
+
         .toast {
             position: fixed;
-            bottom: 28px;
+
+            bottom: 30px;
             left: 50%;
-            transform: translateX(-50%) translateY(80px);
-            background: #036fff;
-            color: white;
-            padding: 12px 28px;
+
+            transform:
+                translateX(-50%)
+                translateY(90px);
+
+            padding: 13px 22px;
+
+            background: #168cff;
+
             border-radius: 12px;
-            font-size: 14px;
-            font-weight: 700;
-            transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
-            z-index: 999;
+
+            color: white;
+
+            font-size: 13px;
+            font-weight: 800;
+
+            box-shadow: 0 15px 40px rgba(0,0,0,.35);
+
+            z-index: 1000;
+
+            transition: .3s;
         }
-        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        .toast.show {
+            transform:
+                translateX(-50%)
+                translateY(0);
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 850px) {
+            .nav-links a:not(.nav-store) {
+                display: none;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .owners {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                min-height: 610px;
+            }
+
+            footer {
+                flex-direction: column;
+
+                text-align: center;
+            }
+
+            .server-bar {
+                max-width: 95%;
+            }
+
+            .server-ip {
+                font-size: 13px;
+            }
+        }
     </style>
 </head>
+
 <body>
 
-<!-- MAIN CONTENT -->
-<div class="home-contents">
+<header class="navbar">
 
-    <!-- LOGO + IP -->
-    <div class="relative">
-        <a href="store.html">
-            <img class="logo-img-home" src="img/logo.png" alt="NotDonutSMP">
-        </a>
-        <div class="below-logo">
-            <button class="ip-home" onclick="copyIP()">
-                <i>⧉</i> play.notdonutsmp.com
+    <a href="index.html" class="nav-brand">
+        <img src="img/bcGCsev.png" alt="NotDonutSMP">
+        NotDonut<span>SMP</span>
+    </a>
+
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="rules.html">Rules</a>
+        <a href="staff.html">Staff</a>
+        <a href="https://discord.gg/zdaUByyf4b" target="_blank">Discord</a>
+        <a class="nav-store" href="store.html">Store</a>
+    </nav>
+
+</header>
+
+
+<main>
+
+    <section class="hero">
+
+        <img
+            class="hero-logo"
+            src="img/logo.png"
+            alt="NotDonutSMP Logo"
+        >
+
+        <h1>
+            Welcome to
+            <span>NotDonutSMP</span>
+        </h1>
+
+        <p>
+            Jump into NotDonutSMP, build your empire,
+            fight your enemies and become one of the
+            strongest players on the server.
+        </p>
+
+        <div class="hero-actions">
+
+            <button
+                class="button button-primary"
+                onclick="copyIP()"
+            >
+                ⚔ Play Now
             </button>
+
+            <a
+                class="button button-secondary"
+                href="https://discord.gg/zdaUByyf4b"
+                target="_blank"
+            >
+                Join Discord
+            </a>
+
         </div>
-    </div>
 
-    <!-- STORE IMAGE -->
-    <div class="relative group">
-        <a href="store.html">
-            <div class="img-text-home">
-                <h2>Store</h2>
-            </div>
-            <img class="store-img-home" src="img/store.png" alt="Store">
-        </a>
-    </div>
 
-    <!-- DISCORD CARD -->
-    <div class="relative group">
-        <a href="https://discord.gg/zdaUByyf4b" target="_blank">
-            <div class="discord-card-home">
-                <img class="discord-img-home" src="img/discord.png" alt="Discord">
-                <span class="discord-count">Join Us</span>
-                <span class="discord-message"><span style="color:#4ade80;padding-right:4px">●</span>Discord Community</span>
-            </div>
-        </a>
-    </div>
+        <div class="server-bar">
 
-    <!-- STATS IMAGE -->
-    <div class="relative group">
-        <a href="staff.html">
-            <div class="img-text-home">
-                <h2>Staff</h2>
-            </div>
-            <img class="stats-img-home" src="img/stats.png" alt="Staff">
-        </a>
-    </div>
+            <span class="server-status"></span>
 
-    <!-- OWNERS CARD -->
-    <div class="relative group">
-        <a href="staff.html">
-            <div class="owners-card-home">
-                <div>
-                    <div class="owners-title">Server Owners</div>
-                    <div class="owner-row">
-                        <div class="owner-skin-sm">
-                            <img src="https://minotar.net/helm/DRDeathMC/80" alt="DRDeathMC">
-                        </div>
-                        <div class="owner-info-sm">
-                            <div class="name">DRDeathMC</div>
-                            <span class="badge-sm b-owner">Owner</span>
-                        </div>
-                    </div>
-                    <div class="owner-row">
-                        <div class="owner-skin-sm">
-                            <img src="https://minotar.net/helm/ItzBebeOnMC/80" alt="ItzBebeOnMC">
-                        </div>
-                        <div class="owner-info-sm">
-                            <div class="name">ItzBebeOnMC</div>
-                            <span class="badge-sm b-coowner">Co-Owner</span>
-                        </div>
-                    </div>
+            <span class="server-ip">
+                play.notdonutsmp.com
+            </span>
+
+            <button onclick="copyIP()">
+                Copy IP
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <section class="section">
+
+        <div class="section-heading">
+
+            <span>Explore</span>
+
+            <h2>Everything you need</h2>
+
+            <p>
+                Join the community, visit the store,
+                meet the team and start your journey.
+            </p>
+
+        </div>
+
+
+        <div class="cards">
+
+            <a
+                href="store.html"
+                class="card image-card"
+            >
+
+                <img
+                    src="img/store.png"
+                    alt="NotDonutSMP Store"
+                >
+
+                <div class="card-content">
+
+                    <h3>Store</h3>
+
+                    <p>
+                        Browse ranks and server upgrades.
+                    </p>
+
                 </div>
-                <a href="staff.html" class="view-staff-link">View Full Staff →</a>
+
+            </a>
+
+
+            <a
+                href="https://discord.gg/zdaUByyf4b"
+                target="_blank"
+                class="card discord-card"
+            >
+
+                <img
+                    src="img/discord.png"
+                    alt="Discord"
+                >
+
+                <h3>Discord</h3>
+
+                <p>
+                    Chat with players, get announcements
+                    and join the community.
+                </p>
+
+                <span class="join">
+                    Join our Discord →
+                </span>
+
+            </a>
+
+
+            <a
+                href="staff.html"
+                class="card image-card"
+            >
+
+                <img
+                    src="img/stats.png"
+                    alt="Staff"
+                >
+
+                <div class="card-content">
+
+                    <h3>Staff Team</h3>
+
+                    <p>
+                        Meet the people behind NotDonutSMP.
+                    </p>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <section class="section">
+
+        <div class="section-heading">
+
+            <span>The Team</span>
+
+            <h2>Meet the owners</h2>
+
+        </div>
+
+
+        <div class="owners">
+
+            <div class="owner">
+
+                <img
+                    src="https://minotar.net/helm/DRDeathMC/100"
+                    alt="DRDeathMC"
+                >
+
+                <div>
+
+                    <div class="owner-name">
+                        DRDeathMC
+                    </div>
+
+                    <span class="owner-rank">
+                        Owner
+                    </span>
+
+                </div>
+
             </div>
+
+
+            <div class="owner">
+
+                <img
+                    src="https://minotar.net/helm/ItzBebeOnMC/100"
+                    alt="ItzBebeOnMC"
+                >
+
+                <div>
+
+                    <div class="owner-name">
+                        ItzBebeOnMC
+                    </div>
+
+                    <span class="owner-rank">
+                        Co-Owner
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="cta">
+
+        <h2>
+            Ready to start playing?
+        </h2>
+
+        <p>
+            Join NotDonutSMP today.
+        </p>
+
+        <button
+            class="button button-primary"
+            onclick="copyIP()"
+        >
+            Copy Server IP
+        </button>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <div class="footer-brand">
+
+        <img
+            src="img/bcGCsev.png"
+            alt="NotDonutSMP"
+        >
+
+        NotDonutSMP
+
+    </div>
+
+
+    <div>
+        © 2026 NotDonutSMP.
+        Not affiliated with Mojang or Microsoft.
+    </div>
+
+
+    <div class="footer-links">
+
+        <a href="rules.html">
+            Rules
         </a>
+
+        <a href="staff.html">
+            Staff
+        </a>
+
+        <a href="store.html">
+            Store
+        </a>
+
     </div>
 
+</footer>
+
+
+<div
+    class="toast"
+    id="toast"
+>
+    ✓ Server IP copied!
 </div>
 
-<!-- FOOTER -->
-<div id="foot">
-    <div class="copyright">
-        <div class="copyright-text">
-            <img src="img/bcGCsev.png" alt="">
-            <strong>NotDonutSMP</strong>
-        </div>
-        <small>Not associated with Mojang or Microsoft</small>
-        <small>© 2026 NotDonutSMP. All Rights Reserved.</small>
-        <div class="copyright-links">
-            <a href="rules.html">Rules</a>
-            <a href="staff.html">Staff</a>
-            <a href="store.html">Store</a>
-            <a href="https://discord.gg/zdaUByyf4b" target="_blank">Discord</a>
-        </div>
-    </div>
-</div>
-
-<div class="toast" id="toast">✓ Copied!</div>
 
 <script>
+
 function copyIP() {
-    navigator.clipboard.writeText('play.notdonutsmp.com').then(() => {
-        const t = document.getElementById('toast');
-        t.classList.add('show');
-        setTimeout(() => t.classList.remove('show'), 2500);
-    });
+
+    navigator.clipboard
+        .writeText("play.notdonutsmp.com")
+        .then(() => {
+
+            const toast =
+                document.getElementById("toast");
+
+            toast.classList.add("show");
+
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 2200);
+
+        });
+
 }
+
 </script>
 
 </body>
