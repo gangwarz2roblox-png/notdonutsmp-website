@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NuxCord</title>
+<style>
+:root{
+  --bg:#313338;--panel:#2b2d31;--rail:#1e1f22;--panel2:#232428;--input:#1e1f22;
+  --text:#f2f3f5;--muted:#b5bac1;--faint:#949ba4;--brand:#5865f2;--brand2:#4752c4;
+  --green:#23a559;--red:#da373c;--yellow:#f0b232;--hover:#35373c;--sel:#404249;--line:#3f4147;
+  --nitro:#ff73fa;
+}
+*{box-sizing:border-box}html,body{height:100%}body{margin:0;background:var(--rail);color:var(--text);font-family:Inter,"Segoe UI",system-ui,sans-serif;overflow:hidden}
+button,input,textarea,select{font:inherit}button{cursor:pointer}.hidden{display:none!important}.muted{color:var(--muted)}
+::-webkit-scrollbar{width:10px}::-webkit-scrollbar-thumb{background:#1a1b1e;border-radius:8px}::-webkit-scrollbar-track{background:transparent}
+
+/* AUTH */
+.auth-shell{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;background:
+radial-gradient(circle at 15% 20%,rgba(88,101,242,.42),transparent 30%),
+radial-gradient(circle at 82% 80%,rgba(88,101,242,.18),transparent 28%),
+linear-gradient(135deg,#202225,#111214);padding:24px}
+.brand-top{position:fixed;left:30px;top:26px;display:flex;align-items:center;gap:10px;font-size:22px;font-weight:850}
+.logo{width:36px;height:36px;border-radius:12px;background:var(--brand);display:grid;place-items:center;font-weight:900;box-shadow:0 8px 28px rgba(88,101,242,.35)}
+.auth-card{width:min(480px,94vw);background:var(--bg);border-radius:5px;padding:32px;box-shadow:0 20px 55px rgba(0,0,0,.48)}
+.auth-card h1{text-align:center;font-size:24px;margin:0 0 8px}.auth-sub{text-align:center;color:var(--muted);margin-bottom:24px}
+.field{margin-bottom:16px}.field label{display:block;font-size:12px;font-weight:800;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.field input,.field textarea,.field select{width:100%;border:1px solid transparent;border-radius:4px;background:var(--input);color:var(--text);padding:11px 12px;outline:0}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:#00a8fc}
+.primary,.danger,.secondary{border:0;border-radius:4px;padding:10px 14px;font-weight:700;color:white}.primary{background:var(--brand)}.primary:hover{background:var(--brand2)}.secondary{background:#4e5058}.danger{background:var(--red)}
+.full{width:100%}.link{border:0;background:none;color:#00a8fc;padding:0}.error{color:#fa777c;min-height:18px;font-size:13px;margin:8px 0}
+.small{font-size:12px}
+
+/* APP SHELL */
+.app{height:100vh;display:grid;grid-template-columns:72px 240px minmax(0,1fr);min-width:0}
+.rail{background:var(--rail);padding:12px 0;display:flex;flex-direction:column;align-items:center;gap:8px;overflow-y:auto}
+.rail-btn{width:48px;height:48px;border:0;border-radius:50%;background:var(--bg);color:#fff;display:grid;place-items:center;font-weight:800;transition:.15s;position:relative;flex:0 0 auto}
+.rail-btn:hover,.rail-btn.active{border-radius:16px;background:var(--brand)}.rail-btn.active:before{content:"";position:absolute;left:-12px;width:4px;height:38px;background:#fff;border-radius:0 4px 4px 0}
+.rail-btn.home{background:var(--brand);border-radius:16px}.rail-btn.add{color:var(--green)}.rail-btn.add:hover{color:#fff;background:var(--green)}
+.rail-divider{width:32px;height:2px;background:#35363c;border-radius:2px}
+
+.sidebar{background:var(--panel);display:flex;flex-direction:column;min-width:0}
+.sidebar-head{height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-weight:750;border-bottom:1px solid #202125;box-shadow:0 1px 0 #202125}
+.searchbox{padding:10px}.searchbox input{width:100%;background:var(--rail);border:0;border-radius:4px;outline:0;color:#fff;padding:8px 10px}
+.side-scroll{flex:1;overflow:auto;padding:8px}.side-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:4px;color:var(--muted);margin:2px 0;cursor:pointer}
+.side-item:hover{background:var(--hover);color:#fff}.side-item.active{background:var(--sel);color:#fff}.side-icon{width:24px;text-align:center;font-size:18px}.category{font-size:12px;text-transform:uppercase;font-weight:800;color:var(--faint);margin:14px 8px 5px;display:flex;align-items:center;justify-content:space-between}
+.category button{border:0;background:none;color:var(--faint);font-size:18px}
+.userbar{height:54px;background:var(--panel2);display:flex;align-items:center;gap:8px;padding:7px 8px}.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#5865f2,#c45cff);display:grid;place-items:center;font-weight:800;position:relative;flex:none}
+.avatar.online:after{content:"";position:absolute;right:-2px;bottom:-2px;width:10px;height:10px;border-radius:50%;background:var(--green);border:3px solid var(--panel2)}
+.usertext{min-width:0;flex:1}.usertext b,.usertext span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.usertext b{font-size:14px}.usertext span{font-size:12px;color:var(--muted)}
+.iconbtn{width:32px;height:32px;border:0;background:transparent;color:var(--muted);border-radius:4px}.iconbtn:hover{background:#37393f;color:#fff}
+
+.main{background:var(--bg);min-width:0;display:flex;flex-direction:column}
+.topbar{height:48px;border-bottom:1px solid #26272b;display:flex;align-items:center;gap:10px;padding:0 16px;box-shadow:0 1px 0 #26272b;flex:none}
+.topbar-title{font-weight:800}.topbar-spacer{flex:1}.tab{border:0;background:none;color:var(--muted);padding:7px 10px;border-radius:4px;font-weight:650}.tab:hover{background:var(--hover);color:#fff}.tab.active{background:var(--sel);color:#fff}
+.content{flex:1;min-height:0;overflow:hidden;display:flex}.pane{flex:1;min-width:0;overflow:auto;padding:22px}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}.card{background:var(--panel);border-radius:8px;padding:16px;border:1px solid #3a3c42}.card h3{margin:0 0 8px}.card p{color:var(--muted);font-size:14px;line-height:1.45}
+.row{display:flex;align-items:center;gap:10px}.grow{flex:1}.section-title{font-size:18px;font-weight:800;margin:0 0 14px}.section-sub{color:var(--muted);font-size:13px;margin:-8px 0 16px}
+
+/* FRIENDS + DMS */
+.friend-row,.dm-row{display:flex;align-items:center;gap:12px;padding:10px;border-radius:6px;border-top:1px solid #3a3c42}.friend-row:hover,.dm-row:hover{background:var(--hover)}.friend-meta{flex:1}.friend-meta b{display:block}.friend-meta span{color:var(--muted);font-size:13px}
+.circle-action{width:36px;height:36px;border:0;border-radius:50%;background:var(--panel2);color:var(--muted)}.circle-action:hover{color:#fff}
+
+/* CHAT */
+.chat-layout{display:grid;grid-template-columns:minmax(0,1fr) 240px;flex:1;min-height:0}.chat-area{display:flex;flex-direction:column;min-width:0}.messages{flex:1;overflow:auto;padding:18px 16px}.welcome{padding:28px 0 18px;border-bottom:1px solid var(--line);margin-bottom:14px}.welcome-badge{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:#41434a;font-size:30px;font-weight:900}.welcome h1{margin:12px 0 4px;font-size:28px}.message{display:grid;grid-template-columns:40px 1fr;gap:12px;padding:8px 0}.message .avatar{width:40px;height:40px}.msg-head{display:flex;gap:8px;align-items:baseline}.msg-head b{font-weight:800}.time{font-size:12px;color:var(--faint)}.msg-text{color:#dbdee1;line-height:1.45;margin-top:2px;white-space:pre-wrap}.composer-wrap{padding:0 16px 18px}.composer{min-height:44px;background:#383a40;border-radius:8px;display:flex;align-items:center;gap:8px;padding:0 12px}.composer input{flex:1;background:none;border:0;outline:0;color:white}.members{background:var(--panel);overflow:auto;padding:16px 8px}.member{display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:4px;color:var(--muted)}.member:hover{background:var(--hover);color:#fff}
+
+/* MODALS */
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:2000;display:grid;place-items:center;padding:20px}.modal{width:min(520px,96vw);max-height:90vh;overflow:auto;background:var(--bg);border-radius:8px;box-shadow:0 25px 80px rgba(0,0,0,.55)}.modal-head{padding:20px 20px 10px}.modal-head h2{margin:0}.modal-body{padding:10px 20px 20px}.modal-actions{display:flex;justify-content:flex-end;gap:8px;padding:16px 20px;background:var(--panel);border-radius:0 0 8px 8px}
+
+/* SETTINGS */
+.settings-shell{display:grid;grid-template-columns:220px minmax(0,1fr);height:100%}.settings-nav{background:var(--panel);padding:24px 12px}.settings-nav button{width:100%;text-align:left;border:0;background:none;color:var(--muted);padding:9px 10px;border-radius:4px}.settings-nav button.active,.settings-nav button:hover{background:var(--sel);color:#fff}.settings-page{overflow:auto;padding:34px;max-width:860px}.profile-banner{height:120px;border-radius:8px 8px 0 0;background:linear-gradient(120deg,#5865f2,#9b59ff)}.profile-card{background:var(--panel2);border-radius:8px;overflow:hidden}.profile-body{padding:0 18px 18px}.profile-big-avatar{width:84px;height:84px;border-radius:50%;background:#5865f2;border:6px solid var(--panel2);display:grid;place-items:center;font-size:30px;font-weight:900;margin-top:-42px}.profile-name{font-size:22px;font-weight:850;margin-top:8px}.profile-user{color:var(--muted)}.setting-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+.toggle{width:42px;height:24px;border:0;border-radius:12px;background:#4e5058;padding:3px}.toggle span{display:block;width:18px;height:18px;border-radius:50%;background:#fff;transition:.15s}.toggle.on{background:var(--green)}.toggle.on span{transform:translateX(18px)}
+
+/* NITRO */
+.nitro-hero{border-radius:14px;padding:28px;background:linear-gradient(135deg,#7c3aed,#5865f2 55%,#ff73fa);box-shadow:0 18px 45px rgba(88,101,242,.25)}.nitro-hero h1{margin:0 0 8px;font-size:34px}.price{font-size:28px;font-weight:900}.nitro-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:18px}.nitro-feature{background:rgba(0,0,0,.18);padding:16px;border-radius:10px}
+
+/* SERVER SETTINGS */
+.role-pill{display:inline-flex;align-items:center;gap:7px;padding:6px 9px;border-radius:5px;background:var(--panel2);margin:4px 4px 4px 0}.dot{width:10px;height:10px;border-radius:50%}
+@media(max-width:980px){.chat-layout{grid-template-columns:1fr}.members{display:none}}
+@media(max-width:760px){.app{grid-template-columns:64px minmax(0,1fr)}.sidebar{position:fixed;left:64px;top:0;bottom:0;width:240px;z-index:100;transform:translateX(-110%);transition:.18s}.sidebar.open{transform:translateX(0)}.settings-shell{grid-template-columns:1fr}.settings-nav{display:flex;overflow:auto;padding:8px}.settings-nav button{width:auto;white-space:nowrap}.settings-page{padding:20px}.topbar .desktop-only{display:none}}
+</style>
+
+<style>
+/* Discord-inspired auth rebuild based on the supplied saved login-page reference.
+   NuxCord branding + original implementation; no Discord production scripts are reused. */
+.auth-shell{
+  position:fixed;inset:0;z-index:1000;display:grid;place-items:center;overflow:hidden;
+  padding:32px;background:#5865f2;
+}
+.auth-shell::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.95;
+  background:
+    radial-gradient(circle at 12% 16%,rgba(255,255,255,.16) 0 2px,transparent 3px),
+    radial-gradient(circle at 78% 23%,rgba(255,255,255,.12) 0 2px,transparent 3px),
+    radial-gradient(circle at 64% 73%,rgba(255,255,255,.10) 0 3px,transparent 4px),
+    linear-gradient(160deg,#5865f2 0%,#4752c4 48%,#3f49b7 100%);
+  background-size:auto;
+}
+.auth-shell::after{
+  content:"";position:absolute;left:-8%;right:-8%;bottom:-16%;height:46%;
+  border-radius:50% 50% 0 0/35% 35% 0 0;
+  background:rgba(20,22,35,.20);filter:blur(1px);
+  transform:rotate(-2deg);
+}
+.brand-top{
+  position:absolute;top:32px;left:42px;z-index:2;display:flex;align-items:center;gap:10px;
+  color:white;font-size:20px;font-weight:800;letter-spacing:-.3px
+}
+.brand-top .logo{
+  width:34px;height:34px;border-radius:12px;background:#fff;color:#5865f2;
+  box-shadow:none;font-size:18px
+}
+.auth-card{
+  position:relative;z-index:2;width:min(784px,calc(100vw - 48px));padding:32px;
+  background:#313338;border-radius:5px;box-shadow:0 8px 24px rgba(0,0,0,.32);
+}
+.auth-card.login-wide{display:grid;grid-template-columns:minmax(0,1fr) 240px;gap:56px;align-items:center}
+.auth-main h1{margin:0 0 8px;text-align:center;font-size:24px;line-height:30px}
+.auth-main .auth-sub{margin-bottom:20px}
+.auth-sub{text-align:center;color:#b5bac1;font-size:16px}
+.auth-card .field{margin-bottom:18px}
+.auth-card .field label{
+  color:#b5bac1;font-size:12px;line-height:16px;font-weight:800;text-transform:uppercase;
+  letter-spacing:.02em
+}
+.auth-card .field label .req{color:#f23f42}
+.auth-card .field input{
+  height:40px;background:#1e1f22;border:none;border-radius:3px;padding:10px;
+  color:#dbdee1
+}
+.auth-card .field input:focus{box-shadow:0 0 0 1px #00a8fc}
+.auth-card .primary{height:44px;margin-top:8px;border-radius:3px;font-size:16px}
+.auth-card .link{font-size:14px;color:#00a8fc}
+.auth-card .small{font-size:14px}
+.qr-panel{text-align:center;padding-top:4px}
+.qr-wrap{
+  width:176px;height:176px;margin:0 auto 18px;background:white;border-radius:4px;padding:8px;
+  position:relative;display:grid;place-items:center
+}
+.fake-qr{
+  width:160px;height:160px;
+  background:
+    linear-gradient(90deg,#111 10px,transparent 10px) 0 0/22px 22px,
+    linear-gradient(#111 10px,transparent 10px) 0 0/22px 22px,
+    linear-gradient(135deg,transparent 35%,#111 35% 65%,transparent 65%) 5px 8px/27px 27px;
+  image-rendering:pixelated
+}
+.fake-qr::before,.fake-qr::after{
+  content:"";position:absolute;width:38px;height:38px;border:8px solid #111;background:#fff
+}
+.fake-qr::before{left:16px;top:16px}.fake-qr::after{right:16px;top:16px}
+.qr-nux{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:38px;height:38px;border-radius:12px;background:#5865f2;border:5px solid #fff;color:#fff;
+  display:grid;place-items:center;font-weight:900;font-size:17px
+}
+.qr-title{font-size:20px;line-height:24px;font-weight:800;color:#f2f3f5;margin-bottom:8px}
+.qr-copy{font-size:14px;line-height:18px;color:#b5bac1}
+.qr-copy b{color:#dbdee1}
+.auth-footnote{margin-top:14px;color:#949ba4;font-size:11px;text-align:center}
+.register-card-new{width:min(480px,calc(100vw - 48px))}
+.dob-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.dob-row select{
+  width:100%;height:40px;background:#1e1f22;border:0;color:#b5bac1;border-radius:3px;padding:0 10px
+}
+.check-row{display:flex;gap:10px;align-items:flex-start;color:#b5bac1;font-size:12px;line-height:16px;margin:10px 0}
+.check-row input{margin-top:2px}
+@media(max-width:740px){
+  .brand-top{left:24px;top:22px}.auth-shell{padding:18px}
+  .auth-card.login-wide{width:min(480px,100%);display:block;padding:24px}
+  .qr-panel{display:none}.auth-card{width:min(480px,100%);padding:24px}
+}
+</style>
+
+</head>
+<body>
+<section class="auth-shell" id="authShell">
+  <div class="brand-top"><div class="logo">N</div><span>NuxCord</span></div>
+
+  <div class="auth-card login-wide" id="loginCard">
+    <div class="auth-main">
+      <h1>Welcome back!</h1>
+      <div class="auth-sub">We're so excited to see you again!</div>
+      <form id="loginForm">
+        <div class="field">
+          <label>Email or Phone Number <span class="req">*</span></label>
+          <input id="loginIdentity" required autocomplete="username">
+        </div>
+        <div class="field">
+          <label>Password <span class="req">*</span></label>
+          <input id="loginPassword" type="password" required autocomplete="current-password">
+        </div>
+        <button type="button" class="link">Forgot your password?</button>
+        <div class="error" id="loginError"></div>
+        <button class="primary full">Log In</button>
+        <p class="muted small">Need an account? <button type="button" id="showRegister" class="link">Register</button></p>
+      </form>
+      <div class="auth-footnote">NuxCord prototype — accounts are currently stored in this browser.</div>
+    </div>
+
+    <div class="qr-panel">
+      <div class="qr-wrap">
+        <div class="fake-qr"></div>
+        <div class="qr-nux">N</div>
+      </div>
+      <div class="qr-title">Log in with QR Code</div>
+      <div class="qr-copy">Scan this with the <b>NuxCord mobile app</b> to log in instantly.</div>
+    </div>
+  </div>
+
+  <div class="auth-card register-card-new hidden" id="registerCard">
+    <div class="auth-main">
+      <h1>Create an account</h1>
+      <form id="registerForm">
+        <div class="field"><label>Email <span class="req">*</span></label><input id="regEmail" type="email" required></div>
+        <div class="field"><label>Display Name <span class="req">*</span></label><input id="regDisplay" required></div>
+        <div class="field"><label>Username <span class="req">*</span></label><input id="regUsername" required></div>
+        <div class="field"><label>Password <span class="req">*</span></label><input id="regPassword" type="password" minlength="6" required></div>
+
+        <div class="field">
+          <label>Date of Birth <span class="req">*</span></label>
+          <div class="dob-row">
+            <select><option>Month</option><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option><option>August</option><option>September</option><option>October</option><option>November</option><option>December</option></select>
+            <select><option>Day</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option></select>
+            <select><option>Year</option><option>2026</option><option>2025</option><option>2024</option><option>2023</option><option>2022</option><option>2021</option><option>2020</option><option>2019</option><option>2018</option><option>2017</option><option>2016</option><option>2015</option><option>2014</option><option>2013</option><option>2012</option><option>2011</option><option>2010</option><option>2009</option><option>2008</option><option>2007</option><option>2006</option><option>2005</option><option>2004</option><option>2003</option><option>2002</option><option>2001</option><option>2000</option><option>1999</option><option>1998</option><option>1997</option><option>1996</option><option>1995</option><option>1994</option><option>1993</option><option>1992</option><option>1991</option><option>1990</option><option>1989</option><option>1988</option><option>1987</option><option>1986</option><option>1985</option><option>1984</option><option>1983</option><option>1982</option><option>1981</option><option>1980</option><option>1979</option><option>1978</option><option>1977</option><option>1976</option><option>1975</option><option>1974</option><option>1973</option><option>1972</option><option>1971</option><option>1970</option><option>1969</option><option>1968</option><option>1967</option><option>1966</option><option>1965</option><option>1964</option><option>1963</option><option>1962</option><option>1961</option><option>1960</option><option>1959</option><option>1958</option><option>1957</option><option>1956</option><option>1955</option><option>1954</option><option>1953</option><option>1952</option><option>1951</option><option>1950</option><option>1949</option><option>1948</option><option>1947</option><option>1946</option><option>1945</option><option>1944</option><option>1943</option><option>1942</option><option>1941</option><option>1940</option></select>
+          </div>
+        </div>
+
+        <label class="check-row"><input type="checkbox"> <span>(Optional) It's okay to send me emails with NuxCord updates, tips and special offers.</span></label>
+        <div class="error" id="registerError"></div>
+        <button class="primary full">Continue</button>
+        <p class="small"><button type="button" id="showLogin" class="link">Already have an account?</button></p>
+        <p class="auth-footnote">By registering, you agree to NuxCord's Terms of Service and Privacy Policy.</p>
+      </form>
+    </div>
+  </div>
+</section>
+<script>
+
+const $=id=>document.getElementById(id);
+const DBKEY='nuxcord_state_v3', SESSION='nuxcord_session_v3';
+const defaultState={users:[],friends:{},friendRequests:{},servers:[],dms:{},messages:{},settings:{},nitro:{}};
+
+function load(){
+  try{return Object.assign({},defaultState,JSON.parse(localStorage.getItem(DBKEY)||'{}'))}
+  catch{return structuredClone(defaultState)}
+}
+let db=load();
+
+function save(){localStorage.setItem(DBKEY,JSON.stringify(db))}
+async function hash(v){
+  const b=new TextEncoder().encode(v);
+  const h=await crypto.subtle.digest('SHA-256',b);
+  return [...new Uint8Array(h)].map(x=>x.toString(16).padStart(2,'0')).join('')
+}
+function seed(){
+  if(!db.users.find(u=>u.username==='nuxbot')) db.users.push({email:'bot@nux.local',display:'NuxBot',username:'nuxbot',passwordHash:'',bio:'Official NuxCord bot',status:'Online'});
+  if(!db.users.find(u=>u.username==='alex')) db.users.push({email:'alex@nux.local',display:'Alex',username:'alex',passwordHash:'',bio:'Gaming & coding',status:'Online'});
+  if(!db.users.find(u=>u.username==='mia')) db.users.push({email:'mia@nux.local',display:'Mia',username:'mia',passwordHash:'',bio:'Music enjoyer',status:'Idle'});
+  save();
+}
+seed();
+
+function showLogin(){
+  $('registerCard').classList.add('hidden');
+  $('loginCard').classList.remove('hidden');
+  $('loginError').textContent='';
+}
+function showRegister(){
+  $('loginCard').classList.add('hidden');
+  $('registerCard').classList.remove('hidden');
+  $('registerError').textContent='';
+}
+$('showRegister').onclick=showRegister;
+$('showLogin').onclick=showLogin;
+
+$('registerForm').onsubmit=async e=>{
+  e.preventDefault();
+  const email=$('regEmail').value.trim().toLowerCase();
+  const display=$('regDisplay').value.trim();
+  const username=$('regUsername').value.trim();
+  const pw=$('regPassword').value;
+
+  if(db.users.some(u=>u.email===email||u.username.toLowerCase()===username.toLowerCase())){
+    $('registerError').textContent='Email or username already registered.';
+    return;
+  }
+
+  const u={email,display,username,passwordHash:await hash(pw),bio:'',status:'Online',accent:'#5865f2'};
+  db.users.push(u);
+  db.friends[username]=[];
+  db.friendRequests[username]=[];
+  db.settings[username]={theme:'dark',compact:false};
+  save();
+
+  localStorage.setItem(SESSION,username);
+  location.href='index.html';
+};
+
+$('loginForm').onsubmit=async e=>{
+  e.preventDefault();
+  const id=$('loginIdentity').value.trim().toLowerCase();
+  const pw=await hash($('loginPassword').value);
+  const u=db.users.find(x=>x.email===id||x.username.toLowerCase()===id);
+
+  if(!u||!u.passwordHash||u.passwordHash!==pw){
+    $('loginError').textContent='Login or password is invalid.';
+    return;
+  }
+
+  localStorage.setItem(SESSION,u.username);
+  location.href='index.html';
+};
+
+// Already logged in -> go straight to the app.
+if(localStorage.getItem(SESSION)){
+  location.replace('index.html');
+}
+
+</script>
+</body>
+</html>
