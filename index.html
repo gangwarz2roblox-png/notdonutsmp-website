@@ -1,147 +1,426 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>NuxCord</title>
 <style>
 :root{
-  --bg:#313338;--bg2:#2b2d31;--bg3:#1e1f22;--bg4:#232428;--field:#1e1f22;
+  --bg:#313338;--panel:#2b2d31;--rail:#1e1f22;--panel2:#232428;--input:#1e1f22;
   --text:#f2f3f5;--muted:#b5bac1;--faint:#949ba4;--brand:#5865f2;--brand2:#4752c4;
-  --green:#23a559;--red:#da373c;--line:#3f4147;--hover:#35373c;--selected:#404249;
+  --green:#23a559;--red:#da373c;--yellow:#f0b232;--hover:#35373c;--sel:#404249;--line:#3f4147;
+  --nitro:#ff73fa;
 }
-*{box-sizing:border-box} html,body{height:100%} body{margin:0;font-family:gg sans,Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg3);color:var(--text);overflow:hidden}
-button,input{font:inherit} button{cursor:pointer}.hidden{display:none!important}
+*{box-sizing:border-box}html,body{height:100%}body{margin:0;background:var(--rail);color:var(--text);font-family:Inter,"Segoe UI",system-ui,sans-serif;overflow:hidden}
+button,input,textarea,select{font:inherit}button{cursor:pointer}.hidden{display:none!important}.muted{color:var(--muted)}
+::-webkit-scrollbar{width:10px}::-webkit-scrollbar-thumb{background:#1a1b1e;border-radius:8px}::-webkit-scrollbar-track{background:transparent}
 
 /* AUTH */
 .auth-shell{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;background:
-  radial-gradient(circle at 20% 20%,rgba(88,101,242,.38),transparent 34%),
-  radial-gradient(circle at 80% 80%,rgba(114,137,218,.22),transparent 30%),
-  linear-gradient(135deg,#202225 0%,#111214 100%);padding:24px}
-.auth-logo{position:fixed;top:28px;left:34px;display:flex;align-items:center;gap:11px;font-size:22px;font-weight:800;letter-spacing:-.4px}
-.logo-mark{width:34px;height:34px;border-radius:12px;background:var(--brand);display:grid;place-items:center;font-weight:900;color:#fff;box-shadow:0 10px 30px rgba(88,101,242,.35)}
-.auth-card{width:min(784px,94vw);background:#313338;border-radius:5px;padding:32px;box-shadow:0 18px 50px rgba(0,0,0,.45)}
-.auth-grid{display:grid;grid-template-columns:1fr 240px;gap:40px;align-items:center}.auth-main h1{font-size:24px;margin:0 0 8px;text-align:center}.auth-sub{text-align:center;color:var(--muted);margin-bottom:22px}
-.field{margin-bottom:18px}.field label{display:block;color:var(--muted);font-size:12px;font-weight:800;text-transform:uppercase;margin:0 0 8px}.field label span{color:#f23f42}.field input{width:100%;height:40px;background:var(--field);border:1px solid transparent;border-radius:3px;color:var(--text);outline:0;padding:10px 12px}.field input:focus{border-color:#00a8fc}
-.link-btn{background:none;border:0;color:#00a8fc;padding:0;font-size:14px}.link-btn:hover{text-decoration:underline}.primary{width:100%;height:44px;border:0;border-radius:3px;background:var(--brand);color:#fff;font-weight:700;margin-top:16px}.primary:hover{background:var(--brand2)}.switch-copy{font-size:14px;color:var(--muted);margin-top:10px}.error{min-height:20px;color:#fa777c;font-size:13px;margin-top:8px}
-.qr-box{display:flex;flex-direction:column;align-items:center;text-align:center}.qr{width:176px;height:176px;background:#fff;border-radius:4px;padding:12px;display:grid;grid-template-columns:repeat(9,1fr);gap:3px;margin-bottom:20px}.qr i{background:#111;border-radius:1px}.qr i:nth-child(3n),.qr i:nth-child(5n){opacity:.12}.qr-title{font-size:20px;font-weight:800}.qr-copy{color:var(--muted);font-size:14px;line-height:1.45;margin-top:8px}.demo-note{margin-top:16px;font-size:12px;color:var(--faint);text-align:center}.register-card{width:min(480px,94vw)}.register-card .auth-grid{display:block}
+radial-gradient(circle at 15% 20%,rgba(88,101,242,.42),transparent 30%),
+radial-gradient(circle at 82% 80%,rgba(88,101,242,.18),transparent 28%),
+linear-gradient(135deg,#202225,#111214);padding:24px}
+.brand-top{position:fixed;left:30px;top:26px;display:flex;align-items:center;gap:10px;font-size:22px;font-weight:850}
+.logo{width:36px;height:36px;border-radius:12px;background:var(--brand);display:grid;place-items:center;font-weight:900;box-shadow:0 8px 28px rgba(88,101,242,.35)}
+.auth-card{width:min(480px,94vw);background:var(--bg);border-radius:5px;padding:32px;box-shadow:0 20px 55px rgba(0,0,0,.48)}
+.auth-card h1{text-align:center;font-size:24px;margin:0 0 8px}.auth-sub{text-align:center;color:var(--muted);margin-bottom:24px}
+.field{margin-bottom:16px}.field label{display:block;font-size:12px;font-weight:800;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.field input,.field textarea,.field select{width:100%;border:1px solid transparent;border-radius:4px;background:var(--input);color:var(--text);padding:11px 12px;outline:0}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:#00a8fc}
+.primary,.danger,.secondary{border:0;border-radius:4px;padding:10px 14px;font-weight:700;color:white}.primary{background:var(--brand)}.primary:hover{background:var(--brand2)}.secondary{background:#4e5058}.danger{background:var(--red)}
+.full{width:100%}.link{border:0;background:none;color:#00a8fc;padding:0}.error{color:#fa777c;min-height:18px;font-size:13px;margin:8px 0}
+.small{font-size:12px}
 
-/* APP */
-.app{display:grid;grid-template-columns:72px 240px minmax(0,1fr) 240px;height:100vh;min-height:0}.servers{background:var(--bg3);padding:12px 0;display:flex;flex-direction:column;align-items:center;gap:8px}.server-icon,.add-server{width:48px;height:48px;border:0;border-radius:50%;display:grid;place-items:center;color:#fff;background:#313338;font-weight:800;transition:.16s;position:relative}.server-icon.active{background:var(--brand);border-radius:16px}.server-icon.active:before{content:"";position:absolute;left:-12px;width:4px;height:40px;border-radius:0 4px 4px 0;background:#fff}.server-icon:hover,.add-server:hover{border-radius:16px;background:var(--brand)}.add-server{color:var(--green)}.add-server:hover{color:#fff;background:var(--green)}.divider{width:32px;height:2px;background:#35363c;border-radius:2px}
-.sidebar{background:var(--bg2);display:flex;flex-direction:column;min-width:0}.server-title{height:48px;padding:0 16px;display:flex;align-items:center;justify-content:space-between;font-weight:700;border-bottom:1px solid #1f2024;box-shadow:0 1px 0 #1f2024}.channel-search{padding:10px}.channel-search input{width:100%;border:0;outline:0;border-radius:4px;padding:8px 10px;color:var(--text);background:var(--bg3)}.channels{flex:1;overflow:auto;padding:8px}.category{margin:10px 8px 4px;font-size:12px;font-weight:800;color:var(--faint);text-transform:uppercase}.channel{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:4px;color:var(--muted);font-weight:600;margin-bottom:2px}.channel:hover{background:var(--hover);color:var(--text)}.channel.active{background:var(--selected);color:white}.hash{color:#80848e;font-size:20px}.user-bar{height:52px;background:var(--bg4);display:flex;align-items:center;padding:8px;gap:8px}.avatar{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-weight:800;background:linear-gradient(135deg,#5865f2,#9b59ff);position:relative;flex:0 0 auto}.avatar.online:after{content:"";width:10px;height:10px;border-radius:50%;background:var(--green);border:3px solid var(--bg4);position:absolute;right:-2px;bottom:-2px}.user-meta{min-width:0;flex:1}.user-name{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.user-status{font-size:12px;color:var(--muted)}.user-actions{display:flex;gap:4px}.icon-btn{border:0;background:transparent;color:var(--muted);border-radius:4px;width:30px;height:30px;display:grid;place-items:center}.icon-btn:hover{background:#34363c;color:#fff}
-.chat{background:var(--bg);display:flex;flex-direction:column;min-width:0}.chat-header{height:48px;display:flex;align-items:center;padding:0 16px;border-bottom:1px solid #26272b;box-shadow:0 1px 0 #26272b;gap:10px}.chat-header .hash{font-size:24px}.chat-title{font-weight:800}.chat-topic{color:var(--muted);font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.chat-tools{margin-left:auto;display:flex;gap:8px}.messages{flex:1;overflow-y:auto;padding:20px 16px 12px}.welcome{padding:28px 0 18px;border-bottom:1px solid var(--line);margin-bottom:18px}.welcome-icon{width:68px;height:68px;border-radius:50%;display:grid;place-items:center;background:#41434a;font-size:34px;font-weight:900;margin-bottom:12px}.welcome h1{margin:0 0 6px;font-size:30px}.welcome p{margin:0;color:var(--muted)}.message{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;padding:8px 0}.message .avatar{width:40px;height:40px}.message-head{display:flex;align-items:baseline;gap:8px}.message-author{font-weight:800}.message-time{font-size:12px;color:var(--faint)}.message-text{color:#dbdee1;line-height:1.45;margin-top:2px}.composer-wrap{padding:0 16px 18px}.composer{min-height:44px;background:#383a40;border-radius:8px;display:flex;align-items:center;padding:0 12px;gap:10px}.composer input{flex:1;border:0;outline:0;background:transparent;color:#fff;min-width:0}.composer input::placeholder{color:#949ba4}.composer button{border:0;background:transparent;color:var(--muted);font-size:18px}.composer button:hover{color:#fff}.members{background:var(--bg2);padding:18px 8px;overflow:auto}.member-group{color:var(--faint);font-size:12px;font-weight:800;text-transform:uppercase;margin:8px 8px 6px}.member{display:flex;align-items:center;gap:10px;padding:7px 8px;border-radius:4px;color:var(--muted)}.member:hover{background:var(--hover);color:#fff}.member .name{font-weight:700;font-size:14px}.role-owner{color:#f0b232}.role-mod{color:#23a559}.logout{color:#fa777c}.mobile-toggle{display:none}
-@media(max-width:1050px){.app{grid-template-columns:72px 240px minmax(0,1fr)}.members{display:none}}
-@media(max-width:760px){.auth-grid{grid-template-columns:1fr}.qr-box{display:none}.auth-card{padding:24px}.auth-logo{left:20px;top:20px}.app{grid-template-columns:64px minmax(0,1fr)}.sidebar{position:fixed;left:64px;top:0;bottom:0;width:240px;z-index:20;transform:translateX(-110%);transition:.2s;box-shadow:10px 0 30px rgba(0,0,0,.35)}.sidebar.open{transform:translateX(0)}.mobile-toggle{display:grid}.chat-topic{display:none}}
+/* APP SHELL */
+.app{height:100vh;display:grid;grid-template-columns:72px 240px minmax(0,1fr);min-width:0}
+.rail{background:var(--rail);padding:12px 0;display:flex;flex-direction:column;align-items:center;gap:8px;overflow-y:auto}
+.rail-btn{width:48px;height:48px;border:0;border-radius:50%;background:var(--bg);color:#fff;display:grid;place-items:center;font-weight:800;transition:.15s;position:relative;flex:0 0 auto}
+.rail-btn:hover,.rail-btn.active{border-radius:16px;background:var(--brand)}.rail-btn.active:before{content:"";position:absolute;left:-12px;width:4px;height:38px;background:#fff;border-radius:0 4px 4px 0}
+.rail-btn.home{background:var(--brand);border-radius:16px}.rail-btn.add{color:var(--green)}.rail-btn.add:hover{color:#fff;background:var(--green)}
+.rail-divider{width:32px;height:2px;background:#35363c;border-radius:2px}
+
+.sidebar{background:var(--panel);display:flex;flex-direction:column;min-width:0}
+.sidebar-head{height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-weight:750;border-bottom:1px solid #202125;box-shadow:0 1px 0 #202125}
+.searchbox{padding:10px}.searchbox input{width:100%;background:var(--rail);border:0;border-radius:4px;outline:0;color:#fff;padding:8px 10px}
+.side-scroll{flex:1;overflow:auto;padding:8px}.side-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:4px;color:var(--muted);margin:2px 0;cursor:pointer}
+.side-item:hover{background:var(--hover);color:#fff}.side-item.active{background:var(--sel);color:#fff}.side-icon{width:24px;text-align:center;font-size:18px}.category{font-size:12px;text-transform:uppercase;font-weight:800;color:var(--faint);margin:14px 8px 5px;display:flex;align-items:center;justify-content:space-between}
+.category button{border:0;background:none;color:var(--faint);font-size:18px}
+.userbar{height:54px;background:var(--panel2);display:flex;align-items:center;gap:8px;padding:7px 8px}.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#5865f2,#c45cff);display:grid;place-items:center;font-weight:800;position:relative;flex:none}
+.avatar.online:after{content:"";position:absolute;right:-2px;bottom:-2px;width:10px;height:10px;border-radius:50%;background:var(--green);border:3px solid var(--panel2)}
+.usertext{min-width:0;flex:1}.usertext b,.usertext span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.usertext b{font-size:14px}.usertext span{font-size:12px;color:var(--muted)}
+.iconbtn{width:32px;height:32px;border:0;background:transparent;color:var(--muted);border-radius:4px}.iconbtn:hover{background:#37393f;color:#fff}
+
+.main{background:var(--bg);min-width:0;display:flex;flex-direction:column}
+.topbar{height:48px;border-bottom:1px solid #26272b;display:flex;align-items:center;gap:10px;padding:0 16px;box-shadow:0 1px 0 #26272b;flex:none}
+.topbar-title{font-weight:800}.topbar-spacer{flex:1}.tab{border:0;background:none;color:var(--muted);padding:7px 10px;border-radius:4px;font-weight:650}.tab:hover{background:var(--hover);color:#fff}.tab.active{background:var(--sel);color:#fff}
+.content{flex:1;min-height:0;overflow:hidden;display:flex}.pane{flex:1;min-width:0;overflow:auto;padding:22px}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}.card{background:var(--panel);border-radius:8px;padding:16px;border:1px solid #3a3c42}.card h3{margin:0 0 8px}.card p{color:var(--muted);font-size:14px;line-height:1.45}
+.row{display:flex;align-items:center;gap:10px}.grow{flex:1}.section-title{font-size:18px;font-weight:800;margin:0 0 14px}.section-sub{color:var(--muted);font-size:13px;margin:-8px 0 16px}
+
+/* FRIENDS + DMS */
+.friend-row,.dm-row{display:flex;align-items:center;gap:12px;padding:10px;border-radius:6px;border-top:1px solid #3a3c42}.friend-row:hover,.dm-row:hover{background:var(--hover)}.friend-meta{flex:1}.friend-meta b{display:block}.friend-meta span{color:var(--muted);font-size:13px}
+.circle-action{width:36px;height:36px;border:0;border-radius:50%;background:var(--panel2);color:var(--muted)}.circle-action:hover{color:#fff}
+
+/* CHAT */
+.chat-layout{display:grid;grid-template-columns:minmax(0,1fr) 240px;flex:1;min-height:0}.chat-area{display:flex;flex-direction:column;min-width:0}.messages{flex:1;overflow:auto;padding:18px 16px}.welcome{padding:28px 0 18px;border-bottom:1px solid var(--line);margin-bottom:14px}.welcome-badge{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:#41434a;font-size:30px;font-weight:900}.welcome h1{margin:12px 0 4px;font-size:28px}.message{display:grid;grid-template-columns:40px 1fr;gap:12px;padding:8px 0}.message .avatar{width:40px;height:40px}.msg-head{display:flex;gap:8px;align-items:baseline}.msg-head b{font-weight:800}.time{font-size:12px;color:var(--faint)}.msg-text{color:#dbdee1;line-height:1.45;margin-top:2px;white-space:pre-wrap}.composer-wrap{padding:0 16px 18px}.composer{min-height:44px;background:#383a40;border-radius:8px;display:flex;align-items:center;gap:8px;padding:0 12px}.composer input{flex:1;background:none;border:0;outline:0;color:white}.members{background:var(--panel);overflow:auto;padding:16px 8px}.member{display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:4px;color:var(--muted)}.member:hover{background:var(--hover);color:#fff}
+
+/* MODALS */
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:2000;display:grid;place-items:center;padding:20px}.modal{width:min(520px,96vw);max-height:90vh;overflow:auto;background:var(--bg);border-radius:8px;box-shadow:0 25px 80px rgba(0,0,0,.55)}.modal-head{padding:20px 20px 10px}.modal-head h2{margin:0}.modal-body{padding:10px 20px 20px}.modal-actions{display:flex;justify-content:flex-end;gap:8px;padding:16px 20px;background:var(--panel);border-radius:0 0 8px 8px}
+
+/* SETTINGS */
+.settings-shell{display:grid;grid-template-columns:220px minmax(0,1fr);height:100%}.settings-nav{background:var(--panel);padding:24px 12px}.settings-nav button{width:100%;text-align:left;border:0;background:none;color:var(--muted);padding:9px 10px;border-radius:4px}.settings-nav button.active,.settings-nav button:hover{background:var(--sel);color:#fff}.settings-page{overflow:auto;padding:34px;max-width:860px}.profile-banner{height:120px;border-radius:8px 8px 0 0;background:linear-gradient(120deg,#5865f2,#9b59ff)}.profile-card{background:var(--panel2);border-radius:8px;overflow:hidden}.profile-body{padding:0 18px 18px}.profile-big-avatar{width:84px;height:84px;border-radius:50%;background:#5865f2;border:6px solid var(--panel2);display:grid;place-items:center;font-size:30px;font-weight:900;margin-top:-42px}.profile-name{font-size:22px;font-weight:850;margin-top:8px}.profile-user{color:var(--muted)}.setting-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+.toggle{width:42px;height:24px;border:0;border-radius:12px;background:#4e5058;padding:3px}.toggle span{display:block;width:18px;height:18px;border-radius:50%;background:#fff;transition:.15s}.toggle.on{background:var(--green)}.toggle.on span{transform:translateX(18px)}
+
+/* NITRO */
+.nitro-hero{border-radius:14px;padding:28px;background:linear-gradient(135deg,#7c3aed,#5865f2 55%,#ff73fa);box-shadow:0 18px 45px rgba(88,101,242,.25)}.nitro-hero h1{margin:0 0 8px;font-size:34px}.price{font-size:28px;font-weight:900}.nitro-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:18px}.nitro-feature{background:rgba(0,0,0,.18);padding:16px;border-radius:10px}
+
+/* SERVER SETTINGS */
+.role-pill{display:inline-flex;align-items:center;gap:7px;padding:6px 9px;border-radius:5px;background:var(--panel2);margin:4px 4px 4px 0}.dot{width:10px;height:10px;border-radius:50%}
+@media(max-width:980px){.chat-layout{grid-template-columns:1fr}.members{display:none}}
+@media(max-width:760px){.app{grid-template-columns:64px minmax(0,1fr)}.sidebar{position:fixed;left:64px;top:0;bottom:0;width:240px;z-index:100;transform:translateX(-110%);transition:.18s}.sidebar.open{transform:translateX(0)}.settings-shell{grid-template-columns:1fr}.settings-nav{display:flex;overflow:auto;padding:8px}.settings-nav button{width:auto;white-space:nowrap}.settings-page{padding:20px}.topbar .desktop-only{display:none}}
 </style>
+
+<style>
+/* Discord-inspired auth rebuild based on the supplied saved login-page reference.
+   NuxCord branding + original implementation; no Discord production scripts are reused. */
+.auth-shell{
+  position:fixed;inset:0;z-index:1000;display:grid;place-items:center;overflow:hidden;
+  padding:32px;background:#5865f2;
+}
+.auth-shell::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.95;
+  background:
+    radial-gradient(circle at 12% 16%,rgba(255,255,255,.16) 0 2px,transparent 3px),
+    radial-gradient(circle at 78% 23%,rgba(255,255,255,.12) 0 2px,transparent 3px),
+    radial-gradient(circle at 64% 73%,rgba(255,255,255,.10) 0 3px,transparent 4px),
+    linear-gradient(160deg,#5865f2 0%,#4752c4 48%,#3f49b7 100%);
+  background-size:auto;
+}
+.auth-shell::after{
+  content:"";position:absolute;left:-8%;right:-8%;bottom:-16%;height:46%;
+  border-radius:50% 50% 0 0/35% 35% 0 0;
+  background:rgba(20,22,35,.20);filter:blur(1px);
+  transform:rotate(-2deg);
+}
+.brand-top{
+  position:absolute;top:32px;left:42px;z-index:2;display:flex;align-items:center;gap:10px;
+  color:white;font-size:20px;font-weight:800;letter-spacing:-.3px
+}
+.brand-top .logo{
+  width:34px;height:34px;border-radius:12px;background:#fff;color:#5865f2;
+  box-shadow:none;font-size:18px
+}
+.auth-card{
+  position:relative;z-index:2;width:min(784px,calc(100vw - 48px));padding:32px;
+  background:#313338;border-radius:5px;box-shadow:0 8px 24px rgba(0,0,0,.32);
+}
+.auth-card.login-wide{display:grid;grid-template-columns:minmax(0,1fr) 240px;gap:56px;align-items:center}
+.auth-main h1{margin:0 0 8px;text-align:center;font-size:24px;line-height:30px}
+.auth-main .auth-sub{margin-bottom:20px}
+.auth-sub{text-align:center;color:#b5bac1;font-size:16px}
+.auth-card .field{margin-bottom:18px}
+.auth-card .field label{
+  color:#b5bac1;font-size:12px;line-height:16px;font-weight:800;text-transform:uppercase;
+  letter-spacing:.02em
+}
+.auth-card .field label .req{color:#f23f42}
+.auth-card .field input{
+  height:40px;background:#1e1f22;border:none;border-radius:3px;padding:10px;
+  color:#dbdee1
+}
+.auth-card .field input:focus{box-shadow:0 0 0 1px #00a8fc}
+.auth-card .primary{height:44px;margin-top:8px;border-radius:3px;font-size:16px}
+.auth-card .link{font-size:14px;color:#00a8fc}
+.auth-card .small{font-size:14px}
+.qr-panel{text-align:center;padding-top:4px}
+.qr-wrap{
+  width:176px;height:176px;margin:0 auto 18px;background:white;border-radius:4px;padding:8px;
+  position:relative;display:grid;place-items:center
+}
+.fake-qr{
+  width:160px;height:160px;
+  background:
+    linear-gradient(90deg,#111 10px,transparent 10px) 0 0/22px 22px,
+    linear-gradient(#111 10px,transparent 10px) 0 0/22px 22px,
+    linear-gradient(135deg,transparent 35%,#111 35% 65%,transparent 65%) 5px 8px/27px 27px;
+  image-rendering:pixelated
+}
+.fake-qr::before,.fake-qr::after{
+  content:"";position:absolute;width:38px;height:38px;border:8px solid #111;background:#fff
+}
+.fake-qr::before{left:16px;top:16px}.fake-qr::after{right:16px;top:16px}
+.qr-nux{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:38px;height:38px;border-radius:12px;background:#5865f2;border:5px solid #fff;color:#fff;
+  display:grid;place-items:center;font-weight:900;font-size:17px
+}
+.qr-title{font-size:20px;line-height:24px;font-weight:800;color:#f2f3f5;margin-bottom:8px}
+.qr-copy{font-size:14px;line-height:18px;color:#b5bac1}
+.qr-copy b{color:#dbdee1}
+.auth-footnote{margin-top:14px;color:#949ba4;font-size:11px;text-align:center}
+.register-card-new{width:min(480px,calc(100vw - 48px))}
+.dob-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.dob-row select{
+  width:100%;height:40px;background:#1e1f22;border:0;color:#b5bac1;border-radius:3px;padding:0 10px
+}
+.check-row{display:flex;gap:10px;align-items:flex-start;color:#b5bac1;font-size:12px;line-height:16px;margin:10px 0}
+.check-row input{margin-top:2px}
+@media(max-width:740px){
+  .brand-top{left:24px;top:22px}.auth-shell{padding:18px}
+  .auth-card.login-wide{width:min(480px,100%);display:block;padding:24px}
+  .qr-panel{display:none}.auth-card{width:min(480px,100%);padding:24px}
+}
+</style>
+
 </head>
 <body>
-
-<section class="auth-shell" id="authShell">
-  <div class="auth-logo"><div class="logo-mark">N</div><span>NuxCord</span></div>
-
-  <div class="auth-card" id="loginCard">
-    <div class="auth-grid">
-      <div class="auth-main">
-        <h1>Welcome back!</h1>
-        <div class="auth-sub">We're so excited to see you again!</div>
-        <form id="loginForm">
-          <div class="field"><label>Email or username <span>*</span></label><input id="loginIdentity" autocomplete="username" required /></div>
-          <div class="field"><label>Password <span>*</span></label><input id="loginPassword" type="password" autocomplete="current-password" required /></div>
-          <button type="button" class="link-btn">Forgot your password?</button>
-          <div class="error" id="loginError"></div>
-          <button class="primary" type="submit">Log In</button>
-          <div class="switch-copy">Need an account? <button type="button" class="link-btn" id="showRegister">Register</button></div>
-        </form>
-      </div>
-      <div class="qr-box">
-        <div class="qr" aria-hidden="true">
-          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-        </div>
-        <div class="qr-title">Log in with QR Code</div>
-        <div class="qr-copy">Scan this with the <strong>NuxCord mobile app</strong> to log in instantly.</div>
-      </div>
-    </div>
-    <div class="demo-note">Demo auth for this single HTML file. Production accounts should use a real backend/database.</div>
-  </div>
-
-  <div class="auth-card register-card hidden" id="registerCard">
-    <div class="auth-main">
-      <h1>Create an account</h1>
-      <div class="auth-sub">Join NuxCord</div>
-      <form id="registerForm">
-        <div class="field"><label>Email <span>*</span></label><input id="regEmail" type="email" autocomplete="email" required /></div>
-        <div class="field"><label>Display name <span>*</span></label><input id="regDisplay" autocomplete="name" required /></div>
-        <div class="field"><label>Username <span>*</span></label><input id="regUsername" autocomplete="username" required /></div>
-        <div class="field"><label>Password <span>*</span></label><input id="regPassword" type="password" autocomplete="new-password" minlength="6" required /></div>
-        <div class="error" id="registerError"></div>
-        <button class="primary" type="submit">Continue</button>
-        <div class="switch-copy"><button type="button" class="link-btn" id="showLogin">Already have an account?</button></div>
-      </form>
-    </div>
-    <div class="demo-note">Your demo account is stored only in this browser.</div>
-  </div>
-</section>
-
-<div class="app hidden" id="app">
-  <aside class="servers">
-    <button class="server-icon active" title="NuxCord">N</button><div class="divider"></div>
-    <button class="server-icon" title="Gaming">G</button><button class="server-icon" title="Friends">F</button><button class="add-server">+</button>
-  </aside>
+<div class="app" id="app">
+  <aside class="rail" id="serverRail"></aside>
 
   <aside class="sidebar" id="sidebar">
-    <div class="server-title"><span>NuxCord</span><span>⌄</span></div>
-    <div class="channel-search"><input type="text" placeholder="Find or start a conversation" /></div>
-    <div class="channels">
-      <div class="category">Information</div><div class="channel"><span class="hash">#</span>welcome</div><div class="channel active"><span class="hash">#</span>general</div><div class="channel"><span class="hash">#</span>announcements</div>
-      <div class="category">Community</div><div class="channel"><span class="hash">#</span>media</div><div class="channel"><span class="hash">#</span>memes</div><div class="channel"><span class="hash">#</span>support</div>
-      <div class="category">Voice channels</div><div class="channel"><span class="hash">🔊</span>General</div><div class="channel"><span class="hash">🔊</span>Gaming</div>
-    </div>
-    <div class="user-bar">
+    <div class="sidebar-head" id="sidebarHead"></div>
+    <div class="searchbox"><input id="sidebarSearch" placeholder="Find or start a conversation"></div>
+    <div class="side-scroll" id="sideScroll"></div>
+    <div class="userbar">
       <div class="avatar online" id="meAvatar">N</div>
-      <div class="user-meta"><div class="user-name" id="meName">NuxCord User</div><div class="user-status">Online</div></div>
-      <div class="user-actions"><button class="icon-btn" title="Mute">🎙</button><button class="icon-btn" title="Settings">⚙</button><button class="icon-btn logout" id="logoutBtn" title="Log out">↪</button></div>
+      <div class="usertext"><b id="meName">User</b><span id="meStatus">Online</span></div>
+      <button class="iconbtn" title="Mute">🎙</button>
+      <button class="iconbtn" id="settingsBtn" title="User Settings">⚙</button>
     </div>
   </aside>
 
-  <main class="chat">
-    <header class="chat-header"><button class="icon-btn mobile-toggle" id="menuButton">☰</button><span class="hash">#</span><span class="chat-title">general</span><span class="chat-topic">Chat with the NuxCord community</span><div class="chat-tools"><button class="icon-btn">🔔</button><button class="icon-btn">📌</button><button class="icon-btn">👥</button></div></header>
-    <section class="messages" id="messages">
-      <div class="welcome"><div class="welcome-icon">#</div><h1>Welcome to #general!</h1><p>This is the start of the #general channel in NuxCord.</p></div>
-      <div class="message"><div class="avatar">N</div><div><div class="message-head"><span class="message-author role-owner">NuxCord</span><span class="message-time">Today</span></div><div class="message-text">Welcome to NuxCord.</div></div></div>
-      <div class="message"><div class="avatar">M</div><div><div class="message-head"><span class="message-author role-mod">Moderator</span><span class="message-time">Today</span></div><div class="message-text">Your account is connected to this browser session.</div></div></div>
-    </section>
-    <div class="composer-wrap"><form class="composer" id="chatForm"><button type="button">＋</button><input id="messageInput" autocomplete="off" placeholder="Message #general"/><button type="button">🎁</button><button type="button">☺</button></form></div>
+  <main class="main">
+    <div class="topbar" id="topbar"></div>
+    <div class="content" id="content"></div>
   </main>
-
-  <aside class="members">
-    <div class="member-group">Online — 3</div>
-    <div class="member"><div class="avatar online">N</div><div class="name role-owner">NuxCord</div></div>
-    <div class="member"><div class="avatar online">M</div><div class="name role-mod">Moderator</div></div>
-    <div class="member"><div class="avatar online" id="memberAvatar">U</div><div class="name" id="memberName">You</div></div>
-  </aside>
 </div>
 
+<div id="modalRoot"></div>
 <script>
-const $=id=>document.getElementById(id);
-const authShell=$('authShell'),app=$('app'),loginCard=$('loginCard'),registerCard=$('registerCard');
-const USERS_KEY='nuxcord_users_v1',SESSION_KEY='nuxcord_session_v1';
-const getUsers=()=>JSON.parse(localStorage.getItem(USERS_KEY)||'[]');
-const setUsers=u=>localStorage.setItem(USERS_KEY,JSON.stringify(u));
-async function hash(v){const data=new TextEncoder().encode(v);const out=await crypto.subtle.digest('SHA-256',data);return [...new Uint8Array(out)].map(b=>b.toString(16).padStart(2,'0')).join('')}
-function initial(n){return (n||'N').trim().charAt(0).toUpperCase()||'N'}
-function showLogin(){registerCard.classList.add('hidden');loginCard.classList.remove('hidden');$('loginError').textContent=''}
-function showRegister(){loginCard.classList.add('hidden');registerCard.classList.remove('hidden');$('registerError').textContent=''}
-$('showRegister').onclick=showRegister;$('showLogin').onclick=showLogin;
-function enterApp(user){authShell.classList.add('hidden');app.classList.remove('hidden');$('meName').textContent=user.display||user.username;$('memberName').textContent=user.display||user.username;$('meAvatar').textContent=initial(user.display||user.username);$('memberAvatar').textContent=initial(user.display||user.username)}
-function currentUser(){const session=localStorage.getItem(SESSION_KEY);if(!session)return null;return getUsers().find(u=>u.username.toLowerCase()===session.toLowerCase())||null}
-$('registerForm').addEventListener('submit',async e=>{e.preventDefault();const email=$('regEmail').value.trim().toLowerCase(),display=$('regDisplay').value.trim(),username=$('regUsername').value.trim(),password=$('regPassword').value;const users=getUsers();if(users.some(u=>u.email===email||u.username.toLowerCase()===username.toLowerCase())){$('registerError').textContent='Email or username is already registered.';return}if(username.length<2){$('registerError').textContent='Username must be at least 2 characters.';return}const user={email,display,username,passwordHash:await hash(password)};users.push(user);setUsers(users);localStorage.setItem(SESSION_KEY,username);enterApp(user)});
-$('loginForm').addEventListener('submit',async e=>{e.preventDefault();const id=$('loginIdentity').value.trim().toLowerCase(),pw=await hash($('loginPassword').value);const user=getUsers().find(u=>u.email===id||u.username.toLowerCase()===id);if(!user||user.passwordHash!==pw){$('loginError').textContent='Login or password is invalid.';return}localStorage.setItem(SESSION_KEY,user.username);enterApp(user)});
-$('logoutBtn').onclick=()=>{localStorage.removeItem(SESSION_KEY);app.classList.add('hidden');authShell.classList.remove('hidden');showLogin();$('loginPassword').value=''};
-const existing=currentUser();if(existing)enterApp(existing);
 
-const form=$('chatForm'),input=$('messageInput'),messages=$('messages');
-form.addEventListener('submit',e=>{e.preventDefault();const text=input.value.trim();if(!text)return;const user=currentUser()||{display:'NuxCord User'};const row=document.createElement('div');row.className='message';row.innerHTML=`<div class="avatar">${initial(user.display||user.username)}</div><div><div class="message-head"><span class="message-author"></span><span class="message-time">Just now</span></div><div class="message-text"></div></div>`;row.querySelector('.message-author').textContent=user.display||user.username;row.querySelector('.message-text').textContent=text;messages.appendChild(row);input.value='';messages.scrollTop=messages.scrollHeight});
-$('menuButton')?.addEventListener('click',()=>$('sidebar').classList.toggle('open'));
+const $=id=>document.getElementById(id);
+const DBKEY='nuxcord_state_v3', SESSION='nuxcord_session_v3';
+const defaultState={users:[],friends:{},friendRequests:{},servers:[],dms:{},messages:{},settings:{},nitro:{}};
+
+function load(){
+  try{return Object.assign({},defaultState,JSON.parse(localStorage.getItem(DBKEY)||'{}'))}
+  catch{return structuredClone(defaultState)}
+}
+let db=load(),view={mode:'home',tab:'friends',serverId:null,channelId:null,dmUser:null,settingsTab:'account'};
+
+function save(){localStorage.setItem(DBKEY,JSON.stringify(db))}
+function uid(p='id'){return p+'_'+Math.random().toString(36).slice(2,9)}
+function current(){
+  const u=localStorage.getItem(SESSION);
+  return db.users.find(x=>x.username.toLowerCase()===(u||'').toLowerCase())||null
+}
+function initial(v){return (v||'N').trim().charAt(0).toUpperCase()||'N'}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+
+if(!current()){
+  location.replace('login.html');
+}
+
+function logout(){
+  localStorage.removeItem(SESSION);
+  location.replace('login.html');
+}
+
+function render(){
+ renderRail();renderSidebar();renderMain();
+}
+function renderRail(){
+ let r=$('serverRail');r.innerHTML='';
+ let home=document.createElement('button');home.className='rail-btn home '+(view.mode==='home'?'active':'');home.textContent='N';home.title='Direct Messages';home.onclick=()=>{view={...view,mode:'home',serverId:null,channelId:null,dmUser:null};render()};r.append(home);
+ r.insertAdjacentHTML('beforeend','<div class="rail-divider"></div>');
+ db.servers.filter(s=>s.members.includes(current().username)).forEach(s=>{
+   let b=document.createElement('button');b.className='rail-btn '+(view.serverId===s.id?'active':'');b.textContent=initial(s.name);b.title=s.name;b.onclick=()=>{view.mode='server';view.serverId=s.id;view.channelId=s.channels[0]?.id||null;render()};r.append(b)
+ });
+ let add=document.createElement('button');add.className='rail-btn add';add.textContent='+';add.title='Add a Server';add.onclick=openServerCreate;r.append(add)
+}
+function renderSidebar(){
+ let head=$('sidebarHead'),list=$('sideScroll');
+ if(view.mode==='home'||view.mode==='settings'||view.mode==='nitro'||view.mode==='profile'){
+   head.innerHTML='<span>NuxCord</span><button class="iconbtn" onclick="openNewDM()">✚</button>';
+   list.innerHTML=`
+     <div class="side-item ${view.mode==='home'&&view.tab==='friends'?'active':''}" onclick="view.mode='home';view.tab='friends';view.dmUser=null;render()"><span class="side-icon">👥</span>Friends</div>
+     <div class="side-item ${view.mode==='nitro'?'active':''}" onclick="view.mode='nitro';render()"><span class="side-icon">♦</span>Nux Nitro</div>
+     <div class="category">Direct Messages <button onclick="openNewDM()">+</button></div>`;
+   let names=Object.keys(db.dms[current().username]||{});
+   names.forEach(name=>{
+     let u=db.users.find(x=>x.username===name); if(!u)return;
+     list.insertAdjacentHTML('beforeend',`<div class="side-item ${view.dmUser===name?'active':''}" onclick="openDM('${name}')"><span class="avatar" style="width:28px;height:28px">${esc(initial(u.display))}</span><span>${esc(u.display)}</span></div>`)
+   });
+ }else{
+   let s=getServer();if(!s)return;
+   head.innerHTML=`<span>${esc(s.name)}</span><button class="iconbtn" onclick="openServerMenu()">⌄</button>`;
+   list.innerHTML='';
+   let cats=[...new Set(s.channels.map(c=>c.category||'TEXT CHANNELS'))];
+   cats.forEach(cat=>{
+     list.insertAdjacentHTML('beforeend',`<div class="category"><span>${esc(cat)}</span><button onclick="openChannelCreate('${s.id}','${esc(cat)}')">+</button></div>`);
+     s.channels.filter(c=>(c.category||'TEXT CHANNELS')===cat).forEach(c=>{
+       list.insertAdjacentHTML('beforeend',`<div class="side-item ${view.channelId===c.id?'active':''}" onclick="view.channelId='${c.id}';renderMain()"><span class="side-icon">${c.type==='voice'?'🔊':'#'}</span>${esc(c.name)}</div>`)
+     })
+   })
+ }
+}
+
+function renderMain(){
+ let top=$('topbar'),content=$('content');
+ if(view.mode==='home'&&!view.dmUser){
+   top.innerHTML=`<b>👥 Friends</b><button class="tab ${view.tab==='friends'?'active':''}" onclick="view.tab='friends';renderMain()">Online</button><button class="tab ${view.tab==='pending'?'active':''}" onclick="view.tab='pending';renderMain()">Pending</button><button class="tab ${view.tab==='all'?'active':''}" onclick="view.tab='all';renderMain()">All</button><button class="tab primary" onclick="openAddFriend()">Add Friend</button><span class="topbar-spacer"></span><button class="iconbtn" onclick="openProfile(current().username)">👤</button>`;
+   renderFriends(content);return;
+ }
+ if(view.mode==='home'&&view.dmUser){renderDM(top,content);return}
+ if(view.mode==='server'){renderServer(top,content);return}
+ if(view.mode==='settings'){renderSettings(top,content);return}
+ if(view.mode==='nitro'){renderNitro(top,content);return}
+ if(view.mode==='profile'){renderProfile(top,content);return}
+}
+function renderFriends(content){
+ let me=current().username, friends=db.friends[me]||[], req=db.friendRequests[me]||[];
+ let arr=view.tab==='pending'?req:view.tab==='all'?friends:friends.filter(n=>{let u=db.users.find(x=>x.username===n);return u?.status==='Online'});
+ content.innerHTML=`<div class="pane"><h2 class="section-title">${view.tab==='pending'?'Pending':view.tab==='all'?'All Friends':'Online'}</h2><div id="friendList"></div></div>`;
+ let box=$('friendList');
+ if(!arr.length)box.innerHTML='<p class="muted">Nothing here yet.</p>';
+ arr.forEach(n=>{let u=db.users.find(x=>x.username===n);if(!u)return;box.insertAdjacentHTML('beforeend',`<div class="friend-row"><div class="avatar online">${esc(initial(u.display))}</div><div class="friend-meta"><b>${esc(u.display)}</b><span>${esc(u.username)} • ${esc(u.status||'Offline')}</span></div>${view.tab==='pending'?`<button class="circle-action" onclick="acceptFriend('${n}')">✓</button>`:`<button class="circle-action" onclick="openDM('${n}')">💬</button><button class="circle-action" onclick="openProfile('${n}')">👤</button>`}</div>`)})
+}
+function openAddFriend(){
+ modal('Add Friend',`<div class="field"><label>Username</label><input id="friendName" placeholder="Enter a NuxCord username"></div><div class="error" id="friendErr"></div>`,
+ `<button class="secondary" onclick="closeModal()">Cancel</button><button class="primary" onclick="sendFriendRequest()">Send Friend Request</button>`)
+}
+function sendFriendRequest(){
+ let me=current().username,n=$('friendName').value.trim(),u=db.users.find(x=>x.username.toLowerCase()===n.toLowerCase());
+ if(!u||u.username===me)return $('friendErr').textContent='That user could not be found.';
+ db.friendRequests[u.username]=db.friendRequests[u.username]||[];if(!db.friendRequests[u.username].includes(me))db.friendRequests[u.username].push(me);
+ save();closeModal();alert('Friend request sent.')
+}
+function acceptFriend(n){
+ let me=current().username;db.friends[me]=db.friends[me]||[];db.friends[n]=db.friends[n]||[];
+ if(!db.friends[me].includes(n))db.friends[me].push(n);if(!db.friends[n].includes(me))db.friends[n].push(me);
+ db.friendRequests[me]=(db.friendRequests[me]||[]).filter(x=>x!==n);save();renderMain()
+}
+function openNewDM(){
+ let others=db.users.filter(u=>u.username!==current().username);
+ modal('New Message',`<div class="field"><label>Choose a user</label><select id="newDmUser">${others.map(u=>`<option value="${esc(u.username)}">${esc(u.display)} (@${esc(u.username)})</option>`).join('')}</select></div>`,
+ `<button class="secondary" onclick="closeModal()">Cancel</button><button class="primary" onclick="startNewDM()">Create DM</button>`)
+}
+function startNewDM(){let n=$('newDmUser').value;closeModal();openDM(n)}
+function openDM(name){
+ let me=current().username;db.dms[me]=db.dms[me]||{};db.dms[me][name]=true;db.dms[name]=db.dms[name]||{};db.dms[name][me]=true;save();
+ view.mode='home';view.dmUser=name;render()
+}
+function dmKey(a,b){return 'dm:'+ [a,b].sort().join(':')}
+function renderDM(top,content){
+ let other=db.users.find(u=>u.username===view.dmUser);if(!other){view.dmUser=null;render();return}
+ top.innerHTML=`<div class="avatar" style="width:30px;height:30px">${esc(initial(other.display))}</div><b>${esc(other.display)}</b><span class="topbar-spacer"></span><button class="iconbtn">☎</button><button class="iconbtn">📹</button><button class="iconbtn" onclick="openProfile('${other.username}')">👤</button>`;
+ let key=dmKey(current().username,other.username),msgs=db.messages[key]||[];
+ content.innerHTML=`<div class="chat-area"><div class="messages" id="messages"><div class="welcome"><div class="avatar" style="width:76px;height:76px;font-size:28px">${esc(initial(other.display))}</div><h1>${esc(other.display)}</h1><p class="muted">This is the beginning of your direct message history with @${esc(other.username)}.</p></div>${msgs.map(m=>messageHTML(m)).join('')}</div><div class="composer-wrap"><form class="composer" onsubmit="sendDM(event,'${other.username}')"><button type="button" class="iconbtn">＋</button><input id="dmInput" autocomplete="off" placeholder="Message @${esc(other.username)}"><button type="button" class="iconbtn">☺</button></form></div></div>`;
+}
+function sendDM(e,to){e.preventDefault();let i=$('dmInput'),t=i.value.trim();if(!t)return;let key=dmKey(current().username,to);db.messages[key]=db.messages[key]||[];db.messages[key].push({author:current().username,text:t,time:Date.now()});save();i.value='';renderMain()}
+
+function getServer(){return db.servers.find(s=>s.id===view.serverId)}
+function openServerCreate(){
+ modal('Create Your Server',`<div class="field"><label>Server Name</label><input id="serverName" placeholder="${esc(current()?.display||'My')}’s server"></div><div class="field"><label>Icon initials</label><input id="serverIcon" maxlength="3" placeholder="NC"></div>`,
+ `<button class="secondary" onclick="closeModal()">Cancel</button><button class="primary" onclick="createServer()">Create</button>`)
+}
+function createServer(){
+ let name=$('serverName').value.trim()||`${current().display}'s server`,id=uid('srv');
+ let s={id,name,owner:current().username,members:[current().username,'nuxbot'],roles:[{id:uid('role'),name:'Owner',color:'#f0b232',permissions:['administrator']},{id:uid('role'),name:'Member',color:'#b5bac1',permissions:['view','send']}],channels:[{id:uid('ch'),name:'general',type:'text',category:'TEXT CHANNELS'},{id:uid('ch'),name:'General',type:'voice',category:'VOICE CHANNELS'}]};
+ db.servers.push(s);save();closeModal();view.mode='server';view.serverId=id;view.channelId=s.channels[0].id;render()
+}
+function openChannelCreate(id,cat){
+ modal('Create Channel',`<div class="field"><label>Channel Type</label><select id="chType"><option value="text">Text</option><option value="voice">Voice</option></select></div><div class="field"><label>Channel Name</label><input id="chName" placeholder="new-channel"></div><input type="hidden" id="chCat" value="${esc(cat)}">`,
+ `<button class="secondary" onclick="closeModal()">Cancel</button><button class="primary" onclick="createChannel('${id}')">Create Channel</button>`)
+}
+function createChannel(id){let s=db.servers.find(x=>x.id===id),name=$('chName').value.trim().toLowerCase().replace(/\s+/g,'-');if(!name)return;s.channels.push({id:uid('ch'),name,type:$('chType').value,category:$('chCat').value});save();closeModal();render()}
+function openServerMenu(){
+ let s=getServer(),owner=s.owner===current().username;
+ modal(s.name,`<div class="side-item" onclick="closeModal();openInvite()">➕ Invite People</div>${owner?`<div class="side-item" onclick="closeModal();openServerSettings()">⚙ Server Settings</div><div class="side-item" onclick="closeModal();openChannelCreate('${s.id}','TEXT CHANNELS')"># Create Channel</div><div class="side-item" onclick="closeModal();openRoleCreate()">🛡 Create Role</div>`:''}`,
+ `<button class="secondary" onclick="closeModal()">Close</button>`)
+}
+function openInvite(){
+ let s=getServer(),others=db.users.filter(u=>!s.members.includes(u.username));
+ modal('Invite People',others.length?others.map(u=>`<div class="friend-row"><div class="avatar">${initial(u.display)}</div><div class="grow">${esc(u.display)}<div class="small muted">@${esc(u.username)}</div></div><button class="primary" onclick="inviteUser('${u.username}')">Invite</button></div>`).join(''):'<p class="muted">Everyone is already in this server.</p>',`<button class="secondary" onclick="closeModal()">Done</button>`)
+}
+function inviteUser(n){let s=getServer();if(!s.members.includes(n))s.members.push(n);save();openInvite();render()}
+function openServerSettings(){
+ let s=getServer();
+ modal('Server Settings',`<div class="field"><label>Server Name</label><input id="srvEditName" value="${esc(s.name)}"></div><h3>Roles</h3>${s.roles.map(r=>`<div class="role-pill"><span class="dot" style="background:${r.color}"></span>${esc(r.name)}</div>`).join('')}<p class="muted small">Role management is stored in this browser demo.</p>`,
+ `<button class="secondary" onclick="closeModal()">Cancel</button><button class="primary" onclick="saveServerSettings()">Save Changes</button>`)
+}
+function saveServerSettings(){let s=getServer();s.name=$('srvEditName').value.trim()||s.name;save();closeModal();render()}
+function openRoleCreate(){
+ modal('Create Role',`<div class="field"><label>Role Name</label><input id="roleName" placeholder="Moderator"></div><div class="field"><label>Color</label><input id="roleColor" type="color" value="#23a559"></div><div class="field"><label>Permissions</label><select id="rolePerm"><option value="view,send">View + Send</option><option value="manage_messages,view,send">Manage Messages</option><option value="administrator">Administrator</option></select></div>`,
+ `<button class="secondary" onclick="closeModal()">Cancel</button><button class="primary" onclick="createRole()">Create Role</button>`)
+}
+function createRole(){let s=getServer(),name=$('roleName').value.trim();if(!name)return;s.roles.push({id:uid('role'),name,color:$('roleColor').value,permissions:$('rolePerm').value.split(',')});save();closeModal();render()}
+function channelKey(s,c){return `server:${s.id}:${c.id}`}
+function renderServer(top,content){
+ let s=getServer();if(!s)return;
+ let c=s.channels.find(x=>x.id===view.channelId)||s.channels[0];view.channelId=c?.id||null;
+ top.innerHTML=`<button class="iconbtn" onclick="$('sidebar').classList.toggle('open')">☰</button><b>${c?.type==='voice'?'🔊':'#'} ${esc(c?.name||'No channel')}</b><span class="topbar-spacer"></span><button class="iconbtn">🔔</button><button class="iconbtn">📌</button><button class="iconbtn">👥</button>`;
+ if(!c){content.innerHTML='<div class="pane">No channels yet.</div>';return}
+ let key=channelKey(s,c),msgs=db.messages[key]||[];
+ content.innerHTML=`<div class="chat-layout"><div class="chat-area"><div class="messages" id="messages"><div class="welcome"><div class="welcome-badge">${c.type==='voice'?'🔊':'#'}</div><h1>${esc(c.name)}</h1><p class="muted">This is the start of the ${esc(c.name)} channel.</p></div>${msgs.map(m=>messageHTML(m)).join('')}</div>${c.type==='text'?`<div class="composer-wrap"><form class="composer" onsubmit="sendChannel(event,'${s.id}','${c.id}')"><button type="button" class="iconbtn">＋</button><input id="channelInput" autocomplete="off" placeholder="Message #${esc(c.name)}"><button type="button" class="iconbtn">🎁</button><button type="button" class="iconbtn">☺</button></form></div>`:`<div class="composer-wrap"><button class="primary full">Join Voice</button></div>`}</div><aside class="members"><div class="category">Members — ${s.members.length}</div>${s.members.map(n=>{let u=db.users.find(x=>x.username===n);return u?`<div class="member" onclick="openProfile('${u.username}')"><div class="avatar online">${initial(u.display)}</div><b>${esc(u.display)}</b></div>`:''}).join('')}</aside></div>`;
+}
+function sendChannel(e,sid,cid){e.preventDefault();let i=$('channelInput'),t=i.value.trim();if(!t)return;let s=db.servers.find(x=>x.id===sid),c=s.channels.find(x=>x.id===cid),key=channelKey(s,c);db.messages[key]=db.messages[key]||[];db.messages[key].push({author:current().username,text:t,time:Date.now()});save();i.value='';renderMain()}
+function messageHTML(m){let u=db.users.find(x=>x.username===m.author)||{display:m.author,username:m.author};return `<div class="message"><div class="avatar">${esc(initial(u.display))}</div><div><div class="msg-head"><b>${esc(u.display)}</b><span class="time">${new Date(m.time).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</span></div><div class="msg-text">${esc(m.text)}</div></div></div>`}
+
+/* PROFILE */
+function openProfile(n){view.mode='profile';view.profileUser=n;render()}
+function renderProfile(top,content){
+ let u=db.users.find(x=>x.username===view.profileUser)||current(),friend=(db.friends[current().username]||[]).includes(u.username);
+ top.innerHTML=`<button class="iconbtn" onclick="view.mode='home';view.dmUser=null;render()">←</button><b>User Profile</b><span class="topbar-spacer"></span>`;
+ content.innerHTML=`<div class="pane"><div class="profile-card" style="max-width:620px"><div class="profile-banner"></div><div class="profile-body"><div class="profile-big-avatar">${esc(initial(u.display))}</div><div class="profile-name">${esc(u.display)}</div><div class="profile-user">@${esc(u.username)}</div><hr style="border:0;border-top:1px solid var(--line);margin:18px 0"><b>About Me</b><p class="muted">${esc(u.bio||'No bio yet.')}</p>${u.username!==current().username?`<div class="row"><button class="primary" onclick="openDM('${u.username}')">Message</button>${friend?'':`<button class="secondary" onclick="quickFriend('${u.username}')">Add Friend</button>`}</div>`:`<button class="primary" onclick="view.mode='settings';view.settingsTab='profiles';render()">Edit Profile</button>`}</div></div></div>`;
+}
+function quickFriend(n){let me=current().username;db.friendRequests[n]=db.friendRequests[n]||[];if(!db.friendRequests[n].includes(me))db.friendRequests[n].push(me);save();alert('Friend request sent.')}
+
+/* SETTINGS */
+$('settingsBtn').onclick=()=>{view.mode='settings';view.settingsTab='account';render()}
+function renderSettings(top,content){
+ top.innerHTML=`<b>User Settings</b><span class="topbar-spacer"></span><button class="iconbtn" onclick="view.mode='home';render()">✕</button>`;
+ let nav=['account','profiles','privacy','notifications','appearance'];
+ content.innerHTML=`<div class="settings-shell"><aside class="settings-nav">${nav.map(n=>`<button class="${view.settingsTab===n?'active':''}" onclick="view.settingsTab='${n}';renderMain()">${n[0].toUpperCase()+n.slice(1)}</button>`).join('')}<button onclick="logout()" style="color:#fa777c">Log Out</button></aside><section class="settings-page" id="settingsPage"></section></div>`;
+ let p=$('settingsPage'),me=current(),st=db.settings[me.username]||{};
+ if(view.settingsTab==='account')p.innerHTML=`<h2>My Account</h2><div class="profile-card"><div class="profile-banner"></div><div class="profile-body"><div class="profile-big-avatar">${initial(me.display)}</div><div class="setting-row"><div><b>Display Name</b><div class="muted">${esc(me.display)}</div></div><button class="secondary" onclick="editAccount()">Edit</button></div><div class="setting-row"><div><b>Username</b><div class="muted">@${esc(me.username)}</div></div></div><div class="setting-row"><div><b>Email</b><div class="muted">${esc(me.email)}</div></div></div></div></div>`;
+ if(view.settingsTab==='profiles')p.innerHTML=`<h2>Profiles</h2><div class="field"><label>Display Name</label><input id="profileDisplay" value="${esc(me.display)}"></div><div class="field"><label>About Me</label><textarea id="profileBio" rows="5">${esc(me.bio||'')}</textarea></div><button class="primary" onclick="saveProfile()">Save Changes</button>`;
+ if(view.settingsTab==='privacy')p.innerHTML=`<h2>Privacy & Safety</h2>${settingToggle('Allow direct messages from server members','dmServer',st.dmServer!==false)}${settingToggle('Allow friend requests','friendReq',st.friendReq!==false)}${settingToggle('Filter spam messages','spam',st.spam!==false)}`;
+ if(view.settingsTab==='notifications')p.innerHTML=`<h2>Notifications</h2>${settingToggle('Desktop Notifications','desktopNotif',!!st.desktopNotif)}${settingToggle('Sounds','sounds',st.sounds!==false)}`;
+ if(view.settingsTab==='appearance')p.innerHTML=`<h2>Appearance</h2>${settingToggle('Compact message display','compact',!!st.compact)}<div class="card" style="margin-top:16px"><h3>Theme</h3><p>This prototype currently uses the NuxCord dark theme.</p></div>`;
+}
+function settingToggle(label,key,on){return `<div class="setting-row"><div><b>${esc(label)}</b></div><button class="toggle ${on?'on':''}" onclick="toggleSetting('${key}',this)"><span></span></button></div>`}
+function toggleSetting(k,b){let me=current().username;db.settings[me]=db.settings[me]||{};db.settings[me][k]=!db.settings[me][k];save();b.classList.toggle('on')}
+function editAccount(){modal('Edit Account',`<div class="field"><label>Display Name</label><input id="editDisplay" value="${esc(current().display)}"></div>`,`<button class="secondary" onclick="closeModal()">Cancel</button><button class="primary" onclick="saveAccountEdit()">Save</button>`)}
+function saveAccountEdit(){let me=current(),v=$('editDisplay').value.trim();if(v)me.display=v;save();closeModal();$('meName').textContent=me.display;$('meAvatar').textContent=initial(me.display);renderMain()}
+function saveProfile(){let me=current();me.display=$('profileDisplay').value.trim()||me.display;me.bio=$('profileBio').value.trim();save();$('meName').textContent=me.display;$('meAvatar').textContent=initial(me.display);alert('Profile saved.')}
+
+/* NITRO */
+function renderNitro(top,content){
+ top.innerHTML=`<b>♦ Nux Nitro</b><span class="topbar-spacer"></span>`;
+ let active=!!db.nitro[current().username];
+ content.innerHTML=`<div class="pane"><div class="nitro-hero"><h1>Nux Nitro</h1><p>Make NuxCord more yours with bigger uploads, profile customisation and extra perks.</p><div class="price">£9.99 <span class="small">/ month</span></div><button class="primary" style="margin-top:16px;background:white;color:#111" onclick="toggleNitro()">${active?'Manage Nitro':'Get Nitro'}</button></div><div class="nitro-grid"><div class="nitro-feature"><h3>HD Streaming</h3><p>Higher quality streaming and screen share.</p></div><div class="nitro-feature"><h3>Custom Profiles</h3><p>More ways to personalise your NuxCord profile.</p></div><div class="nitro-feature"><h3>Bigger Uploads</h3><p>Unlock larger file upload limits.</p></div><div class="nitro-feature"><h3>Custom Emoji</h3><p>Use your favourite emoji across servers.</p></div></div><p class="muted small">Demo only — no payment is processed in this HTML prototype.</p></div>`;
+}
+function toggleNitro(){db.nitro[current().username]=!db.nitro[current().username];save();renderMain()}
+
+/* MODAL */
+function modal(title,body,actions=''){ $('modalRoot').innerHTML=`<div class="modal-backdrop" onclick="if(event.target===this)closeModal()"><div class="modal"><div class="modal-head"><h2>${esc(title)}</h2></div><div class="modal-body">${body}</div><div class="modal-actions">${actions}</div></div></div>` }
+function closeModal(){$('modalRoot').innerHTML=''}
+
+$('sidebarSearch').oninput=e=>{
+ let q=e.target.value.toLowerCase();document.querySelectorAll('#sideScroll .side-item').forEach(x=>x.style.display=x.textContent.toLowerCase().includes(q)?'flex':'none')
+};
+
+
+
+const me=current();
+if(me){
+  $('meName').textContent=me.display||me.username;
+  $('meAvatar').textContent=initial(me.display||me.username);
+  render();
+}
+
 </script>
 </body>
 </html>
