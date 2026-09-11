@@ -173,6 +173,77 @@ linear-gradient(135deg,#202225,#111214);padding:24px}
 }
 </style>
 
+
+<style>
+/* NuxCord desktop polish */
+body{font-family:"gg sans","Noto Sans","Helvetica Neue",Helvetica,Arial,sans-serif}
+.userbar{cursor:pointer}.userbar:hover{background:#292b2f}
+.userbar .iconbtn{cursor:pointer}
+.avatar{overflow:hidden;background:#5865f2;background-size:cover!important;background-position:center!important}
+.avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.profile-popout-wrap{display:flex;justify-content:center;padding:32px 18px}
+.discord-profile{
+  width:340px;background:#111214;border-radius:8px;overflow:hidden;
+  box-shadow:0 18px 45px rgba(0,0,0,.45);position:relative
+}
+.discord-banner{height:105px;background:#5865f2;position:relative}
+.discord-profile-main{padding:0 16px 16px;position:relative}
+.discord-avatar-wrap{width:92px;height:92px;margin-top:-46px;position:relative;border-radius:50%;border:7px solid #111214}
+.discord-avatar{
+  width:100%;height:100%;border-radius:50%;background:#5865f2 center/cover no-repeat;
+  display:grid;place-items:center;font-size:30px;font-weight:800;overflow:hidden;cursor:pointer
+}
+.discord-avatar-edit{
+  position:absolute;inset:0;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  opacity:0;background:rgba(0,0,0,.62);font-size:12px;font-weight:800;text-transform:uppercase;
+  transition:.12s;cursor:pointer;text-align:center;padding:8px
+}
+.discord-avatar-wrap.own:hover .discord-avatar-edit{opacity:1}
+.status-dot{
+  position:absolute;right:1px;bottom:1px;width:22px;height:22px;border-radius:50%;
+  background:#23a559;border:5px solid #111214
+}
+.profile-actions{position:absolute;right:16px;top:12px;display:flex;gap:8px}
+.profile-actions button{height:32px}
+.profile-name-block{margin-top:12px}.profile-display{font-size:20px;font-weight:800;line-height:24px}
+.profile-handle{font-size:14px;color:#dbdee1;margin-top:1px}
+.profile-card-inner{margin-top:14px;background:#232428;border-radius:8px;padding:12px}
+.profile-section{padding:8px 0}.profile-section+.profile-section{border-top:1px solid #3f4147}
+.profile-label{font-size:12px;font-weight:800;text-transform:uppercase;margin-bottom:6px;color:#f2f3f5}
+.profile-about{font-size:14px;line-height:18px;color:#dbdee1;white-space:pre-wrap}
+.profile-note{width:100%;border:0;border-bottom:1px solid transparent;background:transparent;color:#dbdee1;padding:5px 0;outline:0}
+.profile-note:focus{border-bottom-color:#b5bac1}
+.profile-edit-hint{font-size:11px;color:#b5bac1;margin-top:8px}
+.settings-page{max-width:740px}
+.settings-heading{font-size:20px;font-weight:800;margin:0 0 20px}
+.account-panel{background:#1e1f22;border-radius:8px;overflow:hidden}
+.account-banner{height:100px;background:#5865f2}
+.account-info{padding:0 16px 16px;position:relative}
+.account-avatar{width:86px;height:86px;border:6px solid #1e1f22;border-radius:50%;margin-top:-43px;background:#5865f2 center/cover no-repeat;display:grid;place-items:center;font-size:28px;font-weight:800}
+.account-name{font-size:20px;font-weight:800;margin:10px 0 16px}
+.account-detail{background:#2b2d31;border-radius:8px;padding:16px;margin-top:12px}
+.account-field{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:9px 0}
+.account-field+.account-field{border-top:1px solid #3f4147}
+.account-field small{display:block;color:#b5bac1;text-transform:uppercase;font-weight:800;font-size:11px;margin-bottom:3px}
+.profile-editor-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px;align-items:start}
+.profile-editor-preview{position:sticky;top:20px}
+.avatar-upload-row{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.avatar-upload-preview{width:80px;height:80px;border-radius:50%;background:#5865f2 center/cover no-repeat;display:grid;place-items:center;font-size:26px;font-weight:800;overflow:hidden}
+.nitro-lock{border:1px solid #4e5058;border-radius:8px;padding:16px;margin-top:18px}
+.nitro-lock.unlocked{border-color:#5865f2}
+.color-grid{display:grid;grid-template-columns:repeat(6,34px);gap:8px;margin-top:10px}
+.color-swatch{width:34px;height:34px;border-radius:50%;border:3px solid transparent;cursor:pointer}
+.color-swatch.active{border-color:white}
+.nitro-badge{display:inline-flex;align-items:center;gap:6px;border-radius:4px;background:linear-gradient(90deg,#5865f2,#eb459e);padding:3px 7px;font-size:11px;font-weight:800;margin-left:7px}
+.nitro-page-card{max-width:880px;margin:0 auto}
+.nitro-top{background:linear-gradient(135deg,#5865f2,#9b59ff 58%,#eb459e);border-radius:16px;padding:34px;overflow:hidden;position:relative}
+.nitro-top:after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.09);right:-80px;top:-100px}
+.nitro-top h1{font-size:36px;margin:0 0 10px}.nitro-top p{max-width:520px;line-height:1.55}
+.nitro-perks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}
+.nitro-perk{background:#2b2d31;border-radius:10px;padding:18px}.nitro-perk h3{margin:0 0 6px}
+@media(max-width:800px){.profile-editor-grid{grid-template-columns:1fr}.profile-editor-preview{position:static}.nitro-perks{grid-template-columns:1fr}}
+</style>
+
 </head>
 <body>
 <div class="app" id="app">
@@ -182,11 +253,11 @@ linear-gradient(135deg,#202225,#111214);padding:24px}
     <div class="sidebar-head" id="sidebarHead"></div>
     <div class="searchbox"><input id="sidebarSearch" placeholder="Find or start a conversation"></div>
     <div class="side-scroll" id="sideScroll"></div>
-    <div class="userbar">
+    <div class="userbar" id="userBar" title="View profile">
       <div class="avatar online" id="meAvatar">N</div>
       <div class="usertext"><b id="meName">User</b><span id="meStatus">Online</span></div>
-      <button class="iconbtn" title="Mute">🎙</button>
-      <button class="iconbtn" id="settingsBtn" title="User Settings">⚙</button>
+      <button class="iconbtn" title="Mute" onclick="event.stopPropagation()">🎙</button>
+      <button class="iconbtn" id="settingsBtn" title="User Settings" onclick="event.stopPropagation()">⚙</button>
     </div>
   </aside>
 
@@ -217,6 +288,23 @@ function current(){
 }
 function initial(v){return (v||'N').trim().charAt(0).toUpperCase()||'N'}
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+
+
+function userByName(name){return db.users.find(u=>u.username===name)}
+function avatarStyle(u){return u&&u.avatar?`background-image:url('${u.avatar}')`:""}
+function avatarInner(u){return u&&u.avatar?'':esc(initial(u?.display||u?.username))}
+function avatarDiv(u,classes='avatar',extra=''){
+  return `<div class="${classes}" style="${avatarStyle(u)};${extra}">${avatarInner(u)}</div>`
+}
+function setAvatarElement(el,u){
+  if(!el||!u)return;
+  if(u.avatar){el.textContent='';el.style.backgroundImage=`url("${u.avatar}")`}
+  else{el.style.backgroundImage='';el.textContent=initial(u.display||u.username)}
+}
+function profileColor(u){
+  const active=!!db.nitro[u?.username];
+  return active && u?.profileColor ? u.profileColor : '#5865f2'
+}
 
 if(!current()){
   location.replace('login.html');
@@ -284,7 +372,7 @@ function renderFriends(content){
  content.innerHTML=`<div class="pane"><h2 class="section-title">${view.tab==='pending'?'Pending':view.tab==='all'?'All Friends':'Online'}</h2><div id="friendList"></div></div>`;
  let box=$('friendList');
  if(!arr.length)box.innerHTML='<p class="muted">Nothing here yet.</p>';
- arr.forEach(n=>{let u=db.users.find(x=>x.username===n);if(!u)return;box.insertAdjacentHTML('beforeend',`<div class="friend-row"><div class="avatar online">${esc(initial(u.display))}</div><div class="friend-meta"><b>${esc(u.display)}</b><span>${esc(u.username)} • ${esc(u.status||'Offline')}</span></div>${view.tab==='pending'?`<button class="circle-action" onclick="acceptFriend('${n}')">✓</button>`:`<button class="circle-action" onclick="openDM('${n}')">💬</button><button class="circle-action" onclick="openProfile('${n}')">👤</button>`}</div>`)})
+ arr.forEach(n=>{let u=db.users.find(x=>x.username===n);if(!u)return;box.insertAdjacentHTML('beforeend',`<div class="friend-row">${avatarDiv(u,'avatar online')}<div class="friend-meta"><b>${esc(u.display)}</b><span>${esc(u.username)} • ${esc(u.status||'Offline')}</span></div>${view.tab==='pending'?`<button class="circle-action" onclick="acceptFriend('${n}')">✓</button>`:`<button class="circle-action" onclick="openDM('${n}')">💬</button><button class="circle-action" onclick="openProfile('${n}')">👤</button>`}</div>`)})
 }
 function openAddFriend(){
  modal('Add Friend',`<div class="field"><label>Username</label><input id="friendName" placeholder="Enter a NuxCord username"></div><div class="error" id="friendErr"></div>`,
@@ -314,7 +402,7 @@ function openDM(name){
 function dmKey(a,b){return 'dm:'+ [a,b].sort().join(':')}
 function renderDM(top,content){
  let other=db.users.find(u=>u.username===view.dmUser);if(!other){view.dmUser=null;render();return}
- top.innerHTML=`<div class="avatar" style="width:30px;height:30px">${esc(initial(other.display))}</div><b>${esc(other.display)}</b><span class="topbar-spacer"></span><button class="iconbtn">☎</button><button class="iconbtn">📹</button><button class="iconbtn" onclick="openProfile('${other.username}')">👤</button>`;
+ top.innerHTML=`${avatarDiv(other,'avatar','width:30px;height:30px')}<b>${esc(other.display)}</b><span class="topbar-spacer"></span><button class="iconbtn">☎</button><button class="iconbtn">📹</button><button class="iconbtn" onclick="openProfile('${other.username}')">👤</button>`;
  let key=dmKey(current().username,other.username),msgs=db.messages[key]||[];
  content.innerHTML=`<div class="chat-area"><div class="messages" id="messages"><div class="welcome"><div class="avatar" style="width:76px;height:76px;font-size:28px">${esc(initial(other.display))}</div><h1>${esc(other.display)}</h1><p class="muted">This is the beginning of your direct message history with @${esc(other.username)}.</p></div>${msgs.map(m=>messageHTML(m)).join('')}</div><div class="composer-wrap"><form class="composer" onsubmit="sendDM(event,'${other.username}')"><button type="button" class="iconbtn">＋</button><input id="dmInput" autocomplete="off" placeholder="Message @${esc(other.username)}"><button type="button" class="iconbtn">☺</button></form></div></div>`;
 }
@@ -363,44 +451,87 @@ function renderServer(top,content){
  top.innerHTML=`<button class="iconbtn" onclick="$('sidebar').classList.toggle('open')">☰</button><b>${c?.type==='voice'?'🔊':'#'} ${esc(c?.name||'No channel')}</b><span class="topbar-spacer"></span><button class="iconbtn">🔔</button><button class="iconbtn">📌</button><button class="iconbtn">👥</button>`;
  if(!c){content.innerHTML='<div class="pane">No channels yet.</div>';return}
  let key=channelKey(s,c),msgs=db.messages[key]||[];
- content.innerHTML=`<div class="chat-layout"><div class="chat-area"><div class="messages" id="messages"><div class="welcome"><div class="welcome-badge">${c.type==='voice'?'🔊':'#'}</div><h1>${esc(c.name)}</h1><p class="muted">This is the start of the ${esc(c.name)} channel.</p></div>${msgs.map(m=>messageHTML(m)).join('')}</div>${c.type==='text'?`<div class="composer-wrap"><form class="composer" onsubmit="sendChannel(event,'${s.id}','${c.id}')"><button type="button" class="iconbtn">＋</button><input id="channelInput" autocomplete="off" placeholder="Message #${esc(c.name)}"><button type="button" class="iconbtn">🎁</button><button type="button" class="iconbtn">☺</button></form></div>`:`<div class="composer-wrap"><button class="primary full">Join Voice</button></div>`}</div><aside class="members"><div class="category">Members — ${s.members.length}</div>${s.members.map(n=>{let u=db.users.find(x=>x.username===n);return u?`<div class="member" onclick="openProfile('${u.username}')"><div class="avatar online">${initial(u.display)}</div><b>${esc(u.display)}</b></div>`:''}).join('')}</aside></div>`;
+ content.innerHTML=`<div class="chat-layout"><div class="chat-area"><div class="messages" id="messages"><div class="welcome"><div class="welcome-badge">${c.type==='voice'?'🔊':'#'}</div><h1>${esc(c.name)}</h1><p class="muted">This is the start of the ${esc(c.name)} channel.</p></div>${msgs.map(m=>messageHTML(m)).join('')}</div>${c.type==='text'?`<div class="composer-wrap"><form class="composer" onsubmit="sendChannel(event,'${s.id}','${c.id}')"><button type="button" class="iconbtn">＋</button><input id="channelInput" autocomplete="off" placeholder="Message #${esc(c.name)}"><button type="button" class="iconbtn">🎁</button><button type="button" class="iconbtn">☺</button></form></div>`:`<div class="composer-wrap"><button class="primary full">Join Voice</button></div>`}</div><aside class="members"><div class="category">Members — ${s.members.length}</div>${s.members.map(n=>{let u=db.users.find(x=>x.username===n);return u?`<div class="member" onclick="openProfile('${u.username}')">${avatarDiv(u,'avatar online')}<b>${esc(u.display)}</b></div>`:''}).join('')}</aside></div>`;
 }
 function sendChannel(e,sid,cid){e.preventDefault();let i=$('channelInput'),t=i.value.trim();if(!t)return;let s=db.servers.find(x=>x.id===sid),c=s.channels.find(x=>x.id===cid),key=channelKey(s,c);db.messages[key]=db.messages[key]||[];db.messages[key].push({author:current().username,text:t,time:Date.now()});save();i.value='';renderMain()}
-function messageHTML(m){let u=db.users.find(x=>x.username===m.author)||{display:m.author,username:m.author};return `<div class="message"><div class="avatar">${esc(initial(u.display))}</div><div><div class="msg-head"><b>${esc(u.display)}</b><span class="time">${new Date(m.time).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</span></div><div class="msg-text">${esc(m.text)}</div></div></div>`}
-
-/* PROFILE */
-function openProfile(n){view.mode='profile';view.profileUser=n;render()}
-function renderProfile(top,content){
- let u=db.users.find(x=>x.username===view.profileUser)||current(),friend=(db.friends[current().username]||[]).includes(u.username);
- top.innerHTML=`<button class="iconbtn" onclick="view.mode='home';view.dmUser=null;render()">←</button><b>User Profile</b><span class="topbar-spacer"></span>`;
- content.innerHTML=`<div class="pane"><div class="profile-card" style="max-width:620px"><div class="profile-banner"></div><div class="profile-body"><div class="profile-big-avatar">${esc(initial(u.display))}</div><div class="profile-name">${esc(u.display)}</div><div class="profile-user">@${esc(u.username)}</div><hr style="border:0;border-top:1px solid var(--line);margin:18px 0"><b>About Me</b><p class="muted">${esc(u.bio||'No bio yet.')}</p>${u.username!==current().username?`<div class="row"><button class="primary" onclick="openDM('${u.username}')">Message</button>${friend?'':`<button class="secondary" onclick="quickFriend('${u.username}')">Add Friend</button>`}</div>`:`<button class="primary" onclick="view.mode='settings';view.settingsTab='profiles';render()">Edit Profile</button>`}</div></div></div>`;
+function messageHTML(m){
+ let u=db.users.find(x=>x.username===m.author)||{display:m.author,username:m.author};
+ return `<div class="message">${avatarDiv(u,'avatar')}<div><div class="msg-head"><b onclick="openProfile('${esc(u.username)}')" style="cursor:pointer">${esc(u.display)}</b><span class="time">${new Date(m.time).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</span></div><div class="msg-text">${esc(m.text)}</div></div></div>`
 }
 function quickFriend(n){let me=current().username;db.friendRequests[n]=db.friendRequests[n]||[];if(!db.friendRequests[n].includes(me))db.friendRequests[n].push(me);save();alert('Friend request sent.')}
 
 /* SETTINGS */
-$('settingsBtn').onclick=()=>{view.mode='settings';view.settingsTab='account';render()}
+$('settingsBtn').onclick=e=>{e?.stopPropagation?.();view.mode='settings';view.settingsTab='account';render()}
+$('userBar').onclick=()=>openProfile(current().username);
 function renderSettings(top,content){
  top.innerHTML=`<b>User Settings</b><span class="topbar-spacer"></span><button class="iconbtn" onclick="view.mode='home';render()">✕</button>`;
  let nav=['account','profiles','privacy','notifications','appearance'];
  content.innerHTML=`<div class="settings-shell"><aside class="settings-nav">${nav.map(n=>`<button class="${view.settingsTab===n?'active':''}" onclick="view.settingsTab='${n}';renderMain()">${n[0].toUpperCase()+n.slice(1)}</button>`).join('')}<button onclick="logout()" style="color:#fa777c">Log Out</button></aside><section class="settings-page" id="settingsPage"></section></div>`;
- let p=$('settingsPage'),me=current(),st=db.settings[me.username]||{};
- if(view.settingsTab==='account')p.innerHTML=`<h2>My Account</h2><div class="profile-card"><div class="profile-banner"></div><div class="profile-body"><div class="profile-big-avatar">${initial(me.display)}</div><div class="setting-row"><div><b>Display Name</b><div class="muted">${esc(me.display)}</div></div><button class="secondary" onclick="editAccount()">Edit</button></div><div class="setting-row"><div><b>Username</b><div class="muted">@${esc(me.username)}</div></div></div><div class="setting-row"><div><b>Email</b><div class="muted">${esc(me.email)}</div></div></div></div></div>`;
- if(view.settingsTab==='profiles')p.innerHTML=`<h2>Profiles</h2><div class="field"><label>Display Name</label><input id="profileDisplay" value="${esc(me.display)}"></div><div class="field"><label>About Me</label><textarea id="profileBio" rows="5">${esc(me.bio||'')}</textarea></div><button class="primary" onclick="saveProfile()">Save Changes</button>`;
- if(view.settingsTab==='privacy')p.innerHTML=`<h2>Privacy & Safety</h2>${settingToggle('Allow direct messages from server members','dmServer',st.dmServer!==false)}${settingToggle('Allow friend requests','friendReq',st.friendReq!==false)}${settingToggle('Filter spam messages','spam',st.spam!==false)}`;
- if(view.settingsTab==='notifications')p.innerHTML=`<h2>Notifications</h2>${settingToggle('Desktop Notifications','desktopNotif',!!st.desktopNotif)}${settingToggle('Sounds','sounds',st.sounds!==false)}`;
- if(view.settingsTab==='appearance')p.innerHTML=`<h2>Appearance</h2>${settingToggle('Compact message display','compact',!!st.compact)}<div class="card" style="margin-top:16px"><h3>Theme</h3><p>This prototype currently uses the NuxCord dark theme.</p></div>`;
+ let p=$('settingsPage'),me=current(),st=db.settings[me.username]||{},color=profileColor(me),nitro=!!db.nitro[me.username];
+ if(view.settingsTab==='account')p.innerHTML=`<h2 class="settings-heading">My Account</h2>
+   <div class="account-panel">
+     <div class="account-banner" style="background:${esc(color)}"></div>
+     <div class="account-info">
+       <div class="account-avatar" style="${avatarStyle(me)}">${avatarInner(me)}</div>
+       <div class="account-name">${esc(me.display)}</div>
+       <div class="account-detail">
+         <div class="account-field"><div><small>Display Name</small>${esc(me.display)}</div><button class="secondary" onclick="editAccount()">Edit</button></div>
+         <div class="account-field"><div><small>Username</small>${esc(me.username)}</div><button class="secondary" onclick="editAccount()">Edit</button></div>
+         <div class="account-field"><div><small>Email</small>${esc(me.email)}</div></div>
+       </div>
+     </div>
+   </div>`;
+ if(view.settingsTab==='profiles')p.innerHTML=`<h2 class="settings-heading">Profiles</h2>
+   <div class="profile-editor-grid">
+     <div>
+       <div class="avatar-upload-row"><div class="avatar-upload-preview" style="${avatarStyle(me)}">${avatarInner(me)}</div><div><button class="primary" onclick="document.getElementById('settingsAvatarFile').click()">Change Avatar</button><div class="small muted" style="margin-top:6px">PNG only • up to 1.5 MB</div></div></div>
+       <input id="settingsAvatarFile" type="file" accept="image/png" hidden onchange="uploadAvatar(event)">
+       <div class="field"><label>Display Name</label><input id="profileDisplay" value="${esc(me.display)}"></div>
+       <div class="field"><label>About Me</label><textarea id="profileBio" rows="5" maxlength="190">${esc(me.bio||'')}</textarea></div>
+       <div class="nitro-lock ${nitro?'unlocked':''}">
+         <b>Profile Theme ${nitro?'<span class="nitro-badge">NITRO</span>':''}</b>
+         <p class="small muted">${nitro?'Choose the colour shown on your profile banner.':'Profile colours are a Nux Nitro perk.'}</p>
+         ${nitro?`<input id="profileColorPicker" type="color" value="${esc(me.profileColor||'#5865f2')}" oninput="previewProfileColor(this.value)"><div class="color-grid">${['#5865f2','#eb459e','#ed4245','#f0b232','#23a559','#00a8fc'].map(c=>`<button class="color-swatch ${me.profileColor===c?'active':''}" style="background:${c}" onclick="event.preventDefault();setProfileColor('${c}')"></button>`).join('')}</div>`:`<button class="primary" onclick="view.mode='nitro';render()">Get Nux Nitro</button>`}
+       </div>
+       <button class="primary" style="margin-top:18px" onclick="saveProfile()">Save Changes</button>
+     </div>
+     <div class="profile-editor-preview">
+       <div class="discord-profile" style="width:100%">
+         <div class="discord-banner" id="profilePreviewBanner" style="background:${esc(color)}"></div>
+         <div class="discord-profile-main">
+           <div class="discord-avatar-wrap"><div class="discord-avatar" style="${avatarStyle(me)}">${avatarInner(me)}</div><span class="status-dot"></span></div>
+           <div class="profile-name-block"><div class="profile-display">${esc(me.display)}${nitro?'<span class="nitro-badge">NITRO</span>':''}</div><div class="profile-handle">${esc(me.username)}</div></div>
+           <div class="profile-card-inner"><div class="profile-section"><div class="profile-label">About Me</div><div class="profile-about">${esc(me.bio||'No bio yet.')}</div></div></div>
+         </div>
+       </div>
+     </div>
+   </div>`;
+ if(view.settingsTab==='privacy')p.innerHTML=`<h2 class="settings-heading">Privacy & Safety</h2>${settingToggle('Allow direct messages from server members','dmServer',st.dmServer!==false)}${settingToggle('Allow friend requests','friendReq',st.friendReq!==false)}${settingToggle('Filter spam messages','spam',st.spam!==false)}`;
+ if(view.settingsTab==='notifications')p.innerHTML=`<h2 class="settings-heading">Notifications</h2>${settingToggle('Desktop Notifications','desktopNotif',!!st.desktopNotif)}${settingToggle('Sounds','sounds',st.sounds!==false)}`;
+ if(view.settingsTab==='appearance')p.innerHTML=`<h2 class="settings-heading">Appearance</h2>${settingToggle('Compact message display','compact',!!st.compact)}<div class="card" style="margin-top:16px"><h3>Theme</h3><p>Dark is the current NuxCord desktop theme.</p></div>`;
 }
 function settingToggle(label,key,on){return `<div class="setting-row"><div><b>${esc(label)}</b></div><button class="toggle ${on?'on':''}" onclick="toggleSetting('${key}',this)"><span></span></button></div>`}
 function toggleSetting(k,b){let me=current().username;db.settings[me]=db.settings[me]||{};db.settings[me][k]=!db.settings[me][k];save();b.classList.toggle('on')}
 function editAccount(){modal('Edit Account',`<div class="field"><label>Display Name</label><input id="editDisplay" value="${esc(current().display)}"></div>`,`<button class="secondary" onclick="closeModal()">Cancel</button><button class="primary" onclick="saveAccountEdit()">Save</button>`)}
 function saveAccountEdit(){let me=current(),v=$('editDisplay').value.trim();if(v)me.display=v;save();closeModal();$('meName').textContent=me.display;$('meAvatar').textContent=initial(me.display);renderMain()}
-function saveProfile(){let me=current();me.display=$('profileDisplay').value.trim()||me.display;me.bio=$('profileBio').value.trim();save();$('meName').textContent=me.display;$('meAvatar').textContent=initial(me.display);alert('Profile saved.')}
+function saveProfile(){let me=current();me.display=$('profileDisplay').value.trim()||me.display;me.bio=$('profileBio').value.trim();save();$('meName').textContent=me.display;setAvatarElement($('meAvatar'),me);renderMain();alert('Profile saved.')}
+function previewProfileColor(c){let b=$('profilePreviewBanner');if(b)b.style.background=c}
+function setProfileColor(c){let me=current();if(!db.nitro[me.username])return;me.profileColor=c;save();let picker=$('profileColorPicker');if(picker)picker.value=c;previewProfileColor(c);renderMain()}
 
 /* NITRO */
 function renderNitro(top,content){
- top.innerHTML=`<b>♦ Nux Nitro</b><span class="topbar-spacer"></span>`;
+ top.innerHTML=`<b>Nux Nitro</b><span class="topbar-spacer"></span>`;
  let active=!!db.nitro[current().username];
- content.innerHTML=`<div class="pane"><div class="nitro-hero"><h1>Nux Nitro</h1><p>Make NuxCord more yours with bigger uploads, profile customisation and extra perks.</p><div class="price">£9.99 <span class="small">/ month</span></div><button class="primary" style="margin-top:16px;background:white;color:#111" onclick="toggleNitro()">${active?'Manage Nitro':'Get Nitro'}</button></div><div class="nitro-grid"><div class="nitro-feature"><h3>HD Streaming</h3><p>Higher quality streaming and screen share.</p></div><div class="nitro-feature"><h3>Custom Profiles</h3><p>More ways to personalise your NuxCord profile.</p></div><div class="nitro-feature"><h3>Bigger Uploads</h3><p>Unlock larger file upload limits.</p></div><div class="nitro-feature"><h3>Custom Emoji</h3><p>Use your favourite emoji across servers.</p></div></div><p class="muted small">Demo only — no payment is processed in this HTML prototype.</p></div>`;
+ content.innerHTML=`<div class="pane"><div class="nitro-page-card">
+   <div class="nitro-top"><h1>Nux Nitro</h1><p>Unlock profile themes, larger uploads, better streaming and more ways to customise how you look across NuxCord.</p><div class="price">£9.99 <span class="small">/ month</span></div><button class="primary" style="margin-top:16px;background:#fff;color:#111" onclick="toggleNitro()">${active?'Cancel Nitro Demo':'Get Nitro'}</button></div>
+   <div class="nitro-perks">
+     <div class="nitro-perk"><h3>Custom profile colours</h3><p class="muted">Pick your own profile banner colour and show it anywhere someone opens your profile.</p></div>
+     <div class="nitro-perk"><h3>Bigger uploads</h3><p class="muted">Extra upload room for media and files.</p></div>
+     <div class="nitro-perk"><h3>HD streaming</h3><p class="muted">Higher-quality screen share and streaming.</p></div>
+     <div class="nitro-perk"><h3>Extra customisation</h3><p class="muted">More profile options as NuxCord grows.</p></div>
+   </div>
+   <p class="muted small">Prototype subscription only — no payment is processed.</p>
+ </div></div>`;
 }
 function toggleNitro(){db.nitro[current().username]=!db.nitro[current().username];save();renderMain()}
 
@@ -417,7 +548,7 @@ $('sidebarSearch').oninput=e=>{
 const me=current();
 if(me){
   $('meName').textContent=me.display||me.username;
-  $('meAvatar').textContent=initial(me.display||me.username);
+  setAvatarElement($('meAvatar'),me);
   render();
 }
 
