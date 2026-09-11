@@ -1,1443 +1,531 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#050914">
-
-    <title>NotDonutSMP | Welcome</title>
-
-    <link rel="icon" href="img/bcGCsev.png">
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-        rel="stylesheet"
-    >
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --blue: #168cff;
-            --cyan: #25d8ff;
-            --green: #42e47a;
-            --background: #050810;
-            --card: rgba(14, 20, 32, 0.82);
-            --border: rgba(255,255,255,0.08);
-            --muted: #8e9aad;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            min-height: 100vh;
-            font-family: "Inter", sans-serif;
-            color: white;
-
-            background:
-                radial-gradient(circle at 50% -10%, rgba(0,119,255,.24), transparent 35%),
-                radial-gradient(circle at 10% 45%, rgba(0,204,255,.07), transparent 30%),
-                radial-gradient(circle at 90% 60%, rgba(0,102,255,.06), transparent 25%),
-                #050810;
-
-            overflow-x: hidden;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        button {
-            font-family: inherit;
-        }
-
-        /* BACKGROUND */
-
-        .background-grid {
-            position: fixed;
-            inset: 0;
-            z-index: -2;
-            pointer-events: none;
-
-            background-image:
-                linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
-
-            background-size: 45px 45px;
-
-            mask-image:
-                linear-gradient(to bottom, black, transparent 85%);
-        }
-
-        /* NAVBAR */
-
-        .navbar {
-            height: 76px;
-            width: 100%;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            padding: 0 7%;
-
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-
-            background: rgba(5,8,16,.76);
-            backdrop-filter: blur(20px);
-
-            border-bottom: 1px solid var(--border);
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-
-            font-size: 20px;
-            font-weight: 900;
-
-            letter-spacing: -.5px;
-        }
-
-        .brand img {
-            width: 42px;
-            height: 42px;
-
-            object-fit: cover;
-
-            border-radius: 11px;
-
-            box-shadow:
-                0 0 25px rgba(22,140,255,.18);
-        }
-
-        .brand span {
-            color: var(--blue);
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-
-            font-size: 14px;
-            font-weight: 700;
-        }
-
-        .nav-links a {
-            color: #9da8b8;
-            transition: .2s;
-        }
-
-        .nav-links a:hover {
-            color: white;
-        }
-
-        .discord-nav {
-            padding: 10px 17px;
-
-            border-radius: 10px;
-
-            color: white !important;
-
-            background:
-                linear-gradient(135deg, #5865f2, #7289da);
-
-            box-shadow:
-                0 10px 30px rgba(88,101,242,.18);
-        }
-
-        /* HERO */
-
-        .hero {
-            min-height: calc(100vh - 76px);
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-
-            text-align: center;
-
-            padding: 70px 20px 100px;
-
-            position: relative;
-        }
-
-        .hero-glow {
-            position: absolute;
-
-            width: 600px;
-            height: 400px;
-
-            top: 10%;
-
-            background: rgba(0,132,255,.16);
-
-            filter: blur(110px);
-
-            border-radius: 50%;
-
-            z-index: -1;
-        }
-
-        .online-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 9px;
-
-            padding: 8px 14px;
-
-            margin-bottom: 30px;
-
-            border-radius: 100px;
-
-            background: rgba(255,255,255,.035);
-
-            border:
-                1px solid rgba(255,255,255,.08);
-
-            color: #aab5c5;
-
-            font-size: 11px;
-            font-weight: 800;
-
-            letter-spacing: 1px;
-
-            text-transform: uppercase;
-        }
-
-        .online-dot {
-            width: 8px;
-            height: 8px;
-
-            background: var(--green);
-
-            border-radius: 50%;
-
-            box-shadow:
-                0 0 12px var(--green);
-        }
-
-        .hero-logo {
-            width: min(600px, 88vw);
-
-            filter:
-                drop-shadow(0 25px 35px rgba(0,0,0,.45))
-                drop-shadow(0 0 35px rgba(0,132,255,.15));
-
-            animation:
-                logoFloat 5s ease-in-out infinite;
-        }
-
-        @keyframes logoFloat {
-            0%, 100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        .hero h1 {
-            max-width: 850px;
-
-            margin-top: 35px;
-
-            font-size:
-                clamp(40px, 6vw, 72px);
-
-            line-height: 1;
-
-            font-weight: 900;
-
-            letter-spacing: -3.5px;
-        }
-
-        .gradient-text {
-            background:
-                linear-gradient(
-                    90deg,
-                    #168cff,
-                    #29ddff
-                );
-
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-description {
-            max-width: 650px;
-
-            margin-top: 22px;
-
-            color: var(--muted);
-
-            font-size: 16px;
-
-            line-height: 1.75;
-        }
-
-        /* BUTTONS */
-
-        .hero-buttons {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            flex-wrap: wrap;
-
-            gap: 13px;
-
-            margin-top: 32px;
-        }
-
-        .btn {
-            border: none;
-
-            padding: 15px 23px;
-
-            border-radius: 12px;
-
-            font-size: 14px;
-            font-weight: 800;
-
-            cursor: pointer;
-
-            transition:
-                transform .2s,
-                box-shadow .2s,
-                background .2s;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-        }
-
-        .btn-primary {
-            color: white;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #087cff,
-                    #19caff
-                );
-
-            box-shadow:
-                0 12px 35px
-                rgba(0,132,255,.25);
-        }
-
-        .btn-primary:hover {
-            box-shadow:
-                0 18px 45px
-                rgba(0,132,255,.4);
-        }
-
-        .btn-secondary {
-            color: #d9e0e9;
-
-            background:
-                rgba(255,255,255,.05);
-
-            border:
-                1px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            background:
-                rgba(255,255,255,.09);
-        }
-
-        /* SERVER IP */
-
-        .ip-box {
-            margin-top: 40px;
-
-            display: flex;
-            align-items: center;
-            gap: 15px;
-
-            padding:
-                10px 10px 10px 18px;
-
-            border-radius: 14px;
-
-            background:
-                rgba(14,20,32,.82);
-
-            border:
-                1px solid var(--border);
-
-            box-shadow:
-                0 18px 50px rgba(0,0,0,.3);
-
-            backdrop-filter: blur(14px);
-        }
-
-        .ip-status {
-            width: 10px;
-            height: 10px;
-
-            border-radius: 50%;
-
-            background: var(--green);
-
-            box-shadow:
-                0 0 12px var(--green);
-        }
-
-        .ip-text {
-            text-align: left;
-        }
-
-        .ip-label {
-            display: block;
-
-            color: #677386;
-
-            font-size: 9px;
-            font-weight: 800;
-
-            letter-spacing: 1.5px;
-
-            text-transform: uppercase;
-        }
-
-        .ip-address {
-            display: block;
-
-            margin-top: 2px;
-
-            color: white;
-
-            font-size: 14px;
-            font-weight: 800;
-        }
-
-        .copy-btn {
-            padding: 11px 15px;
-
-            border: none;
-
-            border-radius: 9px;
-
-            color: white;
-
-            background: #168cff;
-
-            font-size: 12px;
-            font-weight: 800;
-
-            cursor: pointer;
-        }
-
-        /* SECTIONS */
-
-        .section {
-            width: min(1150px, 92%);
-
-            margin: auto;
-
-            padding: 90px 0;
-        }
-
-        .section-header {
-            text-align: center;
-
-            margin-bottom: 40px;
-        }
-
-        .eyebrow {
-            color: #3ba4ff;
-
-            font-size: 11px;
-
-            font-weight: 900;
-
-            letter-spacing: 3px;
-
-            text-transform: uppercase;
-        }
-
-        .section-header h2 {
-            margin-top: 11px;
-
-            font-size:
-                clamp(30px, 4vw, 45px);
-
-            letter-spacing: -2px;
-        }
-
-        .section-header p {
-            max-width: 580px;
-
-            margin: 13px auto 0;
-
-            color: var(--muted);
-
-            font-size: 14px;
-
-            line-height: 1.7;
-        }
-
-        /* FEATURES */
-
-        .features {
-            display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
-            gap: 20px;
-        }
-
-        .feature-card {
-            position: relative;
-
-            min-height: 260px;
-
-            padding: 28px;
-
-            overflow: hidden;
-
-            border-radius: 21px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(255,255,255,.045),
-                    rgba(255,255,255,.012)
-                ),
-                var(--card);
-
-            border:
-                1px solid var(--border);
-
-            transition:
-                transform .25s,
-                border-color .25s,
-                box-shadow .25s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-7px);
-
-            border-color:
-                rgba(22,140,255,.38);
-
-            box-shadow:
-                0 25px 60px
-                rgba(0,0,0,.35);
-        }
-
-        .feature-card::after {
-            content: "";
-
-            position: absolute;
-
-            width: 180px;
-            height: 180px;
-
-            top: -100px;
-            right: -100px;
-
-            background:
-                rgba(22,140,255,.14);
-
-            border-radius: 50%;
-
-            filter: blur(35px);
-        }
-
-        .feature-icon {
-            width: 52px;
-            height: 52px;
-
-            display: grid;
-            place-items: center;
-
-            margin-bottom: 55px;
-
-            border-radius: 14px;
-
-            background:
-                rgba(22,140,255,.1);
-
-            border:
-                1px solid
-                rgba(22,140,255,.18);
-
-            font-size: 23px;
-        }
-
-        .feature-card h3 {
-            font-size: 20px;
-
-            margin-bottom: 9px;
-        }
-
-        .feature-card p {
-            color: var(--muted);
-
-            font-size: 13px;
-
-            line-height: 1.6;
-        }
-
-        /* DISCORD */
-
-        .community-card {
-            display: grid;
-
-            grid-template-columns:
-                1.4fr .6fr;
-
-            min-height: 330px;
-
-            border-radius: 25px;
-
-            overflow: hidden;
-
-            background:
-                radial-gradient(
-                    circle at 85% 20%,
-                    rgba(88,101,242,.25),
-                    transparent 35%
-                ),
-                #0d1320;
-
-            border:
-                1px solid var(--border);
-        }
-
-        .community-content {
-            padding: 55px;
-
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-        }
-
-        .community-content h2 {
-            margin-top: 12px;
-
-            font-size:
-                clamp(30px, 4vw, 45px);
-
-            letter-spacing: -2px;
-        }
-
-        .community-content p {
-            max-width: 500px;
-
-            margin: 15px 0 25px;
-
-            color: var(--muted);
-
-            font-size: 14px;
-
-            line-height: 1.7;
-        }
-
-        .community-image {
-            display: grid;
-            place-items: center;
-
-            padding: 40px;
-        }
-
-        .community-image img {
-            width: 130px;
-
-            filter:
-                drop-shadow(
-                    0 20px 35px
-                    rgba(88,101,242,.3)
-                );
-        }
-
-        /* OWNER */
-
-        .owner-card {
-            max-width: 620px;
-
-            margin: auto;
-
-            display: flex;
-            align-items: center;
-
-            gap: 25px;
-
-            padding: 28px;
-
-            border-radius: 22px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(255,255,255,.045),
-                    rgba(255,255,255,.01)
-                ),
-                var(--card);
-
-            border:
-                1px solid var(--border);
-
-            transition:
-                transform .25s,
-                border-color .25s;
-        }
-
-        .owner-card:hover {
-            transform: translateY(-5px);
-
-            border-color:
-                rgba(22,140,255,.35);
-        }
-
-        .owner-head {
-            width: 90px;
-            height: 90px;
-
-            flex-shrink: 0;
-
-            border-radius: 18px;
-
-            overflow: hidden;
-
-            background: #111927;
-
-            border:
-                1px solid var(--border);
-
-            box-shadow:
-                0 15px 35px rgba(0,0,0,.3);
-        }
-
-        .owner-head img {
-            width: 100%;
-            height: 100%;
-
-            object-fit: cover;
-        }
-
-        .owner-info h3 {
-            font-size: 24px;
-        }
-
-        .owner-role {
-            display: inline-block;
-
-            margin-top: 7px;
-
-            padding: 5px 10px;
-
-            border-radius: 100px;
-
-            color: #64b7ff;
-
-            background:
-                rgba(22,140,255,.11);
-
-            border:
-                1px solid
-                rgba(22,140,255,.22);
-
-            font-size: 9px;
-
-            font-weight: 900;
-
-            letter-spacing: 1.5px;
-
-            text-transform: uppercase;
-        }
-
-        .owner-info p {
-            margin-top: 12px;
-
-            color: var(--muted);
-
-            font-size: 13px;
-
-            line-height: 1.6;
-        }
-
-        /* JOIN */
-
-        .join-section {
-            width: min(1150px, 92%);
-
-            margin: 40px auto 100px;
-
-            padding: 70px 25px;
-
-            text-align: center;
-
-            border-radius: 28px;
-
-            position: relative;
-
-            overflow: hidden;
-
-            background:
-                radial-gradient(
-                    circle at 50% 0%,
-                    rgba(0,166,255,.27),
-                    transparent 55%
-                ),
-                #0d1420;
-
-            border:
-                1px solid
-                rgba(22,140,255,.17);
-        }
-
-        .join-section h2 {
-            font-size:
-                clamp(34px, 5vw, 52px);
-
-            letter-spacing: -2.5px;
-        }
-
-        .join-section p {
-            margin:
-                14px auto 27px;
-
-            color: var(--muted);
-
-            font-size: 14px;
-        }
-
-        /* FOOTER */
-
-        footer {
-            padding: 35px 7%;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            gap: 20px;
-
-            border-top:
-                1px solid var(--border);
-
-            color: #697587;
-
-            font-size: 11px;
-        }
-
-        .footer-brand {
-            display: flex;
-            align-items: center;
-
-            gap: 10px;
-
-            color: white;
-
-            font-size: 13px;
-
-            font-weight: 800;
-        }
-
-        .footer-brand img {
-            width: 32px;
-            height: 32px;
-
-            border-radius: 8px;
-        }
-
-        .footer-links {
-            display: flex;
-
-            gap: 20px;
-        }
-
-        .footer-links a {
-            transition: .2s;
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
-
-        /* COPY POPUP */
-
-        .toast {
-            position: fixed;
-
-            left: 50%;
-            bottom: 30px;
-
-            transform:
-                translateX(-50%)
-                translateY(100px);
-
-            z-index: 9999;
-
-            padding: 13px 22px;
-
-            border-radius: 12px;
-
-            color: white;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #087cff,
-                    #18c8ff
-                );
-
-            font-size: 13px;
-            font-weight: 800;
-
-            box-shadow:
-                0 18px 45px
-                rgba(0,0,0,.4);
-
-            transition:
-                transform .3s
-                cubic-bezier(.34,1.56,.64,1);
-        }
-
-        .toast.show {
-            transform:
-                translateX(-50%)
-                translateY(0);
-        }
-
-        /* MOBILE */
-
-        @media (max-width: 850px) {
-
-            .navbar {
-                padding: 0 5%;
-            }
-
-            .nav-links a:not(.discord-nav) {
-                display: none;
-            }
-
-            .features {
-                grid-template-columns: 1fr;
-            }
-
-            .community-card {
-                grid-template-columns: 1fr;
-            }
-
-            .community-content {
-                padding: 40px 28px;
-                text-align: center;
-            }
-
-            .community-content p {
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .community-image {
-                padding-top: 0;
-            }
-
-            .hero h1 {
-                letter-spacing: -2px;
-            }
-
-            .owner-card {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            footer {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NuxCord</title>
+  <style>
+    :root {
+      --bg: #1e1f22;
+      --panel: #2b2d31;
+      --panel-2: #313338;
+      --panel-3: #232428;
+      --text: #f2f3f5;
+      --muted: #b5bac1;
+      --faint: #949ba4;
+      --accent: #5865f2;
+      --accent-hover: #4752c4;
+      --green: #23a559;
+      --red: #f23f42;
+      --line: #3f4147;
+      --hover: #35373c;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow: hidden;
+    }
+
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+
+    .app {
+      display: grid;
+      grid-template-columns: 72px 240px minmax(0, 1fr) 240px;
+      height: 100vh;
+      min-height: 0;
+    }
+
+    .servers {
+      background: #1e1f22;
+      padding: 12px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      border-right: 1px solid #18191c;
+    }
+
+    .server-icon,
+    .add-server {
+      width: 48px;
+      height: 48px;
+      border: 0;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: #313338;
+      font-weight: 800;
+      transition: .18s ease;
+      position: relative;
+    }
+
+    .server-icon.active {
+      background: var(--accent);
+      border-radius: 16px;
+    }
+
+    .server-icon.active::before {
+      content: "";
+      position: absolute;
+      left: -12px;
+      width: 4px;
+      height: 40px;
+      border-radius: 0 4px 4px 0;
+      background: white;
+    }
+
+    .server-icon:hover,
+    .add-server:hover {
+      border-radius: 16px;
+      background: var(--accent);
+    }
+
+    .add-server { color: var(--green); }
+    .add-server:hover { color: white; background: var(--green); }
+
+    .divider {
+      width: 32px;
+      height: 2px;
+      border-radius: 2px;
+      background: #35363c;
+      margin: 2px 0;
+    }
+
+    .sidebar {
+      background: var(--panel);
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .server-title {
+      height: 48px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 700;
+      border-bottom: 1px solid #1f2024;
+      box-shadow: 0 1px 0 #1f2024;
+    }
+
+    .channel-search {
+      padding: 10px;
+    }
+
+    .channel-search input {
+      width: 100%;
+      border: 0;
+      outline: 0;
+      border-radius: 4px;
+      padding: 8px 10px;
+      color: var(--text);
+      background: #1e1f22;
+    }
+
+    .channels {
+      flex: 1;
+      overflow: auto;
+      padding: 8px;
+    }
+
+    .category {
+      margin: 10px 8px 4px;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--faint);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .channel {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 4px;
+      color: var(--muted);
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .channel:hover { background: var(--hover); color: var(--text); }
+    .channel.active { background: #404249; color: white; }
+    .channel .hash { color: #80848e; font-size: 20px; font-weight: 400; }
+
+    .user-bar {
+      height: 52px;
+      background: #232428;
+      display: flex;
+      align-items: center;
+      padding: 8px;
+      gap: 8px;
+    }
+
+    .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      background: linear-gradient(135deg, #5865f2, #9b59ff);
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    .avatar.online::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--green);
+      border: 3px solid #232428;
+      position: absolute;
+      right: -2px;
+      bottom: -2px;
+    }
+
+    .user-meta { min-width: 0; flex: 1; }
+    .user-name { font-size: 14px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .user-status { font-size: 12px; color: var(--muted); }
+
+    .user-actions { display: flex; gap: 4px; }
+    .icon-btn {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      border-radius: 4px;
+      width: 30px;
+      height: 30px;
+    }
+    .icon-btn:hover { background: #34363c; color: white; }
+
+    .chat {
+      background: var(--panel-2);
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .chat-header {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      border-bottom: 1px solid #26272b;
+      box-shadow: 0 1px 0 #26272b;
+      gap: 10px;
+    }
+
+    .chat-header .hash { color: #80848e; font-size: 24px; }
+    .chat-title { font-weight: 800; }
+    .chat-topic { color: var(--muted); font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .chat-tools { margin-left: auto; display: flex; gap: 8px; }
+
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 16px 12px;
+    }
+
+    .welcome {
+      padding: 28px 0 18px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 18px;
+    }
+
+    .welcome-icon {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #41434a;
+      font-size: 34px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .welcome h1 { margin: 0 0 6px; font-size: 30px; }
+    .welcome p { margin: 0; color: var(--muted); }
+
+    .message {
+      display: grid;
+      grid-template-columns: 40px minmax(0, 1fr);
+      gap: 12px;
+      padding: 8px 0;
+    }
+
+    .message:hover { background: rgba(0,0,0,.05); }
+    .message .avatar { width: 40px; height: 40px; }
+    .message-head { display: flex; align-items: baseline; gap: 8px; }
+    .message-author { font-weight: 800; }
+    .message-time { font-size: 12px; color: var(--faint); }
+    .message-text { color: #dbdee1; line-height: 1.45; margin-top: 2px; }
+    .mention { color: #c9cdfb; background: rgba(88,101,242,.3); padding: 0 2px; border-radius: 3px; }
+
+    .composer-wrap { padding: 0 16px 18px; }
+    .composer {
+      min-height: 44px;
+      background: #383a40;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      gap: 10px;
+    }
+
+    .composer input {
+      flex: 1;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: white;
+      min-width: 0;
+    }
+
+    .composer input::placeholder { color: #949ba4; }
+    .composer button {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font-size: 18px;
+    }
+    .composer button:hover { color: white; }
+
+    .members {
+      background: var(--panel);
+      padding: 18px 8px;
+      overflow-y: auto;
+    }
+
+    .member-group {
+      color: var(--faint);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin: 8px 8px 6px;
+    }
+
+    .member {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 8px;
+      border-radius: 4px;
+      color: var(--muted);
+    }
+
+    .member:hover { background: var(--hover); color: white; }
+    .member .avatar { width: 32px; height: 32px; }
+    .member .name { font-weight: 700; font-size: 14px; }
+    .role-owner { color: #f0b232; }
+    .role-mod { color: #23a559; }
+
+    .mobile-toggle { display: none; }
+
+    @media (max-width: 1050px) {
+      .app { grid-template-columns: 72px 240px minmax(0,1fr); }
+      .members { display: none; }
+    }
+
+    @media (max-width: 760px) {
+      .app { grid-template-columns: 64px minmax(0,1fr); }
+      .sidebar {
+        position: fixed;
+        left: 64px;
+        top: 0;
+        bottom: 0;
+        width: 240px;
+        z-index: 20;
+        transform: translateX(-110%);
+        transition: .2s ease;
+        box-shadow: 10px 0 30px rgba(0,0,0,.35);
+      }
+      .sidebar.open { transform: translateX(0); }
+      .mobile-toggle { display: inline-grid; place-items: center; }
+      .chat-topic { display: none; }
+    }
+  </style>
 </head>
-
-
 <body>
+  <div class="app">
+    <aside class="servers" aria-label="Servers">
+      <button class="server-icon active" title="NuxCord">N</button>
+      <div class="divider"></div>
+      <button class="server-icon" title="Gaming">G</button>
+      <button class="server-icon" title="Friends">F</button>
+      <button class="add-server" title="Add server">+</button>
+    </aside>
 
-<div class="background-grid"></div>
+    <aside class="sidebar" id="sidebar">
+      <div class="server-title">
+        <span>NuxCord</span>
+        <span>⌄</span>
+      </div>
 
+      <div class="channel-search">
+        <input type="text" placeholder="Find or start a conversation" />
+      </div>
 
-<!-- NAVBAR -->
+      <div class="channels">
+        <div class="category">Information</div>
+        <div class="channel"><span class="hash">#</span><span>welcome</span></div>
+        <div class="channel active"><span class="hash">#</span><span>general</span></div>
+        <div class="channel"><span class="hash">#</span><span>announcements</span></div>
 
-<header class="navbar">
+        <div class="category">Community</div>
+        <div class="channel"><span class="hash">#</span><span>media</span></div>
+        <div class="channel"><span class="hash">#</span><span>memes</span></div>
+        <div class="channel"><span class="hash">#</span><span>support</span></div>
 
-    <a href="index.html" class="brand">
+        <div class="category">Voice channels</div>
+        <div class="channel"><span class="hash">🔊</span><span>General</span></div>
+        <div class="channel"><span class="hash">🔊</span><span>Gaming</span></div>
+      </div>
 
-        <img
-            src="img/bcGCsev.png"
-            alt="NotDonutSMP"
-        >
+      <div class="user-bar">
+        <div class="avatar online">N</div>
+        <div class="user-meta">
+          <div class="user-name">NuxCord User</div>
+          <div class="user-status">Online</div>
+        </div>
+        <div class="user-actions">
+          <button class="icon-btn" title="Mute">🎙</button>
+          <button class="icon-btn" title="Settings">⚙</button>
+        </div>
+      </div>
+    </aside>
 
-        NotDonut<span>SMP</span>
+    <main class="chat">
+      <header class="chat-header">
+        <button class="icon-btn mobile-toggle" id="menuButton">☰</button>
+        <span class="hash">#</span>
+        <span class="chat-title">general</span>
+        <span class="chat-topic">Chat with the NuxCord community</span>
+        <div class="chat-tools">
+          <button class="icon-btn" title="Notifications">🔔</button>
+          <button class="icon-btn" title="Pinned messages">📌</button>
+          <button class="icon-btn" title="Members">👥</button>
+        </div>
+      </header>
 
-    </a>
-
-
-    <nav class="nav-links">
-
-        <a href="index.html">
-            Home
-        </a>
-
-        <a href="staff.html">
-            Staff
-        </a>
-
-        <a
-            class="discord-nav"
-            href="https://discord.gg/zdaUByyf4b"
-            target="_blank"
-        >
-            Join Discord
-        </a>
-
-    </nav>
-
-</header>
-
-
-<main>
-
-
-<!-- HERO -->
-
-<section class="hero">
-
-    <div class="hero-glow"></div>
-
-
-    <div class="online-pill">
-
-        <span class="online-dot"></span>
-
-        NOTDONUTSMP
-
-    </div>
-
-
-    <img
-        class="hero-logo"
-        src="img/logo.png"
-        alt="NotDonutSMP Logo"
-    >
-
-
-    <h1>
-
-        Your next
-
-        <span class="gradient-text">
-            Minecraft adventure
-        </span>
-
-        starts here.
-
-    </h1>
-
-
-    <p class="hero-description">
-
-        Build your empire, fight your enemies,
-        make alliances and rise to the top on
-        NotDonutSMP.
-
-    </p>
-
-
-    <div class="hero-buttons">
-
-        <button
-            class="btn btn-primary"
-            onclick="copyIP()"
-        >
-            ⚔ Copy Server IP
-        </button>
-
-
-        <a
-            class="btn btn-secondary"
-            href="https://discord.gg/zdaUByyf4b"
-            target="_blank"
-        >
-            Join Discord
-        </a>
-
-    </div>
-
-
-    <div class="ip-box">
-
-        <span class="ip-status"></span>
-
-
-        <div class="ip-text">
-
-            <span class="ip-label">
-                Java Server
-            </span>
-
-            <span class="ip-address">
-                play.notdonutsmp.com
-            </span>
-
+      <section class="messages" id="messages">
+        <div class="welcome">
+          <div class="welcome-icon">#</div>
+          <h1>Welcome to #general!</h1>
+          <p>This is the start of the #general channel in NuxCord.</p>
         </div>
 
-
-        <button
-            class="copy-btn"
-            onclick="copyIP()"
-        >
-            COPY
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- FEATURES -->
-
-<section class="section">
-
-    <div class="section-header">
-
-        <span class="eyebrow">
-            NOTDONUTSMP
-        </span>
-
-        <h2>
-            Start your journey.
-        </h2>
-
-        <p>
-            Join the server, build your base,
-            meet other players and fight your
-            way to the top.
-        </p>
-
-    </div>
-
-
-    <div class="features">
-
-
-        <div class="feature-card">
-
-            <div class="feature-icon">
-                ⚔️
+        <div class="message">
+          <div class="avatar">N</div>
+          <div>
+            <div class="message-head">
+              <span class="message-author role-owner">NuxCord</span>
+              <span class="message-time">Today at 13:42</span>
             </div>
-
-            <h3>
-                Fight
-            </h3>
-
-            <p>
-                Take on other players,
-                defend your base and prove
-                you're one of the strongest
-                players on the server.
-            </p>
-
+            <div class="message-text">Welcome to <span class="mention">@NuxCord</span> — a Discord-inspired community experience built directly into the website.</div>
+          </div>
         </div>
 
-
-        <div class="feature-card">
-
-            <div class="feature-icon">
-                🏰
+        <div class="message">
+          <div class="avatar">F</div>
+          <div>
+            <div class="message-head">
+              <span class="message-author">Friend</span>
+              <span class="message-time">Today at 13:44</span>
             </div>
-
-            <h3>
-                Build
-            </h3>
-
-            <p>
-                Create your base, collect
-                resources and turn your
-                land into an empire.
-            </p>
-
+            <div class="message-text">This redesign is already looking way cleaner 🔥</div>
+          </div>
         </div>
 
-
-        <div class="feature-card">
-
-            <div class="feature-icon">
-                👑
+        <div class="message">
+          <div class="avatar">M</div>
+          <div>
+            <div class="message-head">
+              <span class="message-author role-mod">Moderator</span>
+              <span class="message-time">Today at 13:45</span>
             </div>
-
-            <h3>
-                Become #1
-            </h3>
-
-            <p>
-                Grind, make alliances,
-                become powerful and climb
-                your way to the top.
-            </p>
-
+            <div class="message-text">Channels, member lists and a proper chat layout can all be wired up next.</div>
+          </div>
         </div>
-
-    </div>
-
-</section>
-
-
-<!-- DISCORD -->
-
-<section class="section">
-
-    <div class="community-card">
-
-        <div class="community-content">
-
-            <span class="eyebrow">
-                COMMUNITY
-            </span>
-
-            <h2>
-                Join our Discord.
-            </h2>
-
-            <p>
-                Get server announcements,
-                talk with other players,
-                receive support and stay
-                up to date with everything
-                happening on NotDonutSMP.
-            </p>
-
-
-            <div>
-
-                <a
-                    class="btn btn-primary"
-                    href="https://discord.gg/zdaUByyf4b"
-                    target="_blank"
-                >
-                    Join the Discord →
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <div class="community-image">
-
-            <img
-                src="img/discord.png"
-                alt="Discord"
-            >
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- OWNER -->
-
-<section class="section">
-
-    <div class="section-header">
-
-        <span class="eyebrow">
-            THE TEAM
-        </span>
-
-        <h2>
-            Meet the owner.
-        </h2>
-
-        <p>
-            The person behind NotDonutSMP.
-        </p>
-
-    </div>
-
-
-    <div class="owner-card">
-
-
-        <div class="owner-head">
-
-            <img
-                src="https://minotar.net/helm/BandzE1/100"
-                alt="BandzE1"
-            >
-
-        </div>
-
-
-        <div class="owner-info">
-
-            <h3>
-                BandzE1
-            </h3>
-
-            <span class="owner-role">
-                Owner
-            </span>
-
-            <p>
-                Owner of NotDonutSMP.
-                Check out the full staff
-                team below.
-            </p>
-
-
-            <div style="margin-top:18px;">
-
-                <a
-                    href="staff.html"
-                    class="btn btn-secondary"
-                >
-                    View Staff →
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- JOIN -->
-
-<section class="join-section">
-
-    <span class="eyebrow">
-        PLAY NOW
-    </span>
-
-    <h2>
-        Ready to join NotDonutSMP?
-    </h2>
-
-    <p>
-        Minecraft Java Edition
-        • play.notdonutsmp.com
-    </p>
-
-    <button
-        class="btn btn-primary"
-        onclick="copyIP()"
-    >
-        ⚔ Copy Server IP
-    </button>
-
-</section>
-
-
-</main>
-
-
-<!-- FOOTER -->
-
-<footer>
-
-    <div class="footer-brand">
-
-        <img
-            src="img/bcGCsev.png"
-            alt=""
-        >
-
-        NotDonutSMP
-
-    </div>
-
-
-    <div>
-        © 2026 NotDonutSMP.
-        Not associated with Mojang or Microsoft.
-    </div>
-
-
-    <div class="footer-links">
-
-        <a href="staff.html">
-            Staff
-        </a>
-
-        <a
-            href="https://discord.gg/zdaUByyf4b"
-            target="_blank"
-        >
-            Discord
-        </a>
-
-    </div>
-
-</footer>
-
-
-<!-- COPY POPUP -->
-
-<div
-    class="toast"
-    id="toast"
->
-    ✓ play.notdonutsmp.com copied!
-</div>
-
-
-<script>
-
-function copyIP() {
-
-    navigator.clipboard
-        .writeText(
-            "play.notdonutsmp.com"
-        )
-        .then(() => {
-
-            const toast =
-                document.getElementById(
-                    "toast"
-                );
-
-            toast.classList.add(
-                "show"
-            );
-
-            setTimeout(() => {
-
-                toast.classList.remove(
-                    "show"
-                );
-
-            }, 2200);
-
-        });
-
-}
-
-</script>
-
-
+      </section>
+
+      <div class="composer-wrap">
+        <form class="composer" id="chatForm">
+          <button type="button" title="Add">＋</button>
+          <input id="messageInput" autocomplete="off" placeholder="Message #general" />
+          <button type="button" title="Gift">🎁</button>
+          <button type="button" title="Emoji">☺</button>
+        </form>
+      </div>
+    </main>
+
+    <aside class="members">
+      <div class="member-group">Online — 3</div>
+      <div class="member">
+        <div class="avatar online">N</div>
+        <div class="name role-owner">NuxCord</div>
+      </div>
+      <div class="member">
+        <div class="avatar online">M</div>
+        <div class="name role-mod">Moderator</div>
+      </div>
+      <div class="member">
+        <div class="avatar online">F</div>
+        <div class="name">Friend</div>
+      </div>
+
+      <div class="member-group">Offline — 2</div>
+      <div class="member">
+        <div class="avatar">A</div>
+        <div class="name">Alex</div>
+      </div>
+      <div class="member">
+        <div class="avatar">S</div>
+        <div class="name">Steve</div>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    const form = document.getElementById('chatForm');
+    const input = document.getElementById('messageInput');
+    const messages = document.getElementById('messages');
+    const menuButton = document.getElementById('menuButton');
+    const sidebar = document.getElementById('sidebar');
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const text = input.value.trim();
+      if (!text) return;
+
+      const row = document.createElement('div');
+      row.className = 'message';
+      row.innerHTML = `
+        <div class="avatar">N</div>
+        <div>
+          <div class="message-head">
+            <span class="message-author">NuxCord User</span>
+            <span class="message-time">Just now</span>
+          </div>
+          <div class="message-text"></div>
+        </div>`;
+      row.querySelector('.message-text').textContent = text;
+      messages.appendChild(row);
+      input.value = '';
+      messages.scrollTop = messages.scrollHeight;
+    });
+
+    menuButton?.addEventListener('click', () => sidebar.classList.toggle('open'));
+  </script>
 </body>
 </html>
