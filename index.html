@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Reviews — 67Client</title>
+  <meta name="description" content="Reviews written by verified 67Client licence holders. Only customers with an active licence can post." />
+  <meta property="og:title" content="67Client reviews" />
+  <meta property="og:description" content="Written by verified licence holders only." />
+  <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#0a0810" />
+<meta name="color-scheme" content="dark" />
+<meta property="og:site_name" content="67Client" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://67clientofficial.com/assets/img/og.svg" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" href="/assets/img/logo-67-transparent.png" />
+<link rel="stylesheet" href="/assets/css/site.css?v=632897fd838d" />
+<link rel="stylesheet" href="/assets/css/storefront.css?v=535d56ad9382" />
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav" id="nav">
+  <div class="container nav__inner">
+    <a class="brand" href="/" aria-label="67Client">
+      <span class="brand__mark" aria-hidden="true"></span>
+      <span>67Client</span>
+    </a>
+
+    <button class="nav__toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" aria-hidden="true">
+        <path d="M4 7h16M4 12h16M4 17h16" />
+      </svg>
+    </button>
+
+    <nav class="nav__links" id="navLinks" aria-label="Main">
+      <a class="nav__link" href="/modules">Modules</a>
+      <a class="nav__link" href="/pricing">Pricing</a>
+      <a class="nav__link" href="/reviews">Reviews</a>
+      <a class="nav__link" href="/setup">Setup</a>
+      <a class="nav__link" href="/faq">FAQ</a>
+    </nav>
+
+    <div class="nav__actions">
+      <details class="lang" id="langMenu">
+        <summary class="lang__button" aria-label="Language">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M3 12h18M12 3c2.5 2.6 2.5 15 0 18M12 3c-2.5 2.6-2.5 15 0 18" />
+          </svg>
+          <span class="lang__current">EN</span>
+        </summary>
+        <div class="lang__menu"><a class="lang__opt is-active" href="/lang/en" hreflang="en" lang="en" data-lang-option><span class="lang__code">EN</span>English</a><a class="lang__opt" href="/lang/de" hreflang="de" lang="de" data-lang-option><span class="lang__code">DE</span>Deutsch</a><a class="lang__opt" href="/lang/es" hreflang="es" lang="es" data-lang-option><span class="lang__code">ES</span>Español</a><a class="lang__opt" href="/lang/fr" hreflang="fr" lang="fr" data-lang-option><span class="lang__code">FR</span>Français</a><a class="lang__opt" href="/lang/it" hreflang="it" lang="it" data-lang-option><span class="lang__code">IT</span>Italiano</a><a class="lang__opt" href="/lang/nl" hreflang="nl" lang="nl" data-lang-option><span class="lang__code">NL</span>Nederlands</a><a class="lang__opt" href="/lang/pt" hreflang="pt" lang="pt" data-lang-option><span class="lang__code">PT</span>Português</a></div>
+      </details>
+
+      <a class="btn btn--ghost btn--sm nav__discord" href="https://discord.gg/67client" data-needs-invite target="_blank" rel="noopener noreferrer">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M19.3 5.3A16.9 16.9 0 0 0 15 4l-.3.5c1.4.3 2.6.9 3.7 1.6a12.6 12.6 0 0 0-12.8 0c1.1-.7 2.4-1.3 3.8-1.6L9 4c-1.5.2-3 .6-4.3 1.3C2.5 8.6 1.9 11.9 2.2 15c1.6 1.2 3.2 1.9 4.7 2.4l1-1.6c-.6-.2-1.2-.5-1.7-.9l.4-.3c3.2 1.5 6.7 1.5 9.9 0l.4.3c-.5.4-1.1.7-1.8.9l1 1.6c1.6-.5 3.1-1.2 4.7-2.4.4-3.6-.6-6.9-2.5-9.7ZM8.9 13.3c-.9 0-1.7-.9-1.7-1.9s.8-1.9 1.7-1.9 1.7.8 1.7 1.9-.7 1.9-1.7 1.9Zm6.2 0c-.9 0-1.7-.9-1.7-1.9s.8-1.9 1.7-1.9 1.7.8 1.7 1.9-.7 1.9-1.7 1.9Z"/>
+        </svg>
+        Discord
+      </a>
+      <a class="btn btn--primary btn--sm" href="https://67-client-api.gangwarz2roblox.workers.dev/auth/discord" data-account-link
+         data-label-dashboard="Dashboard" data-label-signin="Sign in">Dashboard</a>
+    </div>
+  </div>
+</header>
+
+
+<main id="main">
+  <section class="section">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <span class="eyebrow">Reviews</span>
+        <h2>From the community.</h2>
+        <p>Reviews from customers with an active 67Client licence.</p>
+        <div class="row mt-2" style="justify-content:center" data-review-summary></div>
+      </div>
+
+      <div class="reviews" data-reviews data-limit="60"></div>
+
+      <div class="center mt-4">
+        <a class="btn btn--primary" href="/dashboard#reviews">Write your review</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__about">
+        <a class="brand" href="/" aria-label="67Client">
+          <span class="brand__mark" aria-hidden="true"></span>
+          <span>67Client</span>
+        </a>
+        <p>67Client for DonutSMP. Minecraft 1.21.11 · Fabric.</p>
+      </div>
+
+      <div>
+        <h4>Product</h4>
+        <ul>
+          <li><a href="/modules">Modules</a></li>
+          <li><a href="/pricing">Pricing</a></li>
+          <li><a href="/setup">Setup guide</a></li>
+          <li><a href="/changelog">Changelog</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Account</h4>
+        <ul>
+          <li><a href="/dashboard">Dashboard</a></li>
+          <li><a href="/dashboard#download">Download</a></li>
+          <li><a href="/dashboard#machine">Reset HWID</a></li>
+          <li><a href="/reviews">Reviews</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Support</h4>
+        <ul>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="https://discord.gg/67client" data-needs-invite target="_blank" rel="noopener noreferrer">Discord</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/refunds">Refund policy</a></li>
+          <li><a href="/delivery">Digital delivery</a></li>
+          <li><a href="/contact">Contact &amp; seller</a></li>
+          <li><a href="/cookies">Cookies</a></li>
+          <li><a href="/withdraw">Withdraw from a purchase</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>&copy; 2026 67Client. All rights reserved.</span>
+      <span class="footer__credit">made by <a href="https://pickzugng.dev" target="_blank" rel="noopener noreferrer">pickzugng</a></span>
+      <span class="footer__disclaimer">Not affiliated with, endorsed by or associated with Mojang AB, Microsoft or DonutSMP.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toasts" id="toasts" aria-live="polite" aria-atomic="false"></div>
+
+<script src="/assets/js/api.js?v=be497e03902e"></script>
+<script src="/assets/js/site.js?v=17141752f939"></script>
+</body>
+</html>
